@@ -1,0 +1,6 @@
+// topmenu.scss
+@import "mixins/functions";
+
+#topmenu{
+  @include no-border-radius;
+}
