@@ -2,5 +2,10 @@
 @import "mixins/functions";
 
 #topmenu{
-  @include no-border-radius;
+  @include border-radius;
+  margin-bottom: 0;
+
+  .item{
+    padding: 30px;
+  }
 }

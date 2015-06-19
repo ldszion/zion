@@ -1,4 +1,6 @@
 // functions.scss
-@mixin no-border-radius(){
-  border-radius: 0;
+@mixin border-radius($radius: 0) {
+  -webkit-border-radius: $radius;
+  -moz-border-radius: $radius;
+  border-radius: $radius;
 }
