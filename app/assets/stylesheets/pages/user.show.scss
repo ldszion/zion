@@ -1,0 +1,21 @@
+// user.show
+#user-profile{
+  .inverted.segment{
+    margin-top: 0;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-left: 25px;
+  }
+
+  #user-name{
+    font-size: 3em;
+    font-weight: 100;
+  }
+
+  a{
+    color: inherit;
+    &:hover{
+      color: #20D0D3;
+    }
+  }
+}
