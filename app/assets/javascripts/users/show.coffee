@@ -1,6 +1,6 @@
 # users.show
 ready = ->
-  $('#user-profile .segment .dimmable.image').dimmer({
+  $('#user-profile-header .dimmable.image').dimmer({
     on: 'hover'
   })
 

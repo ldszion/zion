@@ -13,9 +13,14 @@
     width: 10%;
   }
 
+  $white: #fff;
   #user-name {
-    font-size: 3em;
+    font-size: 2.3em;
     font-weight: 100;
+    color: $white;
+    .sub.header{
+      color: rgba($white, .5);
+    }
   }
 
   a {
@@ -24,4 +29,8 @@
       color: #20D0D3;
     }
   }
+}
+
+#user-profile-body{
+  margin-top: 25px;
 }

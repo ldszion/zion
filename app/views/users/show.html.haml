@@ -15,7 +15,8 @@
         .ui.grid
           / NOME DO USUÁRIO
           .sixteen.wide.column
-            %h1#user-name Marco Túlio de Ávila Santos
+            %h1#user-name.ui.header
+              Marco Túlio de Ávila Santos
           / INFORMAÇÕES
           .four.wide.column
             %p
@@ -24,6 +25,9 @@
             %p
               %i.ui.university.icon
               Estaca Brasília - Ala Guará II
+            %p
+              %i.ui.birthday.icon
+              26 anos em 28/06/1989
           .four.wide.column
             %p
               %i.ui.call.icon
@@ -31,6 +35,38 @@
             %p
               %i.ui.map.marker.icon
               QE 40 Rua 10 Lote 01 apt 201
+            %p
+              %i.ui.privacy.icon
+              Administrador
+          .four.wide.black.column
+            %p
+              %i.ui.announcement.icon
+              %b Contato de Emergência
+            %p
+              %i.ui.user.icon
+              Polyana Ferreira Souza
+            %p
+              %i.ui.call.icon
+              (61) 8130-6496
 
 #user-profile-body
-  .ui.three.column.grid
+  .ui.page.grid
+    .column
+      .ui.divided.divided.items
+        .item
+          .ui.tiny.image
+            = image_tag("example/avatars/man.jpg")
+          .content
+            .ui.two.column.grid
+              .twelve.wide.column
+                .ui.header(style="margin-bottom: 5px")
+                  %a Conferência do MAS 2016
+                  .sub.header Maio de 2016
+                .ui.description
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                  tempor incididunt ut labore et dolore magna aliqua.
+              .four.wide.column
+                .extra
+                  .ui.right.floated.primary.small.button
+                    Inscrever-me
+                    %i.right.chevron.icon
