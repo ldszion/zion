@@ -9,3 +9,8 @@
 user = User.create email: "marcotulio.avila@gmail.com",
                    password: "123456",
                    password_confirmation: "123456"
+
+event = Event.create name: "Acampamento do MAS 2016",
+                     description: "Acampamento para Jovens Adultos Solteiros",
+                     start_datetime: "02/04/2016 09:00".to_datetime,
+                     end_datetime: "05/04/2016 17:00".to_datetime
