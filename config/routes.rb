@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :wards
   resources :stakes
   resources :regions
   get 'confirmation' => 'confirmation#index', as: :confirmation

@@ -1,0 +1,12 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @ward.name
+%p
+  %b Stake:
+  = @ward.stake
+
+= link_to 'Edit', edit_ward_path(@ward)
+\|
+= link_to 'Back', wards_path

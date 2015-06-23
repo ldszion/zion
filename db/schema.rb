@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150623155641) do
+ActiveRecord::Schema.define(version: 20150623155809) do
 
   create_table "events", force: :cascade do |t|
     t.string   "name",           limit: 255
@@ -46,5 +46,15 @@ ActiveRecord::Schema.define(version: 20150623155641) do
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
 
+  create_table "wards", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.integer  "stake_id",   limit: 4
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  add_index "wards", ["stake_id"], name: "index_wards_on_stake_id", using: :btree
+
   add_foreign_key "stakes", "regions"
+  add_foreign_key "wards", "stakes"
 end
