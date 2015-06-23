@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :regions
   get 'confirmation' => 'confirmation#index', as: :confirmation
 
   # The priority is based upon order of creation: first created -> highest priority.
