@@ -1,0 +1,22 @@
+.ui.one.column.page.grid
+  .column
+    %table.ui.celled.striped.table
+      %thead
+        %tr
+          %th(colspan="4")
+            Eventos
+          %th Operações
+      %tbody
+        - @events.each do |event|
+          %tr
+            %td
+              = link_to event.name, event_path(event)
+            %td 10 inscritos
+            %td #{event.start_date} às #{event.start_time}
+            %td #{event.end_date} às #{event.end_time}
+            %td
+              .ui.mini.icon.buttons
+                .ui.icon.button(data-content="Editar Evento")
+                  %i.edit.icon
+                .ui.icon.button(data-content="Apagar Evento")
+                  %i.remove.icon

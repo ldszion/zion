@@ -54,13 +54,26 @@
     .column
       .ui.divided.divided.items
         .item
-          .ui.tiny.image
-            = image_tag("example/avatars/man.jpg")
           .content
             .ui.two.column.grid
               .twelve.wide.column
                 .ui.header(style="margin-bottom: 5px")
-                  = link_to "Acampamento do MAS 2016", '/events/1'
+                  = link_to "Acampamento do MAS 2016", event_path(1)
+                  .sub.header Maio de 2016
+                .ui.description
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                  tempor incididunt ut labore et dolore magna aliqua.
+              .four.wide.column
+                .extra
+                  .ui.right.floated.primary.small.button
+                    Inscrever-me
+                    %i.right.chevron.icon
+        .item
+          .content
+            .ui.two.column.grid
+              .twelve.wide.column
+                .ui.header(style="margin-bottom: 5px")
+                  = link_to "Acampamento do MAS 2016", event_path(1)
                   .sub.header Maio de 2016
                 .ui.description
                   Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
