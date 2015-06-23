@@ -1,0 +1,12 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @stake.name
+%p
+  %b Region:
+  = @stake.region
+
+= link_to 'Edit', edit_stake_path(@stake)
+\|
+= link_to 'Back', stakes_path

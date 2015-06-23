@@ -1,0 +1,23 @@
+%h1 Listing stakes
+
+%table
+  %thead
+    %tr
+      %th Name
+      %th Region
+      %th
+      %th
+      %th
+
+  %tbody
+    - @stakes.each do |stake|
+      %tr
+        %td= stake.name
+        %td= stake.region
+        %td= link_to 'Show', stake
+        %td= link_to 'Edit', edit_stake_path(stake)
+        %td= link_to 'Destroy', stake, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Stake', new_stake_path
