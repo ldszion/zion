@@ -1,7 +1,5 @@
 Rails.application.routes.draw do
-  get 'events/show'
-
-  get 'event/show'
+  get 'confirmation' => 'confirmation#index', as: :confirmation
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

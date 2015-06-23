@@ -7,13 +7,6 @@
     = javascript_include_tag 'application'
     = csrf_meta_tags
   %body
-    #topmenu.ui.large.menu
-      %a.header.item{:href => "/"}
-        ZION 
-      .right.menu
-        %a.item{href: event_path("1"), class: active_item('events')}
-          Eventos
-        %a.item{href: users_url, class: active_item('users')}
-          Usuários
+    = render 'layouts/menu'
 
     = yield

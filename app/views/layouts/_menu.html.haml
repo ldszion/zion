@@ -1,0 +1,13 @@
+#topmenu.ui.large.menu
+  %a.header.item{:href => "/"}
+    ZION 
+  .right.menu
+    %a.item{href: event_path("1"), class: active_item('events')}
+      %i.ui.calendar.icon
+      Eventos
+    %a.item{href: users_url, class: active_item('users')}
+      %i.ui.users.icon
+      Usuários
+    %a.item{href: confirmation_url, class: active_item('confirmation')}
+      %i.ui.check.icon
+      Confirmação
