@@ -1,13 +1,23 @@
 #topmenu.ui.large.menu
   %a.header.item{:href => "/"}
     ZION 
-  .right.menu
-    %a.item{href: events_url, class: active_item('events')}
-      %i.ui.calendar.icon
-      Eventos
-    %a.item{href: users_url, class: active_item('users')}
-      %i.ui.users.icon
-      Usuários
-    %a.item{href: confirmation_url, class: active_item('confirmation')}
-      %i.ui.check.icon
-      Confirmação
+  %a.item{href: events_url, class: active_item('events')}
+    %i.ui.calendar.icon
+    Eventos
+  %a.item{href: users_url, class: active_item('users')}
+    %i.ui.users.icon
+    Usuários
+  %a.item{href: confirmation_url, class: active_item('confirmation')}
+    %i.ui.check.icon
+    Confirmação
+  .ui.dropdown.item
+    %i.university.icon
+    Unidades
+    %i.dropdown.icon
+    .menu
+      %a.item{href: regions_url, class: active_item('regions')}
+        Regiões
+      %a.item{href: stakes_url, class: active_item('stakes')}
+        Estacas
+      %a.item{href: wards_url, class: active_item('wards')}
+        Alas

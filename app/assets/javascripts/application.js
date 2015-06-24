@@ -14,3 +14,7 @@
 //= require jquery_ujs
 //= require semantic.min
 //= require_tree .
+
+$(document).ready(function() {
+  $('div.dropdown').dropdown();
+});

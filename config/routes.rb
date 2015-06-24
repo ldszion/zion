@@ -2,6 +2,9 @@ Rails.application.routes.draw do
   resources :wards
   resources :stakes
   resources :regions
+  resources :users
+  resources :events
+
   get 'confirmation' => 'confirmation#index', as: :confirmation
 
   # The priority is based upon order of creation: first created -> highest priority.
@@ -9,9 +12,6 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
   root 'users#index'
-
-  resources :users
-  resources :events
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

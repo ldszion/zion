@@ -3,6 +3,12 @@ module ApplicationHelper
   # dizer se o item do menu está ativo ou não.
   # {param} controller
   def active_item controller
-    'active' if controller == controller_name
+    if controller.is_a? String
+      controller = controller.split
+    end
+    controller.each do |c|
+      return 'active' if c == controller_name
+    end
+    ""
   end
 end
