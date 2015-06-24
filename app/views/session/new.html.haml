@@ -1,0 +1,26 @@
+.ui.page.centered.grid
+  .five.wide.column
+    %h2.ui.basic.center.aligned.segment
+      Login
+      %i.ui.lock.icon
+
+    - if notice
+      .ui.negative.small.message
+        .content
+          %p=notice
+
+    .ui.form.segment
+      = form_tag login_url, method: :post 
+      .field
+        .ui.right.icon.input
+          = text_field_tag "email", nil, placeholder: "Email"
+          %i.mail.icon{"aria-hidden" => "true"}
+
+      .field
+        .ui.right.icon.input
+          = password_field_tag "password", nil, placeholder: "Senha"
+          %i.key.icon{"aria-hidden" => "true"}
+
+      %button.fluid.ui.primary.button{type:"submit"}
+        Entrar
+        %i.sign.in.icon{"aria-hidden" => "true"}

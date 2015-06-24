@@ -7,4 +7,19 @@
   .item{
     padding: 20px;
   }
+
+  #profile-avatar{
+    padding-left: 40px;
+    .image{
+      position: absolute;
+      left: 15px;
+      top: 12px;
+      width: 2em;
+      height: auto;
+      img{
+        width: inherit;
+        height: auto;
+      }
+    }
+  }
 }

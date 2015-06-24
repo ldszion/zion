@@ -21,3 +21,21 @@
         Estacas
       %a.item{href: wards_url, class: active_item('wards')}
         Alas
+
+  .right.menu
+    - if current_user
+      .ui.dropdown.item
+        #profile-avatar
+          .ui.avatar.image
+            = image_tag('example/avatars/man.jpg')
+          = current_user.email
+          %i.dropdown.icon
+        .menu
+          %a.item{href: edit_user_path(current_user)}
+            %i.edit.icon
+            Editar
+          %a.item{href: logout_url}
+            %i.sign.out.icon
+            Sair
+    - else
+      %a.item{href: login_url} Entrar

@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'login'  => 'session#new', as: :login
+  post 'login' => 'session#create'
+  get 'logout' => 'session#destroy', as: :logout
+
   resources :wards
   resources :stakes
   resources :regions
