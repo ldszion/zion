@@ -14,3 +14,7 @@ event = Event.create name: "Acampamento do MAS 2016",
                      description: "Acampamento para Jovens Adultos Solteiros",
                      start_datetime: "02/04/2016 09:00".to_datetime,
                      end_datetime: "05/04/2016 17:00".to_datetime
+
+centroOeste = Region.create name: "Centro Oeste"
+brasiliaStake = Stake.create name: "Brasília", region: centroOeste
+guara2 = Ward.create name: "Guará II", stake: brasiliaStake
