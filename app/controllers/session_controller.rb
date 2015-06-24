@@ -4,7 +4,7 @@ class SessionController < ApplicationController
 
   def create
     user = User.find_by_email(params[:email])
-    if user.authenticate(params[:password])
+    if user and user.authenticate(params[:password])
       session[:user_id] = user.id
       redirect_to root_url and return
     end
@@ -13,7 +13,7 @@ class SessionController < ApplicationController
 
   def destroy
     if current_user
-      session[:user_id] = nil
+      session.delete[:user_id]
     end
     redirect_to login_url
   end
