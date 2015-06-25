@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150623155809) do
+ActiveRecord::Schema.define(version: 20150625013710) do
 
   create_table "events", force: :cascade do |t|
     t.string   "name",           limit: 255
@@ -20,6 +20,13 @@ ActiveRecord::Schema.define(version: 20150623155809) do
     t.datetime "end_datetime"
     t.datetime "created_at",                   null: false
     t.datetime "updated_at",                   null: false
+  end
+
+  create_table "profiles", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.string   "key",        limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
   create_table "regions", force: :cascade do |t|
@@ -42,9 +49,11 @@ ActiveRecord::Schema.define(version: 20150623155809) do
     t.string   "password_digest", limit: 255
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
+    t.integer  "profile_id",      limit: 4
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["profile_id"], name: "index_users_on_profile_id", using: :btree
 
   create_table "wards", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -56,5 +65,6 @@ ActiveRecord::Schema.define(version: 20150623155809) do
   add_index "wards", ["stake_id"], name: "index_wards_on_stake_id", using: :btree
 
   add_foreign_key "stakes", "regions"
+  add_foreign_key "users", "profiles"
   add_foreign_key "wards", "stakes"
 end

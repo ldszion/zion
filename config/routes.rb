@@ -1,14 +1,16 @@
 Rails.application.routes.draw do
-  get 'login'  => 'session#new', as: :login
-  post 'login' => 'session#create'
-  get 'logout' => 'session#destroy', as: :logout
-
   resources :wards
   resources :stakes
   resources :regions
   resources :users
   resources :events
 
+  # Sessions routes
+  get 'login'  => 'session#new', as: :login
+  post 'login' => 'session#create'
+  get 'logout' => 'session#destroy', as: :logout
+
+  # Confirmation routes
   get 'confirmation' => 'confirmation#index', as: :confirmation
 
   # The priority is based upon order of creation: first created -> highest priority.

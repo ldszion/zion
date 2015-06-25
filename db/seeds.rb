@@ -6,9 +6,17 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+# profile
+admin               = Profile.create name: "Administrador", key: Profile::ADMIN
+userProfile         = Profile.create name: "Usuário", key: Profile::USER
+wardLeaderProfile   = Profile.create name: "Líder da Ala", key: Profile::WARD_LEADER
+stakeLeaderProfile  = Profile.create name: "Líder da Estaca", key: Profile::STAKE_LEADER
+regionLeaderProfile = Profile.create name: "Líder da Região", key: Profile::REGION_LEADER
+
 user = User.create email: "marcotulio.avila@gmail.com",
                    password: "123456",
-                   password_confirmation: "123456"
+                   password_confirmation: "123456",
+                   profile: admin
 
 event = Event.create name: "Acampamento do MAS 2016",
                      description: "Acampamento para Jovens Adultos Solteiros",
