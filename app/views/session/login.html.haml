@@ -21,6 +21,9 @@
           = password_field_tag "password", nil, placeholder: "Senha"
           %i.key.icon{"aria-hidden" => "true"}
 
-      %button.fluid.ui.primary.button{type:"submit"}
+      %button.ui.fluid.primary.button{type:"submit"}
         Entrar
         %i.sign.in.icon{"aria-hidden" => "true"}
+      %br
+      %a{href: 'register'}
+        Não tem uma conta? Registre-se!

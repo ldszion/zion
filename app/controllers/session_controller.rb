@@ -1,5 +1,6 @@
 class SessionController < ApplicationController
   def new
+    render "login"
   end
 
   def create
@@ -16,5 +17,14 @@ class SessionController < ApplicationController
       logout
     end
     redirect_to login_url
+  end
+
+  # Show register form to guest
+  def register
+    @user = User.new
+  end
+
+  # Add user to database and signin
+  def signup
   end
 end
