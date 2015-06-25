@@ -1,5 +1,6 @@
 class WardsController < ApplicationController
   before_action :set_ward, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user
 
   # GET /wards
   # GET /wards.json
