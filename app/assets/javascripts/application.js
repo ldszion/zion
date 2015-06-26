@@ -31,5 +31,6 @@ $(document).ready(function() {
     }
   };
   $('input.phone').mask(maskBehavior, options);
+  $('input.datemask').mask('00/00/0000');
   // END INPUT MASK
 });

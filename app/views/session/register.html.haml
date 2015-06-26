@@ -32,14 +32,14 @@
       / Informações Pessoais
       .ui.dividing.centered.header Informações Pessoais
       .ui.grid
-        .four.wide.column
+        .five.wide.column
           .ui.card
             .image
               = image_tag "example/avatars/default.jpg"
             .ui.bottom.attached.basic.button
               %i.photo.icon
               Escolher Foto
-        .twelve.wide.column
+        .eleven.wide.column
           .field
             .ui.left.icon.input
               = text_field_tag "name", nil, placeholder: "Nome completo"
@@ -52,32 +52,34 @@
 
           .field
             .ui.left.icon.input
-              = date_field_tag "birthday", nil, placeholder: "Seu aniversário", class: "ui date"
+              = date_field_tag "birthday", nil, placeholder: "Seu aniversário", class: "datemask"
               %i.calendar.icon
 
           .field
             .ui.left.icon.input
-              = text_field_tag "phone", nil, placeholder: "Telefone de contato", class: "phone"
+              = text_field_tag "phone", nil,
+              placeholder: "Telefone de contato com DDD",
+              class: "phone"
               %i.call.icon
+          .ui.grid
+            .column
+              .two.fields
+                .field
+                  = collection_select(:ward, :ward_id, @wards, :id, :name,
+                    {include_blank: "Selecione sua Ala"},
+                    {class: "ui search dropdown"})
+                .field
+                  = select :person, :gender, [ ['Homem', '1'], ['Mulher','2'] ],
+                    {include_blank: "Selecione seu Sexo"},
+                    class: "ui dropdown"
+          .ineline.field
+            .ui.checkbox
+              / %input{type: "checkbox", name: "agreed"}
+              = check_box(:person, :agreed)
+              %label Concordo que meus dados estarão seguros e poderão ser utilizados na aplicação
 
-      .ui.grid
-        .column
-          .two.fields
-            .field
-              = collection_select(:ward, :ward_id, @wards, :id, :name,
-                {include_blank: "Selecione sua Ala"},
-                {class: "ui search dropdown"})
-            .field
-              = select :person, :gender, [ ['Homem', '1'], ['Mulher','2'] ],
-                {include_blank: "Selecione seu Sexo"},
-                class: "ui dropdown"
 
-      .ineline.field
-        .ui.checkbox
-          / %input{type: "checkbox", name: "agreed"}
-          = check_box(:person, :agreed)
-          %label Concordo que meus dados estarão seguros e poderão ser utilizados na aplicação
-
+      %br
       %button.ui.fluid.green.button{type:"submit"}
         Cadastrar
         %i.sign.in.icon
