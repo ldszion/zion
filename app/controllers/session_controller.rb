@@ -26,5 +26,6 @@ class SessionController < ApplicationController
 
   # Add user to database and signin
   def signup
+    render json: params
   end
 end

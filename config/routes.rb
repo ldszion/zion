@@ -11,11 +11,6 @@ Rails.application.routes.draw do
   resources :users
   resources :events
 
-  # Sessions routes
-  get 'login'  => 'session#new', as: :login
-  post 'login' => 'session#create'
-  get 'logout' => 'session#destroy', as: :logout
-
   # Confirmation routes
   get 'confirmation' => 'confirmation#index', as: :confirmation
 

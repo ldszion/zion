@@ -1,5 +1,5 @@
 .ui.page.centered.grid
-  .ten.wide.column
+  .twelve.wide.column
     %h2.ui.basic.center.aligned.segment
       Cadastro
       %i.ui.write.icon
@@ -10,25 +10,77 @@
           %p=notice
 
     .ui.form.segment
-      = form_tag login_url, method: :post, autocomplete: :off
+      = form_tag register_url, method: :post
+
+      / Informações da Conta
+      .ui.dividing.centered.header(style="margin-top: 1rem;") Informações da Conta
       .field
-        .ui.right.icon.input
-          = text_field_tag "email", nil, placeholder: "Email", :autocomplete => :off
-          %i.mail.icon{"aria-hidden" => "true"}
+        .ui.left.icon.input
+          = email_field_tag "user[email]", nil, placeholder: "Email"
+          %i.mail.icon
 
       .field
-        .ui.right.icon.input
-          = password_field_tag "password", nil, placeholder: "Senha", :autocomplete => :off
-          %i.key.icon{"aria-hidden" => "true"}
+        .ui.left.icon.input
+          = password_field_tag "password", nil, placeholder: "Senha"
+          %i.key.icon
 
       .field
-        .ui.right.icon.input
-          = text_field_tag "name", nil, placeholder: "Digite seu nome"
-          %i.user.icon{"aria-hidden" => "true"}
+        .ui.left.icon.input
+          = password_field_tag "password_confirmation", nil, placeholder: "Confirmação de senha"
+          %i.key.icon
+
+      / Informações Pessoais
+      .ui.dividing.centered.header Informações Pessoais
+      .ui.grid
+        .four.wide.column
+          .ui.card
+            .image
+              = image_tag "example/avatars/default.jpg"
+            .ui.bottom.attached.basic.button
+              %i.photo.icon
+              Escolher Foto
+        .twelve.wide.column
+          .field
+            .ui.left.icon.input
+              = text_field_tag "name", nil, placeholder: "Nome completo"
+              %i.user.icon
+
+          .field
+            .ui.left.icon.input
+              = text_field_tag "nickname", nil, placeholder: "Nome preferido?"
+              %i.star.icon
+
+          .field
+            .ui.left.icon.input
+              = date_field_tag "birthday", nil, placeholder: "Seu aniversário", class: "ui date"
+              %i.calendar.icon
+
+          .field
+            .ui.left.icon.input
+              = text_field_tag "phone", nil, placeholder: "Telefone de contato", class: "phone"
+              %i.call.icon
+
+      .ui.grid
+        .column
+          .two.fields
+            .field
+              = collection_select(:ward, :ward_id, Ward.all.collect, :id, :name,
+                {include_blank: "Selecione sua Ala"},
+                {class: "ui search dropdown"})
+            .field
+              = select :person, :gender, [ ['Homem', '1'], ['Mulher','2'] ],
+                {include_blank: "Selecione seu Sexo"},
+                class: "ui dropdown"
+
+      .ineline.field
+        .ui.checkbox
+          / %input{type: "checkbox", name: "agreed"}
+          = check_box(:person, :agreed)
+          %label Concordo que meus dados estarão seguros e poderão ser utilizados na aplicação
 
       %button.ui.fluid.green.button{type:"submit"}
         Cadastrar
-        %i.sign.in.icon{"aria-hidden" => "true"}
+        %i.sign.in.icon
       %br
       %a{href: 'login'}
         Já tem uma conta? Entrar!
