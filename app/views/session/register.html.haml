@@ -78,8 +78,25 @@
               = check_box(:person, :agreed)
               %label Concordo que meus dados estarão seguros e poderão ser utilizados na aplicação
 
-
       %br
+      / Informações do Contato de Emergência
+      .ui.dividing.centered.header(style="margin-top: 1rem;") Contato de Emergência
+      .field
+        .ui.left.icon.input
+          = text_field_tag "emergency_contact[name]", nil, placeholder: "Nome completo"
+          %i.user.icon
+      .field
+        .ui.left.icon.input
+          = text_field_tag "emergency_contact[phone]", nil,
+          placeholder: "Telefone de contato com DDD",
+          class: "phone"
+          %i.call.icon
+      .field
+        = select :emergency_contact, :kinship, [ ['Pai', '1'], ['Mãe','2'] ],
+          {include_blank: "Grau de parentesco"},
+          class: "ui dropdown"
+
+      .ui.divider
       %button.ui.fluid.green.button{type:"submit"}
         Cadastrar
         %i.sign.in.icon
