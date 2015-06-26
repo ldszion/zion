@@ -22,6 +22,7 @@ class SessionController < ApplicationController
   # Show register form to guest
   def register
     @user = User.new
+    @wards = Ward.all.order(:name)
   end
 
   # Add user to database and signin

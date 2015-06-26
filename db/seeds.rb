@@ -25,4 +25,12 @@ event = Event.create name: "Acampamento do MAS 2016",
 
 centroOeste = Region.create name: "Centro Oeste"
 brasiliaStake = Stake.create name: "Brasília", region: centroOeste
-guara2 = Ward.create name: "Guará II", stake: brasiliaStake
+
+# Alas
+guara1            = Ward.create name: "Guará I", stake: brasiliaStake
+guara2            = Ward.create name: "Guará II", stake: brasiliaStake
+aguasClaras       = Ward.create name: "Águas Claras", stake: brasiliaStake
+agrovila          = Ward.create name: "Agrovila", stake: brasiliaStake
+nucleoBandeirante = Ward.create name: "Núcleo Bandeirante", stake: brasiliaStake
+asaSul            = Ward.create name: "Asa Sul", stake: brasiliaStake
+lagoSul           = Ward.create name: "Lago Sul", stake: brasiliaStake

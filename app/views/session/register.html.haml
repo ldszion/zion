@@ -64,7 +64,7 @@
         .column
           .two.fields
             .field
-              = collection_select(:ward, :ward_id, Ward.all.collect, :id, :name,
+              = collection_select(:ward, :ward_id, @wards, :id, :name,
                 {include_blank: "Selecione sua Ala"},
                 {class: "ui search dropdown"})
             .field
