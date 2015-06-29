@@ -5,4 +5,13 @@ class Person < ActiveRecord::Base
 
   MALE   = 1
   FEMALE = 2
+
+  def age
+    now = Time.now.utc.to_date
+    now.year - self.birthday.year - (
+      (now.month > self.birthday.month ||
+        (now.month == self.birthday.month &&
+          now.day >= self.birthday.day)) ? 0 : 1
+    )
+  end
 end
