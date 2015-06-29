@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  last_name: MyString
+  nickname: MyString
+  birthday: 2015-06-29
+  gender: 1
+  ward_id: 
+  agreed: false
+
+two:
+  name: MyString
+  last_name: MyString
+  nickname: MyString
+  birthday: 2015-06-29
+  gender: 1
+  ward_id: 
+  agreed: false

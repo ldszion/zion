@@ -34,3 +34,12 @@ agrovila          = Ward.create name: "Agrovila", stake: brasiliaStake
 nucleoBandeirante = Ward.create name: "Núcleo Bandeirante", stake: brasiliaStake
 asaSul            = Ward.create name: "Asa Sul", stake: brasiliaStake
 lagoSul           = Ward.create name: "Lago Sul", stake: brasiliaStake
+
+# Person Example
+person = Person.create name: "Marco Túlio de Ávila",
+    last_name: "Santos",
+    nickname: "Marco",
+    birthday: "28/06/1989".to_date,
+    gender: Person::MALE,
+    ward: guara2,
+    agreed: true
