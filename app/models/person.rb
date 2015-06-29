@@ -6,6 +6,12 @@ class Person < ActiveRecord::Base
   MALE   = 1
   FEMALE = 2
 
+  # Returns the person's full name
+  def full_name
+    self.name + " " + self.last_name
+  end
+
+  # Returns the current person's age
   def age
     now = Time.now.utc.to_date
     now.year - self.birthday.year - (
