@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150625013710) do
+ActiveRecord::Schema.define(version: 20150629154837) do
 
   create_table "events", force: :cascade do |t|
     t.string   "name",           limit: 255
@@ -21,6 +21,44 @@ ActiveRecord::Schema.define(version: 20150625013710) do
     t.datetime "created_at",                   null: false
     t.datetime "updated_at",                   null: false
   end
+
+  create_table "people", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.string   "last_name",  limit: 255
+    t.string   "nickname",   limit: 255
+    t.date     "birthday"
+    t.integer  "gender",     limit: 4
+    t.integer  "ward_id",    limit: 4
+    t.boolean  "agreed",     limit: 1
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  add_index "people", ["ward_id"], name: "index_people_on_ward_id", using: :btree
+
+  create_table "phones", force: :cascade do |t|
+    t.string   "number",         limit: 255
+    t.integer  "provider",       limit: 4
+    t.integer  "phoneable_id",   limit: 4
+    t.string   "phoneable_type", limit: 255
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+  end
+
+  add_index "phones", ["phoneable_type", "phoneable_id"], name: "index_phones_on_phoneable_type_and_phoneable_id", using: :btree
+
+  create_table "pictures", force: :cascade do |t|
+    t.integer  "imageable_id",      limit: 4
+    t.string   "imageable_type",    limit: 255
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+    t.string   "file_file_name",    limit: 255
+    t.string   "file_content_type", limit: 255
+    t.integer  "file_file_size",    limit: 4
+    t.datetime "file_updated_at"
+  end
+
+  add_index "pictures", ["imageable_type", "imageable_id"], name: "index_pictures_on_imageable_type_and_imageable_id", using: :btree
 
   create_table "profiles", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -64,6 +102,7 @@ ActiveRecord::Schema.define(version: 20150625013710) do
 
   add_index "wards", ["stake_id"], name: "index_wards_on_stake_id", using: :btree
 
+  add_foreign_key "people", "wards"
   add_foreign_key "stakes", "regions"
   add_foreign_key "users", "profiles"
   add_foreign_key "wards", "stakes"
