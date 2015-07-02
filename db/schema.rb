@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150629154837) do
+ActiveRecord::Schema.define(version: 20150630035119) do
 
   create_table "events", force: :cascade do |t|
     t.string   "name",           limit: 255
@@ -48,14 +48,15 @@ ActiveRecord::Schema.define(version: 20150629154837) do
   add_index "phones", ["phoneable_type", "phoneable_id"], name: "index_phones_on_phoneable_type_and_phoneable_id", using: :btree
 
   create_table "pictures", force: :cascade do |t|
-    t.integer  "imageable_id",      limit: 4
-    t.string   "imageable_type",    limit: 255
-    t.datetime "created_at",                    null: false
-    t.datetime "updated_at",                    null: false
-    t.string   "file_file_name",    limit: 255
-    t.string   "file_content_type", limit: 255
-    t.integer  "file_file_size",    limit: 4
-    t.datetime "file_updated_at"
+    t.string   "name",               limit: 255
+    t.integer  "imageable_id",       limit: 4
+    t.string   "imageable_type",     limit: 255
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.string   "image_file_name",    limit: 255
+    t.string   "image_content_type", limit: 255
+    t.integer  "image_file_size",    limit: 4
+    t.datetime "image_updated_at"
   end
 
   add_index "pictures", ["imageable_type", "imageable_id"], name: "index_pictures_on_imageable_type_and_imageable_id", using: :btree
