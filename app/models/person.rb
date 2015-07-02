@@ -2,7 +2,7 @@ class Person < ActiveRecord::Base
   belongs_to :ward
   has_one :user
   has_many :phones, as: :phoneable
-  has_one :avatar, as: :imageable
+  has_one :avatar, as: :imageable, class_name: "Picture"
 
   MALE   = 1
   FEMALE = 2
