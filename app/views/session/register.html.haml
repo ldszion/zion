@@ -25,12 +25,12 @@
 
           .field
             .ui.left.icon.input
-              = password_field_tag "password", nil, placeholder: "Senha"
+              = password_field_tag "user[password]", nil, placeholder: "Senha"
               %i.key.icon
 
           .field
             .ui.left.icon.input
-              = password_field_tag "password_confirmation", nil, placeholder: "Confirmação de senha"
+              = password_field_tag "user[password_confirmation]", nil, placeholder: "Confirmação de senha"
               %i.key.icon
 
       / Informações Pessoais
@@ -41,30 +41,32 @@
           .ui.grid
             .five.wide.column
               .ui.card
-                .image
+                #preview_image.image
                   = image_tag "example/avatars/default.jpg"
-                .ui.bottom.attached.basic.button
+                #avatar_button.ui.bottom.attached.basic.button
                   %i.photo.icon
                   Escolher Foto
+                  .hidden
+                    = file_field :person, :avatar
             .eleven.wide.column
               .field
                 .ui.left.icon.input
-                  = text_field_tag "name", nil, placeholder: "Nome completo"
+                  = text_field :person, "name", placeholder: "Nome completo"
                   %i.user.icon
 
               .field
                 .ui.left.icon.input
-                  = text_field_tag "nickname", nil, placeholder: "Nome preferido?"
+                  = text_field :person, "nickname", placeholder: "Nome preferido?"
                   %i.star.icon
 
               .field
                 .ui.left.icon.input
-                  = date_field_tag "birthday", nil, placeholder: "Seu aniversário", class: "datemask"
+                  = date_field :person, "birthday", placeholder: "Seu aniversário", class: "datemask"
                   %i.calendar.icon
 
               .field
                 .ui.left.icon.input
-                  = text_field_tag "phone", nil,
+                  = text_field :person, "phones",
                   placeholder: "Telefone de contato com DDD",
                   class: "phone"
                   %i.call.icon
@@ -92,11 +94,11 @@
         .ui.segment
           .field
             .ui.left.icon.input
-              = text_field_tag "emergency_contact[name]", nil, placeholder: "Nome completo"
+              = text_field :emergency_contact, "name", placeholder: "Nome completo"
               %i.user.icon
           .field
             .ui.left.icon.input
-              = text_field_tag "emergency_contact[phone]", nil,
+              = text_field :emergency_contact, "phone",
               placeholder: "Telefone de contato com DDD",
               class: "phone"
               %i.call.icon
