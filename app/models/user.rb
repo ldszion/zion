@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
   has_secure_password
   belongs_to :profile
+  belongs_to :person
 
   validates :email,
     presence: {presence: true, message: "Email obrigatório"},

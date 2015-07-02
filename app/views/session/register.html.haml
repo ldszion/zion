@@ -72,7 +72,7 @@
                 .column
                   .two.fields
                     .field
-                      = collection_select(:ward, :ward_id, @wards, :id, :name,
+                      = collection_select(:person, :ward_id, @wards, :id, :name,
                         {include_blank: "Selecione sua Ala"},
                         {class: "ui search dropdown"})
                     .field
@@ -81,7 +81,6 @@
                         class: "ui dropdown"
               .ineline.field
                 .ui.checkbox
-                  / %input{type: "checkbox", name: "agreed"}
                   = check_box(:person, :agreed)
                   %label Concordo que meus dados estarão seguros e poderão ser utilizados na aplicação
 

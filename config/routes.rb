@@ -1,15 +1,16 @@
 Rails.application.routes.draw do
-  get 'login'     => 'session#new', as: :login
-  post 'login'    => 'session#create'
-  get 'logout'    => 'session#destroy', as: :logout
-  get 'register'  => 'session#register', as: :register
-  post 'register' => 'session#signup', as: :signup
-
   resources :wards
   resources :stakes
   resources :regions
   resources :users
   resources :events
+  resources :people
+
+  get 'login'     => 'session#new', as: :login
+  post 'login'    => 'session#create'
+  get 'logout'    => 'session#destroy', as: :logout
+  get 'register'  => 'session#register', as: :register
+  post 'register' => 'session#signup', as: :signup
 
   # Confirmation routes
   get 'confirmation' => 'confirmation#index', as: :confirmation

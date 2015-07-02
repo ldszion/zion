@@ -88,9 +88,11 @@ ActiveRecord::Schema.define(version: 20150629154837) do
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
     t.integer  "profile_id",      limit: 4
+    t.integer  "person_id",       limit: 4
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["person_id"], name: "index_users_on_person_id", using: :btree
   add_index "users", ["profile_id"], name: "index_users_on_profile_id", using: :btree
 
   create_table "wards", force: :cascade do |t|
@@ -104,6 +106,7 @@ ActiveRecord::Schema.define(version: 20150629154837) do
 
   add_foreign_key "people", "wards"
   add_foreign_key "stakes", "regions"
+  add_foreign_key "users", "people"
   add_foreign_key "users", "profiles"
   add_foreign_key "wards", "stakes"
 end

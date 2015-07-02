@@ -36,10 +36,12 @@ asaSul            = Ward.create name: "Asa Sul", stake: brasiliaStake
 lagoSul           = Ward.create name: "Lago Sul", stake: brasiliaStake
 
 # Person Example
+phone = Phone.create number: "(61) 8125-7757"
 person = Person.create name: "Marco Túlio de Ávila",
     last_name: "Santos",
     nickname: "Marco",
     birthday: "28/06/1989".to_date,
     gender: Person::MALE,
     ward: guara2,
+    phones: [phone],
     agreed: true
