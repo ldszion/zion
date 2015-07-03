@@ -3,12 +3,12 @@
     %h2.ui.basic.center.aligned.segment
       Cadastro
       %i.ui.write.icon
-    %a{href: 'login'}
+    %a{ href: 'login' }
       Já tem uma conta? Entrar!
     - if notice
       .ui.negative.small.message
         .content
-          %p=notice
+          %p= notice
 
     .ui.form
       = form_tag register_url, method: :post
@@ -20,17 +20,18 @@
         .ui.segment
           .field
             .ui.left.icon.input
-              = email_field_tag "user[email]", nil, placeholder: "Email"
+              = email_field_tag 'user[email]', nil, placeholder: 'Email'
               %i.mail.icon
 
           .field
             .ui.left.icon.input
-              = password_field_tag "user[password]", nil, placeholder: "Senha"
+              = password_field_tag 'user[password]', nil, placeholder: 'Senha'
               %i.key.icon
 
           .field
             .ui.left.icon.input
-              = password_field_tag "user[password_confirmation]", nil, placeholder: "Confirmação de senha"
+              = password_field_tag 'user[password_confirmation]', nil,
+                placeholder: 'Confirmação de senha'
               %i.key.icon
 
       / Informações Pessoais
@@ -41,9 +42,9 @@
           .ui.grid
             .five.wide.column
               .ui.card
-                #preview_image.image
-                  = image_tag "example/avatars/default.jpg"
-                #avatar_button.ui.bottom.attached.basic.button
+                .image#preview_image
+                  = image_tag 'example/avatars/default.jpg'
+                .ui.bottom.attached.basic.button
                   %i.photo.icon
                   Escolher Foto
                   .hidden
@@ -51,40 +52,45 @@
             .eleven.wide.column
               .field
                 .ui.left.icon.input
-                  = text_field :person, "name", placeholder: "Nome completo"
+                  = text_field :person, 'name', placeholder: 'Nome completo'
                   %i.user.icon
 
               .field
                 .ui.left.icon.input
-                  = text_field :person, "nickname", placeholder: "Nome preferido?"
+                  = text_field :person, 'nickname',
+                    placeholder: 'Nome preferido?'
                   %i.star.icon
 
               .field
                 .ui.left.icon.input
-                  = date_field :person, "birthday", placeholder: "Seu aniversário", class: "datemask"
+                  = date_field :person, 'birthday',
+                    placeholder: 'Seu aniversário', class: 'datemask'
                   %i.calendar.icon
 
               .field
                 .ui.left.icon.input
-                  = text_field :person, "phones",
-                  placeholder: "Telefone de contato com DDD",
-                  class: "phone"
+                  = text_field :person, 'phones',
+                  placeholder: 'Telefone de contato com DDD',
+                  class: 'phone'
                   %i.call.icon
               .ui.grid
                 .column
                   .two.fields
                     .field
                       = collection_select(:person, :ward_id, @wards, :id, :name,
-                        {include_blank: "Selecione sua Ala"},
-                        {class: "ui search dropdown"})
+                        include_blank: 'Selecione sua Ala',
+                        class: 'ui search dropdown')
                     .field
-                      = select :person, :gender, [ ['Homem', '1'], ['Mulher','2'] ],
-                        {include_blank: "Selecione seu Sexo"},
-                        class: "ui dropdown"
+                      = select :person, :gender,
+                        Person::GENDER,
+                        include_blank: 'Selecione seu Sexo',
+                        class: 'ui dropdown'
               .ineline.field
                 .ui.checkbox
                   = check_box(:person, :agreed)
-                  %label Concordo que meus dados estarão seguros e poderão ser utilizados na aplicação
+                  %label
+                    Concordo que meus dados estarão seguros e poderão ser
+                    utilizados na aplicação
 
       %br
       / Informações do Contato de Emergência
@@ -94,22 +100,24 @@
         .ui.segment
           .field
             .ui.left.icon.input
-              = text_field :emergency_contact, "name", placeholder: "Nome completo"
+              = text_field :emergency_contact, 'name',
+                placeholder: 'Nome completo'
               %i.user.icon
           .field
             .ui.left.icon.input
-              = text_field :emergency_contact, "phone",
-              placeholder: "Telefone de contato com DDD",
-              class: "phone"
+              = text_field :emergency_contact, 'phone',
+              placeholder: 'Telefone de contato com DDD',
+              class: 'phone'
               %i.call.icon
           .field
-            = select :emergency_contact, :kinship, [ ['Pai', '1'], ['Mãe','2'] ],
-              {include_blank: "Grau de parentesco"},
-              class: "ui dropdown"
+            = select :emergency_contact, :kinship,
+              [ ['Pai', '1'], ['Mãe','2'] ],
+              include_blank: 'Grau de parentesco',
+              class: 'ui dropdown'
 
       .ui.green.segment
-        %button.ui.right.floated.green.button{type:"submit"}
+        %button.ui.right.floated.green.button{ type: 'submit' }
           Cadastrar
           %i.sign.in.icon
-        %a{href: 'login'}
+        %a{ href: 'login' }
           Já tem uma conta? Entrar!

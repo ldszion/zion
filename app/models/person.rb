@@ -6,6 +6,7 @@ class Person < ActiveRecord::Base
 
   MALE   = 1
   FEMALE = 2
+  GENDER = [ ['Homem', '1'], ['Mulher','2'] ]
 
   # Returns the person's full name
   def full_name

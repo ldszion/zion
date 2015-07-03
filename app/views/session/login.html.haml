@@ -7,23 +7,23 @@
     - if notice
       .ui.negative.small.message
         .content
-          %p=notice
+          %p= notice
 
     .ui.form.segment
-      = form_tag login_url, method: :post 
+      = form_tag login_url, method: :post
       .field
         .ui.right.icon.input
-          = text_field_tag "email", nil, placeholder: "Email"
-          %i.mail.icon{"aria-hidden" => "true"}
+          = text_field_tag 'email', nil, placeholder: 'Email'
+          %i.mail.icon
 
       .field
         .ui.right.icon.input
-          = password_field_tag "password", nil, placeholder: "Senha"
-          %i.key.icon{"aria-hidden" => "true"}
+          = password_field_tag 'password', nil, placeholder: 'Senha'
+          %i.key.icon
 
-      %button.ui.fluid.primary.button{type:"submit"}
+      %button.ui.fluid.primary.button{ type: 'submit' }
         Entrar
-        %i.sign.in.icon{"aria-hidden" => "true"}
+        %i.sign.in.icon
       %br
-      %a{href: 'register'}
+      %a{ href: 'register' }
         Não tem uma conta? Registre-se!
