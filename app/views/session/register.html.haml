@@ -78,12 +78,12 @@
                   .two.fields
                     .field
                       = collection_select(:person, :ward_id, @wards, :id, :name,
-                        include_blank: 'Selecione sua Ala',
+                        { include_blank: 'Selecione sua Ala' },
                         class: 'ui search dropdown')
                     .field
                       = select :person, :gender,
                         Person::GENDER,
-                        include_blank: 'Selecione seu Sexo',
+                        { include_blank: 'Selecione seu Sexo' },
                         class: 'ui dropdown'
               .ineline.field
                 .ui.checkbox
@@ -112,7 +112,7 @@
           .field
             = select :emergency_contact, :kinship,
               [ ['Pai', '1'], ['Mãe','2'] ],
-              include_blank: 'Grau de parentesco',
+              { include_blank: 'Grau de parentesco' },
               class: 'ui dropdown'
 
       .ui.green.segment

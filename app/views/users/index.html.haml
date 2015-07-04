@@ -4,9 +4,10 @@
       .ui.icon.primary.button
         %i.plus.icon
         Novo Usuário
-    %table.ui.celled.striped.table
+    %table.ui.striped.table
       %thead
         %tr
+          %th{ style: 'width: 30px' }
           %th
             Usuários
           %th Operações
@@ -14,13 +15,20 @@
         - @users.each do |user|
           %tr
             %td
+              .ui.avatar.image
+                - if user.person.nil?
+                  = image_tag 'avatar.jpg'
+                - else
+                  = image_tag user.person.avatar.image.url
+            %td
               = mail_to user.email
             %td
               .ui.mini.icon.buttons
-                = link_to user, class: "ui button" do
+                = link_to user, class: 'ui button' do
                   %i.eye.icon
-                = link_to edit_user_path(user), class: "ui button" do
+                = link_to edit_user_path(user), class: 'ui button' do
                   %i.edit.icon
-                = link_to user, method: :delete, data: { confirm: 'Are you sure?' }, class: "ui button" do
+                = link_to user, method: :delete,
+                  data: { confirm: 'Are you sure?' }, class: 'ui button' do
                   %i.close.icon
     %br/

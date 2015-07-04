@@ -48,7 +48,6 @@ ActiveRecord::Schema.define(version: 20150630035119) do
   add_index "phones", ["phoneable_type", "phoneable_id"], name: "index_phones_on_phoneable_type_and_phoneable_id", using: :btree
 
   create_table "pictures", force: :cascade do |t|
-    t.string   "name",               limit: 255
     t.integer  "imageable_id",       limit: 4
     t.string   "imageable_type",     limit: 255
     t.datetime "created_at",                     null: false

@@ -1,13 +1,13 @@
-#topmenu.ui.large.menu
-  %a.header.item{:href => "/"}
-    ZION 
-  %a.item{href: events_url, class: active_item('events')}
+.ui.large.menu#topmenu
+  %a.header.item{ href: '/' }
+    ZION
+  %a.item{ href: events_url, class: active_item('events') }
     %i.ui.calendar.icon
     Eventos
-  %a.item{href: users_url, class: active_item('users')}
+  %a.item{ href: users_url, class: active_item('users') }
     %i.ui.users.icon
     Usuários
-  %a.item{href: confirmation_url, class: active_item('confirmation')}
+  %a.item{ href: confirmation_url, class: active_item('confirmation') }
     %i.ui.check.icon
     Confirmação
   .ui.dropdown.item
@@ -15,27 +15,27 @@
     Unidades
     %i.dropdown.icon
     .menu
-      %a.item{href: regions_url, class: active_item('regions')}
+      %a.item{ href: regions_url, class: active_item('regions') }
         Regiões
-      %a.item{href: stakes_url, class: active_item('stakes')}
+      %a.item{ href: stakes_url, class: active_item('stakes') }
         Estacas
-      %a.item{href: wards_url, class: active_item('wards')}
+      %a.item{ href: wards_url, class: active_item('wards') }
         Alas
 
   .right.menu
-    - if current_user
-      .ui.dropdown.item
-        #profile-avatar
-          .ui.avatar.image
-            = image_tag('example/avatars/man.jpg')
-          = current_user.email
-          %i.dropdown.icon
-        .menu
-          %a.item{href: edit_user_path(current_user)}
-            %i.edit.icon
-            Editar
-          %a.item{href: logout_url}
-            %i.sign.out.icon
-            Sair
-    - else
-      %a.item{href: login_url} Entrar
+    .ui.dropdown.item
+      #profile-avatar
+        .ui.avatar.image
+          - image = 'avatar.jpg'
+          - unless current_user.person.nil?
+            - image = current_user.person.avatar.image.url
+          = image_tag image
+        = current_user.email
+        %i.dropdown.icon
+      .menu
+        %a.item{ href: edit_user_path(current_user) }
+          %i.edit.icon
+          Editar
+        %a.item{ href: logout_url }
+          %i.sign.out.icon
+          Sair

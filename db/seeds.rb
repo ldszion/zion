@@ -37,11 +37,15 @@ lagoSul           = Ward.create name: "Lago Sul", stake: brasiliaStake
 
 # Person Example
 phone = Phone.create number: "(61) 8125-7757"
+picture = Picture.create image: File.new("#{Rails.root}/app/assets/images/perfil.jpg")
 person = Person.create name: "Marco Túlio de Ávila",
     last_name: "Santos",
     nickname: "Marco",
     birthday: "28/06/1989".to_date,
     gender: Person::MALE,
     ward: guara2,
+    avatar: picture,
     phones: [phone],
     agreed: true
+
+admin.person = person
