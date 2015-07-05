@@ -2,6 +2,7 @@ require 'test_helper'
 
 class WardsControllerTest < ActionController::TestCase
   setup do
+    log_in_as_admin
     @ward = wards(:one)
   end
 

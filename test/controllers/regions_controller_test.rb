@@ -2,6 +2,7 @@ require 'test_helper'
 
 class RegionsControllerTest < ActionController::TestCase
   setup do
+    log_in_as_admin
     @region = regions(:one)
   end
 

@@ -1,19 +1,22 @@
 require 'test_helper'
 
 class SessionControllerTest < ActionController::TestCase
-  test "should get new" do
+
+  setup do
+    log_in_as_admin
+    @user = users(:one)
+    @user.password = "123456"
+    @user.password_confirmation = "123456"
+  end
+
+  test "should go to login page" do
     get :new
     assert_response :success
   end
 
-  test "should get create" do
-    get :create
-    assert_response :success
-  end
-
-  test "should get destroy" do
+  test "should logout" do
     get :destroy
-    assert_response :success
+    assert_redirected_to login_url
   end
 
 end

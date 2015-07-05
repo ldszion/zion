@@ -2,6 +2,7 @@ require 'test_helper'
 
 class StakesControllerTest < ActionController::TestCase
   setup do
+    log_in_as_admin
     @stake = stakes(:one)
   end
 

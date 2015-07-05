@@ -4,8 +4,9 @@ class User < ActiveRecord::Base
   belongs_to :person
 
   validates :email,
-    presence: {presence: true, message: "Email obrigatório"},
-    uniqueness: {uniqueness: true, message: "Email já existe"}
+    presence: { presence: true, message: "Email obrigatório" },
+    uniqueness: { uniqueness: true, message: "Email já existe" },
+    format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i }
 
   def register_to event
     "registrando em #{event.name}"
