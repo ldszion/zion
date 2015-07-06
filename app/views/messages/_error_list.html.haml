@@ -1,0 +1,11 @@
+- if errors.any?
+  .ui.negative.message
+    %h2.header
+      - count = errors.count
+      - if count > 1
+        #{count} erros ocorreram
+      - else
+        #{count} erro ocorreu
+    %ul.content
+      - errors.each do |msg|
+        %li= msg
