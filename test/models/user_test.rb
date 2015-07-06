@@ -21,6 +21,12 @@ class UserTest < ActiveSupport::TestCase
     assert_not @user.save
   end
 
+  test "user with a taken email should not be valid" do
+    user = users(:two)
+    user.email = users(:one)
+    assert_not user.save, "Email field should be unique"
+  end
+
   test "user with password confirmation wrong should not be saved" do
     @user.password_confirmation = "different"
     assert_not @user.save
