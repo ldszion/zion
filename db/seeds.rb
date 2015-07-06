@@ -7,7 +7,7 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 # profile
-admin               = Profile.create name: "Administrador", key: Profile::ADMIN
+adminProfile               = Profile.create name: "Administrador", key: Profile::ADMIN
 userProfile         = Profile.create name: "Usuário", key: Profile::USER
 wardLeaderProfile   = Profile.create name: "Líder da Ala", key: Profile::WARD_LEADER
 stakeLeaderProfile  = Profile.create name: "Líder da Estaca", key: Profile::STAKE_LEADER
@@ -16,7 +16,7 @@ regionLeaderProfile = Profile.create name: "Líder da Região", key: Profile::RE
 user = User.create email: "marcotulio.avila@gmail.com",
                    password: "123456",
                    password_confirmation: "123456",
-                   profile: admin
+                   profile: adminProfile
 
 event = Event.create name: "Acampamento do MAS 2016",
                      description: "Acampamento para Jovens Adultos Solteiros",
@@ -46,6 +46,8 @@ person = Person.create name: "Marco Túlio de Ávila",
     ward: guara2,
     avatar: picture,
     phones: [phone],
+    member: true,
     agreed: true
 
-admin.person = person
+user.person = person
+user.save

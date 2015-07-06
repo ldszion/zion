@@ -4,6 +4,8 @@ class Person < ActiveRecord::Base
   has_many :phones, as: :phoneable
   has_one :avatar, as: :imageable, class_name: "Picture"
 
+  validates_presence_of :name, :last_name, :birthday, :gender, :ward, :agreed, :phones
+
   MALE   = 1
   FEMALE = 2
   GENDER = [ ['Homem', '1'], ['Mulher','2'] ]

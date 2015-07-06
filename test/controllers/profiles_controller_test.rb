@@ -6,7 +6,4 @@ class ProfilesControllerTest < ActionController::TestCase
     log_in_as_admin
   end
 
-  # test "the truth" do
-  #   assert true
-  # end
 end

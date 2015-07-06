@@ -8,6 +8,7 @@ class CreatePeople < ActiveRecord::Migration
       t.integer :gender
       t.references :ward, index: true, foreign_key: true
       t.boolean :agreed
+      t.boolean :member
 
       t.timestamps null: false
     end
