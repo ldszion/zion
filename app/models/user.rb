@@ -4,12 +4,19 @@ class User < ActiveRecord::Base
   belongs_to :person
 
   validates :email,
-    presence: { presence: true, message: "Email obrigatório" },
-    uniqueness: { uniqueness: true, message: "Email já existe" },
+    presence: { presence: true, message: "obrigatório" },
+    uniqueness: { uniqueness: true, message: "já existe" },
     format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i }
 
   def register_to event
     "registrando em #{event.name}"
+  end
+
+  # Appends the array params to user's errors
+  def append_errors array
+    array.each do |key, value|
+      self.errors[key] = value
+    end
   end
 
   # Returns true if user's profile is admin.
