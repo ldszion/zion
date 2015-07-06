@@ -1,0 +1,44 @@
+pt_BR:
+  activerecord:
+    errors:
+      models:
+        user:
+          attributes:
+            email:
+              blank: "obrigatório"
+              invalid: "inválido"
+            password:
+              blank: "obrigatória"
+            password_confirmation:
+              confirmation: "não bate com a senha informada"
+        person:
+          attributes:
+            ward:
+              blank: "obrigatória"
+            name:
+              blank: "obrigatório"
+            last_name:
+              blank: "obrigatório"
+            birthday:
+              blank: "obrigatório"
+            agreed:
+              blank: "com os termos de serviço é necessário"
+            gender:
+              blank: "obrigatório"
+            phones:
+              blank: "obrigatório"
+    attributes:
+      user:
+        email: "E-mail"
+        password: "Senha"
+        password_confirmation: "Confirmação de senha"
+      person:
+        name: "Nomed"
+        last_name: "Sobrenome"
+        nickname: "Nome preferido"
+        birthday: "Aniversário"
+        agreed: "Concordar"
+        gender: "Sexo"
+        member: "membro"
+        ward: "Ala"
+        phones: "Telefone"
