@@ -1,0 +1,13 @@
+= form_for @person, multipart: true do |person|
+  .field
+    = person.text_field :name, placeholder: 'Nome'
+  .field
+    = person.text_field :last_name, placeholder: 'Sobrenome'
+  .field
+    = person.text_field :nickname, placeholder: 'Nome preferido'
+  .field
+    = person.date_field :birthday, placeholder: 'Data de nascimento',
+      class: 'datemask'
+  .field
+    = fields_for :phones, person.phones do |phone|
+      = phone.text_field :number, class: 'phone'
