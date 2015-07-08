@@ -4,10 +4,7 @@
       Login
       %i.ui.lock.icon
 
-    - if notice
-      .ui.negative.small.message
-        .content
-          %p= notice
+    = render partial: 'messages/notice'
 
     .ui.form.segment
       = form_tag login_url, method: :post

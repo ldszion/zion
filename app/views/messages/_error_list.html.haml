@@ -1,11 +1,13 @@
 - if errors.any?
-  .ui.negative.message
-    %h2.header
-      - count = errors.count
-      - if count > 1
-        #{count} erros ocorreram
-      - else
-        #{count} erro ocorreu
-    %ul.content
+  .ui.error.message
+    %i.close.icon
+    .header
+      %p
+        - count = errors.count
+        - if count > 1
+          #{count} erros ocorreram
+        - else
+          #{count} erro ocorreu
+    %ul.list
       - errors.each do |msg|
         %li= msg
