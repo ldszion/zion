@@ -1,6 +1,6 @@
 class WardsController < ApplicationController
   before_action :set_ward, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user
+  before_action :authenticate_user, :must_have_person_if_logged_in
 
   # GET /wards
   # GET /wards.json

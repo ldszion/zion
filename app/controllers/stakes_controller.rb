@@ -1,6 +1,6 @@
 class StakesController < ApplicationController
   before_action :set_stake, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user
+  before_action :authenticate_user, :must_have_person_if_logged_in
 
   # GET /stakes
   # GET /stakes.json

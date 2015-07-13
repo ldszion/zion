@@ -1,6 +1,6 @@
 class RegionsController < ApplicationController
   before_action :set_region, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user
+  before_action :authenticate_user, :must_have_person_if_logged_in
 
   # GET /regions
   # GET /regions.json

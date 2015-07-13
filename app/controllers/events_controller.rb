@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-  before_action :authenticate_user
+  before_action :authenticate_user, :must_have_person_if_logged_in
 
   def index
     @events = Event.all.order(:name)
