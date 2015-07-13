@@ -1,13 +1,48 @@
-= form_for @person, multipart: true do |person|
+= form_for @person, multipart: true do |f|
+  .field.required{ class: error_class(@person, :name) }
+    = f.label :name
+    = f.text_field :name, placeholder: 'Nome'
+  .field.required{ class: error_class(@person, :last_name) }
+    = f.label :last_name
+    = f.text_field :last_name, placeholder: 'Sobrenome'
   .field
-    = person.text_field :name, placeholder: 'Nome'
-  .field
-    = person.text_field :last_name, placeholder: 'Sobrenome'
-  .field
-    = person.text_field :nickname, placeholder: 'Nome preferido'
-  .field
-    = person.date_field :birthday, placeholder: 'Data de nascimento',
+    = f.label :nickname
+    = f.text_field :nickname, placeholder: 'Nome preferido'
+  .field.required{ class: error_class(@person, :birthday) }
+    = f.label :birthday
+    = f.date_field :birthday, placeholder: 'Data de nascimento',
       class: 'datemask'
+  - @person.phones.each do |phone|
+    .field.required{ class: ('error' if @person.phones.first.errors.any?) }
+      = f.label :phones
+      = f.fields_for :phones, phone do |ph|
+        = ph.text_field :number, placeholder: 'Telefone', class: 'phone'
+  .field.required
+    = f.label :ward
+    = f.collection_select :ward_id, @wards, :id, :name, {},
+      class: 'ui search dropdown'
+  .field.required
+    = f.label :gender
+    = f.select :gender, Person::GENDER, {}, class: 'ui dropdown'
+
+  .ui.column.grid
+    .two.wide.column
+      %a.ui.fluid.circular.image#preview_image{ href: '#' }
+        = image_tag 'example/avatars/default.jpg',
+          style: 'width: 100px; height: 100px'
+    .fourteen.wide.column
+      .field.required{ class: ('error' if @person.avatar.errors.any?) }
+        = f.label :avatar
+        .ui.fluid.input
+          = f.fields_for :avatar, @person.avatar do |pic|
+            = pic.file_field :image, class: 'target_file'
+  %br
   .field
-    = fields_for :phones, person.phones do |phone|
-      = phone.text_field :number, class: 'phone'
+    .ui.checkbox
+      = f.check_box :member
+      = f.label :member, t('text.person.is_member')
+  .field.required{ class: error_class(@person, :agreed) }
+    .ui.checkbox
+      = f.check_box :agreed
+      = f.label :agreed, t('text.person.agreed')
+  = f.submit 'Salvar', class: 'ui green button'

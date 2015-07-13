@@ -27,12 +27,18 @@ class SessionController < ApplicationController
 
   # Add user to database and signin
   def signup
-    render json: person_params and return
-    person = Person.new person_params
-    person.phones.build number: params[:phone]
-    render json: person.phones
+    @user = User.new user_params
+    @user.profile = Profile.user
+
+    unless @user.save
+      render :register and return
+    end
+
+    log_in @user
+    redirect_to users_url
   end
 
+  private
   # Permit some user's fields from params
   def user_params
     params.require(:user).permit(:email, :password, :password_confirmation)
@@ -41,11 +47,10 @@ class SessionController < ApplicationController
   # Permit some person's fields from params
   def person_params
     params.require(:person).permit(
-      # :avatar,
       :name,
+      :last_name,
       :nickname,
       :birthday,
-      :phones,
       :ward_id,
       :gender,
       :agreed

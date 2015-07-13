@@ -8,6 +8,8 @@ class User < ActiveRecord::Base
     uniqueness: { uniqueness: true, message: "já existe" },
     format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i }
 
+  validates_presence_of :profile
+
   def register_to event
     "registrando em #{event.name}"
   end
