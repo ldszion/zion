@@ -24,7 +24,7 @@ $(document).ready(function() {
   // INPUT MASK FOR PHONE NUMBERS
   var maskBehavior = function (val) {
     return val.replace(/\D/g, '').length === 11 ? '(00) 00000-0000' : '(00) 0000-00009';
-  }
+  };
   options = {
     onKeyPress: function(val, e, field, options) {
       field.mask(maskBehavior.apply({}, arguments), options);
@@ -33,4 +33,11 @@ $(document).ready(function() {
   $('input.phone').mask(maskBehavior, options);
   $('input.datemask').mask('00/00/0000');
   // END INPUT MASK
+
+  $('.ui.message .close.icon')
+    .on('click', function(){
+      $(this).closest('.message').transition('fade', function(){
+        $(this).remove();
+      });
+    });
 });
