@@ -1,9 +1,10 @@
 registerReady = ->
-  $("#avatar_button").click (e) ->
-    if $(e.target).is('input[type="file"]') then return else
-      $(this).find('input[type="file"]').click()
+  $("#preview_image").click (e) ->
+    e.preventDefault()
+    if $(e.target).is('.target_file') then return else
+      $('.target_file').click()
 
-  $("#person_avatar").change ->
+  $(".target_file").change ->
     previewImage this
 
 previewImage = (input) ->
