@@ -11,6 +11,8 @@ pt_BR:
               blank: "obrigatória"
             password_confirmation:
               confirmation: "não bate com a senha informada"
+            profile:
+              blank: "obrigatório"
         person:
           attributes:
             ward:
@@ -27,13 +29,21 @@ pt_BR:
               blank: "obrigatório"
             phones:
               blank: "obrigatório"
+            avatar:
+              blank: "obrigatório"
+        phone:
+          attributes:
+            number:
+              blank: 'obrigatório'
+        picture:
+          attributes:
+            image:
+              blank: 'obrigatório'
+              spoofed_media_type: 'com extensão inválida'
+            image_content_type: 'inválida'
     attributes:
-      user:
-        email: "E-mail"
-        password: "Senha"
-        password_confirmation: "Confirmação de senha"
       person:
-        name: "Nomed"
+        name: "Nome"
         last_name: "Sobrenome"
         nickname: "Nome preferido"
         birthday: "Aniversário"
@@ -42,3 +52,19 @@ pt_BR:
         member: "membro"
         ward: "Ala"
         phones: "Telefone"
+      user:
+        email: "E-mail"
+        password: "Senha"
+        password_confirmation: "Confirmação de senha"
+        profile: "Perfil"
+      phone:
+        number: 'Número'
+      picture:
+        image: "teste"
+        image_content_type: 'imagem teste'
+  text:
+    person:
+      agreed: "Li e concordo com os termos de uso e privacidade"
+      is_member: "Sou membro de A Igreja de Jesus Cristo dos Santos dos Últimos Dias"
+    thanks:
+      to_complete_account: 'Obrigado por completar suas informações'
