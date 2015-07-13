@@ -11,5 +11,8 @@ class ActiveSupport::TestCase
     log_in User.first
   end
 
-  # Add more helper methods to be used by all tests here...
+  # Returns a string explaining why the record is not valid
+  def why_is_not_valid(record)
+    "#{record.class.name} is not valid because of: #{record.errors.full_messages.inspect}"
+  end
 end

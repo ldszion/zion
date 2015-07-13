@@ -6,6 +6,7 @@ class PersonTest < ActiveSupport::TestCase
     @person = people(:one)
     @person.ward = Ward.first
     @person.phones << Phone.new(number: "(61) 8125-7757")
+    @person.avatar = Picture.create image: File.new("#{Rails.root}/app/assets/images/perfil.jpg")
   end
 
   test "person should be valid" do
@@ -22,8 +23,8 @@ class PersonTest < ActiveSupport::TestCase
     assert_not @person.valid?, "person is not valid because"
   end
 
-  test "person without ward should not be valid" do
-    @person.ward = nil
+  test 'person without birthday should not be valid' do
+    @person.birthday = ''
     assert_not @person.valid?, why_is_not_valid(@person)
   end
 
@@ -32,9 +33,14 @@ class PersonTest < ActiveSupport::TestCase
     assert_not @person.valid?, "person is not valid because it should have phones"
   end
 
-  # Returns a string explaining why the record is not valid
-  def why_is_not_valid(record)
-    "person is not valid because of: #{record.errors.full_messages.inspect}"
+  test "person without ward should not be valid" do
+    @person.ward = nil
+    assert_not @person.valid?, why_is_not_valid(@person)
+  end
+
+  test "person without avatar should not be valid" do
+    @person.avatar = nil
+    assert_not @person.valid?, why_is_not_valid(@person)
   end
 
 end

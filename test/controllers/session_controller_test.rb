@@ -19,4 +19,8 @@ class SessionControllerTest < ActionController::TestCase
     assert_redirected_to login_url
   end
 
+  test "should authenticate" do
+    get :new
+  end
+
 end

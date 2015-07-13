@@ -5,10 +5,11 @@ class UserTest < ActiveSupport::TestCase
     @user = User.new email: "valid@email.com"
     @user.password = "123456"
     @user.password_confirmation = "123456"
+    @user.profile = Profile.first
   end
 
-  test "should be valid" do
-    assert @user.valid?
+  test "user should be valid" do
+    assert @user.valid?, why_is_not_valid(@user)
   end
 
   test "user with invalid email should be invalid" do
@@ -36,5 +37,10 @@ class UserTest < ActiveSupport::TestCase
     @user.password = nil
     @user.password_confirmation = nil
     assert_not @user.save
+  end
+
+  test "user without profile should not be valid" do
+    @user.profile = nil
+    assert_not @user.valid?, why_is_not_valid(@user)
   end
 end
