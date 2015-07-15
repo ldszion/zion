@@ -7,8 +7,12 @@ pt_BR:
             email:
               blank: "obrigatório"
               invalid: "inválido"
+              taken: já existe
             password:
               blank: "obrigatória"
+              confirmation: 'precisa de confirmação'
+              too_short: deve ter no mínimo 6 caracteres
+              too_long: deve ter no máximo 16 caracteres
             password_confirmation:
               confirmation: "não bate com a senha informada"
             profile:
