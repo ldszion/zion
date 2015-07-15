@@ -22,27 +22,27 @@ class User < ActiveRecord::Base
   end
 
   # Returns true if user's profile is admin.
-  def is_admin?
+  def admin?
     self.profile.key == Profile::ADMIN
   end
 
   # Returns true if user's profile is common user.
-  def is_user?
+  def user?
     self.profile.key == Profile::USER
   end
 
   # Returns true if user's profile is ward leader.
-  def is_ward_leader?
+  def ward_leader?
     self.profile.key == Profile::WARD_LEADER
   end
 
   # Returns true if user's profile is stake leader.
-  def is_stake_leader?
+  def stake_leader?
     self.profile.key == Profile::STAKE_LEADER
   end
 
   # Returns true if user's profile is region leader.
-  def is_region_leader?
+  def region_leader?
     self.profile.key == Profile::REGION_LEADER
   end
 end
