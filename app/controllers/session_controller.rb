@@ -53,7 +53,6 @@ class SessionController < ApplicationController
       :birthday,
       :ward_id,
       :gender,
-      :agreed
     )
   end
 end

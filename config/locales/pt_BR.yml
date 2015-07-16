@@ -27,8 +27,6 @@ pt_BR:
               blank: "obrigatório"
             birthday:
               blank: "obrigatório"
-            agreed:
-              blank: "com os termos de serviço é necessário"
             gender:
               blank: "obrigatório"
             phones:
@@ -51,7 +49,6 @@ pt_BR:
         last_name: "Sobrenome"
         nickname: "Nome preferido"
         birthday: "Aniversário"
-        agreed: "Concordar"
         gender: "Sexo"
         member: "membro"
         ward: "Ala"
@@ -68,7 +65,6 @@ pt_BR:
         image_content_type: 'imagem teste'
   text:
     person:
-      agreed: "Li e concordo com os termos de uso e privacidade"
       is_member: "Sou membro de A Igreja de Jesus Cristo dos Santos dos Últimos Dias"
     thanks:
       to_complete_account: 'Obrigado por completar suas informações'

@@ -44,7 +44,6 @@ class PeopleController < ApplicationController
       :birthday,
       :gender,
       :ward_id,
-      :agreed,
       :member,
       avatar_attributes: [
         :image

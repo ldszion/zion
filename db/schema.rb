@@ -29,7 +29,6 @@ ActiveRecord::Schema.define(version: 20150630035119) do
     t.date     "birthday"
     t.integer  "gender",     limit: 4
     t.integer  "ward_id",    limit: 4
-    t.boolean  "agreed",     limit: 1
     t.boolean  "member",     limit: 1
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false

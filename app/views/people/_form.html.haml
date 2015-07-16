@@ -41,8 +41,4 @@
     .ui.checkbox
       = f.check_box :member
       = f.label :member, t('text.person.is_member')
-  .field.required{ class: error_class(@person, :agreed) }
-    .ui.checkbox
-      = f.check_box :agreed
-      = f.label :agreed, t('text.person.agreed')
   = f.submit 'Salvar', class: 'ui green button'

@@ -7,7 +7,6 @@ one:
   birthday: 1988-06-29
   gender: 1
   ward_id: 1
-  agreed: true
   member: true
 
 two:
@@ -17,5 +16,4 @@ two:
   birthday: 1980-06-29
   gender: 1
   ward_id: 2
-  agreed: true
   member: true
