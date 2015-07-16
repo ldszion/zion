@@ -31,7 +31,7 @@
         .ui.avatar.image
           - image = 'avatar.jpg'
           - unless current_user.person.nil?
-            - image = current_user.person.avatar.image.url
+            - image = current_user.person.avatar.image.url(:thumb)
           = image_tag image
         = current_user.email
         %i.dropdown.icon

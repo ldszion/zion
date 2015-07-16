@@ -10,27 +10,27 @@
                 .ui.inverted.basic.icon.button
                   Alterar
                   %i.photo.icon
-          = image_tag("example/avatars/man.jpg")
-        #user-edit-button.ui.icon.button
+          = image_tag(@person.avatar.image.url(:medium))
+        .ui.icon.button#user-edit-button
           %i.edit.icon
           Editar
       .fourteen.wide.column
         .ui.grid
           / NOME DO USUÁRIO
           .sixteen.wide.column
-            %h1#user-name.ui.header
-              Marco Túlio de Ávila Santos
+            %h1.ui.header#user-name
+              = @person.full_name
           / INFORMAÇÕES
           .four.wide.column
             %p
               %i.ui.mail.icon
-              = mail_to "marcotulio.avila@gmail.com"
+              = mail_to @user.email
             %p
               %i.ui.university.icon
-              Estaca Brasília - Ala Guará II
+              Estaca #{@person.stake.name} - Ala #{@person.ward.name}
             %p
               %i.ui.birthday.icon
-              26 anos em 28/06/1989
+              #{@person.age} anos em #{brazilian_date(@person.birthday)}
           .four.wide.column
             %p
               %i.ui.call.icon
@@ -40,7 +40,7 @@
               QE 40 Rua 10 Lote 01 apt 201
             %p
               %i.ui.privacy.icon
-              Administrador
+              = @user.profile.name
           .four.wide.black.column
             %p
               %i.ui.announcement.icon

@@ -8,20 +8,19 @@
       %thead
         %tr
           %th{ style: 'width: 30px' }
-          %th
-            Usuários
+          %th Email
+          %th Nome
           %th Operações
       %tbody
         - @users.each do |user|
           %tr
             %td
               .ui.avatar.image
-                - if user.person.nil?
-                  = image_tag 'avatar.jpg'
-                - else
-                  = image_tag user.person.avatar.image.url
+                = image_tag user.person.avatar.image.url
             %td
               = mail_to user.email
+            %td
+              = link_to user.person.full_name, user
             %td
               .ui.mini.icon.buttons
                 = link_to user, class: 'ui button' do
