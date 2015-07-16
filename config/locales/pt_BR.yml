@@ -33,6 +33,10 @@ pt_BR:
               blank: "obrigatório"
             avatar:
               blank: "obrigatório"
+            emergency_contact:
+              blank: obrigatório
+            address:
+              blank: obrigatório
         phone:
           attributes:
             number:
@@ -53,6 +57,8 @@ pt_BR:
         member: "membro"
         ward: "Ala"
         phones: "Telefone"
+        emergency_contact: Contato de emergência
+        address: Endereço
       user:
         email: "E-mail"
         password: "Senha"

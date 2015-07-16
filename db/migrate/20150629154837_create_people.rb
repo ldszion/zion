@@ -4,6 +4,7 @@ class CreatePeople < ActiveRecord::Migration
       t.string :name
       t.string :last_name
       t.string :nickname
+      t.string :address
       t.date :birthday
       t.integer :gender
       t.references :ward, index: true, foreign_key: true

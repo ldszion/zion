@@ -14,11 +14,11 @@ describe User do
   it { should respond_to :region_leader? }
 
   context '#validations' do
-    it { should have_secure_password}
+    it { should have_secure_password }
     it { should validate_presence_of :email }
     it { should validate_uniqueness_of :email }
     it { should validate_presence_of(:password).on(:create) }
-    it "should confirm password" do
+    it 'should confirm password' do
       expect(subject.password_confirmation).to eq subject.password
     end
     it { should validate_length_of(:password).is_at_least(6).is_at_most(16) }
