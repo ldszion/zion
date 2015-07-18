@@ -33,6 +33,7 @@ class PeopleController < ApplicationController
     @person = Person.new
     @person.phones.build
     @person.avatar = Picture.new
+    @person.emergency_contact = EmergencyContact.new
     @wards = Ward.all.order(:name)
   end
 
@@ -42,11 +43,17 @@ class PeopleController < ApplicationController
       :last_name,
       :nickname,
       :birthday,
+      :address,
       :gender,
       :ward_id,
       :member,
       avatar_attributes: [
         :image
+      ],
+      emergency_contact_attributes: [
+        :name,
+        :phone,
+        :kinship
       ],
       phones_attributes: [
         :number,

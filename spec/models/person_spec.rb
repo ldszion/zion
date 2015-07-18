@@ -31,15 +31,16 @@ describe Person do
 
   context '#validations' do
     context '#required' do
-      it { should validate_presence_of(:name).with_message('obrigatório') }
-      it { should validate_presence_of(:last_name).with_message('obrigatório') }
-      it { should validate_presence_of(:birthday).with_message('obrigatório') }
-      it { should validate_presence_of(:gender).with_message('obrigatório') }
-      it { should validate_presence_of(:address).with_message('obrigatório') }
-      it { should validate_presence_of(:ward).with_message('obrigatória') }
-      it { should validate_presence_of(:phones).with_message('obrigatório') }
-      it { should validate_presence_of(:avatar).with_message('obrigatório') }
-      it { should validate_presence_of(:emergency_contact).with_message('obrigatório') }
+      it { should validate_presence_of(:name).with_message('não pode ficar em branco') }
+      it { should validate_uniqueness_of(:name).case_insensitive.with_message('já está em uso') }
+      it { should validate_presence_of(:last_name).with_message('não pode ficar em branco') }
+      it { should validate_presence_of(:birthday).with_message('não pode ficar em branco') }
+      it { should validate_presence_of(:gender).with_message('não pode ficar em branco') }
+      it { should validate_presence_of(:address).with_message('não pode ficar em branco') }
+      it { should validate_presence_of(:ward).with_message('não pode ficar em branco') }
+      it { should validate_presence_of(:phones).with_message('não pode ficar em branco') }
+      it { should validate_presence_of(:avatar).with_message('não pode ficar em branco') }
+      it { should validate_presence_of(:emergency_contact).with_message('não pode ficar em branco') }
     end
 
     context '#not_required' do

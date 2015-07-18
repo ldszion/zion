@@ -15,8 +15,8 @@ describe User do
 
   context '#validations' do
     it { should have_secure_password }
-    it { should validate_presence_of :email }
-    it { should validate_uniqueness_of :email }
+    it { should validate_presence_of(:email) }
+    it { should validate_uniqueness_of(:email).case_insensitive }
     it { should validate_presence_of(:password).on(:create) }
     it 'should confirm password' do
       expect(subject.password_confirmation).to eq subject.password

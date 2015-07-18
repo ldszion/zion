@@ -17,6 +17,9 @@
       = f.label :phones
       = f.fields_for :phones, phone do |ph|
         = ph.text_field :number, placeholder: 'Telefone', class: 'phone'
+  .field.required{ class: error_class(@person, :address) }
+    = f.label :address
+    = f.text_field :address, placeholder: 'Endereço'
   .field.required
     = f.label :ward
     = f.collection_select :ward_id, @wards, :id, :name, {},
@@ -40,5 +43,18 @@
   .field
     .ui.checkbox
       = f.check_box :member
-      = f.label :member, t('text.person.is_member')
+      = f.label :member, t('label.is_member')
+
+  .ui.header Informações do Contato de Emergência
+  = f.fields_for :emergency_contact, @person.emergency_contact do |c|
+    .field.required{ class: error_class(@person.emergency_contact, :kinship) }
+      = c.label :kinship
+      = c.select :kinship, Person::KINSHIP, {}, class: 'ui dropdown'
+    .field.required{ class: error_class(@person.emergency_contact, :name) }
+      = c.label :name
+      = c.text_field :name, placeholder: 'Nome completo'
+    .field.required{ class: error_class(@person.emergency_contact, :phone) }
+      = c.label :phone
+      = c.text_field :phone, placeholder: 'Telefone', class: 'phone'
+
   = f.submit 'Salvar', class: 'ui green button'
