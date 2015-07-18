@@ -7,8 +7,11 @@ class Person < ActiveRecord::Base
 
   accepts_nested_attributes_for :phones, :avatar, :emergency_contact
 
-  validates_presence_of :name,
-                        :last_name,
+  validates :name, presence: true,
+    uniqueness: {
+      case_sensitive: false,
+    }
+  validates_presence_of :last_name,
                         :birthday,
                         :gender,
                         :address,

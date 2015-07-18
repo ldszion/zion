@@ -4,8 +4,8 @@ class User < ActiveRecord::Base
   belongs_to :person
 
   validates :email,
-    presence: { presence: true, message: "obrigatório" },
-    uniqueness: { uniqueness: true, message: "já existe" },
+    presence: { presence: true },
+    uniqueness: { case_sensitive: false },
     format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i }
 
   validates_presence_of :profile
