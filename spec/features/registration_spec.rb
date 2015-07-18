@@ -38,13 +38,13 @@ feature 'registration process' do
     fill_in_fields EMAIL, '', ''
     click_register_button
     expect(page).to_not have_text EMAIL
-    expect(page).to have_text 'Senha obrigatória'
+    expect(page).to have_text 'Senha não pode ficar em branco'
   end
 
   scenario 'registering without password confirmation should not pass' do
     fill_in_fields EMAIL, PASSWORD, ''
     click_register_button
     expect(page).to_not have_text EMAIL
-    expect(page).to have_text 'Confirmação de senha não bate com a senha informada'
+    expect(page).to have_text 'Confirmação de senha não é igual a Senha'
   end
 end
