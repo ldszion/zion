@@ -1,76 +1,257 @@
 pt_BR:
   activerecord:
-    errors:
-      models:
-        user:
-          attributes:
-            email:
-              blank: "obrigatório"
-              invalid: "inválido"
-              taken: já existe
-            password:
-              blank: "obrigatória"
-              confirmation: 'precisa de confirmação'
-              too_short: deve ter no mínimo 6 caracteres
-              too_long: deve ter no máximo 16 caracteres
-            password_confirmation:
-              confirmation: "não bate com a senha informada"
-            profile:
-              blank: "obrigatório"
-        person:
-          attributes:
-            ward:
-              blank: "obrigatória"
-            name:
-              blank: "obrigatório"
-            last_name:
-              blank: "obrigatório"
-            birthday:
-              blank: "obrigatório"
-            gender:
-              blank: "obrigatório"
-            phones:
-              blank: "obrigatório"
-            avatar:
-              blank: "obrigatório"
-            emergency_contact:
-              blank: obrigatório
-            address:
-              blank: obrigatório
-        phone:
-          attributes:
-            number:
-              blank: 'obrigatório'
-        picture:
-          attributes:
-            image:
-              blank: 'obrigatório'
-              spoofed_media_type: 'com extensão inválida'
-            image_content_type: 'inválida'
+    # Model names
+    models:
+      user: Usuário
+      phone: Telefone
+      person: Pessoa
+      picture: Imagem
+      emergency_contact: Contato de Emergência
+
+    # Model attributes
     attributes:
-      person:
-        name: "Nome"
-        last_name: "Sobrenome"
-        nickname: "Nome preferido"
-        birthday: "Aniversário"
-        gender: "Sexo"
-        member: "membro"
-        ward: "Ala"
-        phones: "Telefone"
-        emergency_contact: Contato de emergência
-        address: Endereço
       user:
-        email: "E-mail"
-        password: "Senha"
-        password_confirmation: "Confirmação de senha"
-        profile: "Perfil"
-      phone:
-        number: 'Número'
-      picture:
-        image: "teste"
-        image_content_type: 'imagem teste'
+        password: Senha
+        password_confirmation: Confirmação de senha
+      person:
+        phones: Telefone
+        name: Nome
+        last_name: Sobrenome
+        emergency_contact: Contato de Emergência
+        member: Membro
+        birthday: Aniversário
+        address: Endereço
+        nickname: Apelido
+        ward: Ala
+        stake: Estaca
+        gender: Sexo
+      person/phones:
+        number: Número de telefone
+      person/avatar:
+        image: 'Avatar'
+      person/emergency_contact:
+        name: Nome do contato de emergência
+        kinship: Parentesco do contato de emergência
+        person: Pessoa
+        phone: Telefone
+      emergency_contact:
+        name: Nome
+        kinship: Parentesco
+        phone: Telefone
+
+  # LABELS
+  label:
+    is_member: Sou membro d'A Igreja de Jesus Cristo dos Santos dos Últimos Dias
+
+  # PURE TEXTS
   text:
-    person:
-      is_member: "Sou membro de A Igreja de Jesus Cristo dos Santos dos Últimos Dias"
     thanks:
-      to_complete_account: 'Obrigado por completar suas informações'
+      to_complete_account: Obrigado por completar seu cadastro
+
+  # tradução em:
+  # https://github.com/svenfuchs/rails-i18n/blob/master/rails/locale/pt-BR.yml
+  date:
+    abbr_day_names:
+    - Dom
+    - Seg
+    - Ter
+    - Qua
+    - Qui
+    - Sex
+    - Sáb
+    abbr_month_names:
+    -
+    - Jan
+    - Fev
+    - Mar
+    - Abr
+    - Mai
+    - Jun
+    - Jul
+    - Ago
+    - Set
+    - Out
+    - Nov
+    - Dez
+    day_names:
+    - Domingo
+    - Segunda-feira
+    - Terça-feira
+    - Quarta-feira
+    - Quinta-feira
+    - Sexta-feira
+    - Sábado
+    formats:
+      default: "%d/%m/%Y"
+      long: "%d de %B de %Y"
+      short: "%d de %B"
+    month_names:
+    -
+    - Janeiro
+    - Fevereiro
+    - Março
+    - Abril
+    - Maio
+    - Junho
+    - Julho
+    - Agosto
+    - Setembro
+    - Outubro
+    - Novembro
+    - Dezembro
+    order:
+    - :day
+    - :month
+    - :year
+  datetime:
+    distance_in_words:
+      about_x_hours:
+        one: aproximadamente 1 hora
+        other: aproximadamente %{count} horas
+      about_x_months:
+        one: aproximadamente 1 mês
+        other: aproximadamente %{count} meses
+      about_x_years:
+        one: aproximadamente 1 ano
+        other: aproximadamente %{count} anos
+      almost_x_years:
+        one: quase 1 ano
+        other: quase %{count} anos
+      half_a_minute: meio minuto
+      less_than_x_minutes:
+        one: menos de um minuto
+        other: menos de %{count} minutos
+      less_than_x_seconds:
+        one: menos de 1 segundo
+        other: menos de %{count} segundos
+      over_x_years:
+        one: mais de 1 ano
+        other: mais de %{count} anos
+      x_days:
+        one: 1 dia
+        other: "%{count} dias"
+      x_minutes:
+        one: 1 minuto
+        other: "%{count} minutos"
+      x_months:
+        one: 1 mês
+        other: "%{count} meses"
+      x_seconds:
+        one: 1 segundo
+        other: "%{count} segundos"
+    prompts:
+      day: Dia
+      hour: Hora
+      minute: Minuto
+      month: Mês
+      second: Segundo
+      year: Ano
+  errors:
+    format: "%{attribute} %{message}"
+    messages:
+      accepted: deve ser aceito
+      blank: não pode ficar em branco
+      present: deve ficar em branco
+      confirmation: não é igual a %{attribute}
+      empty: não pode ficar vazio
+      equal_to: deve ser igual a %{count}
+      even: deve ser par
+      exclusion: não está disponível
+      greater_than: deve ser maior que %{count}
+      greater_than_or_equal_to: deve ser maior ou igual a %{count}
+      inclusion: não está incluído na lista
+      invalid: não é válido
+      less_than: deve ser menor que %{count}
+      less_than_or_equal_to: deve ser menor ou igual a %{count}
+      not_a_number: não é um número
+      not_an_integer: não é um número inteiro
+      odd: deve ser ímpar
+      record_invalid: 'A validação falhou: %{errors}'
+      restrict_dependent_destroy:
+        one: Não é possível excluir o registro pois existe um %{record} dependente
+        many: Não é possível excluir o registro pois existem %{record} dependentes
+      taken: já está em uso
+      too_long: 'é muito longo (máximo: %{count} caracteres)'
+      too_short: 'é muito curto (mínimo: %{count} caracteres)'
+      wrong_length: não possui o tamanho esperado (%{count} caracteres)
+      other_than: deve ser diferente de %{count}
+    template:
+      body: 'Por favor, verifique o(s) seguinte(s) campo(s):'
+      header:
+        one: 'Não foi possível gravar %{model}: 1 erro'
+        other: 'Não foi possível gravar %{model}: %{count} erros.'
+  helpers:
+    select:
+      prompt: Por favor selecione
+    submit:
+      create: Criar %{model}
+      submit: Salvar %{model}
+      update: Atualizar %{model}
+  number:
+    currency:
+      format:
+        delimiter: "."
+        format: "%u %n"
+        precision: 2
+        separator: ","
+        significant: false
+        strip_insignificant_zeros: false
+        unit: R$
+    format:
+      delimiter: "."
+      precision: 3
+      separator: ","
+      significant: false
+      strip_insignificant_zeros: false
+    human:
+      decimal_units:
+        format: "%n %u"
+        units:
+          billion:
+            one: bilhão
+            other: bilhões
+          million:
+            one: milhão
+            other: milhões
+          quadrillion:
+            one: quatrilhão
+            other: quatrilhões
+          thousand: mil
+          trillion:
+            one: trilhão
+            other: trilhões
+          unit: ''
+      format:
+        delimiter: "."
+        precision: 2
+        significant: true
+        strip_insignificant_zeros: true
+      storage_units:
+        format: "%n %u"
+        units:
+          byte:
+            one: Byte
+            other: Bytes
+          gb: GB
+          kb: KB
+          mb: MB
+          tb: TB
+    percentage:
+      format:
+        delimiter: "."
+        format: "%n%"
+    precision:
+      format:
+        delimiter: "."
+  support:
+    array:
+      last_word_connector: " e "
+      two_words_connector: " e "
+      words_connector: ", "
+  time:
+    am: ''
+    formats:
+      default: "%a, %d de %B de %Y, %H:%M:%S %z"
+      long: "%d de %B de %Y, %H:%M"
+      short: "%d de %B, %H:%M"
+    pm: ''
