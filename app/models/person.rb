@@ -36,6 +36,11 @@ class Person < ActiveRecord::Base
     name + ' ' + last_name
   end
 
+  # Returns the person's gender name
+  def gender_name
+    GENDER[gender - 1][0]
+  end
+
   # Returns the person's stake through his ward
   def stake
     ward.stake
