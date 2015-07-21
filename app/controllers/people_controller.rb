@@ -21,7 +21,7 @@ class PeopleController < ApplicationController
     if @person.save
       current_user.person = @person
       current_user.save
-      return redirect_to root_url, notice: t('text.thanks.to_complete_account')
+      return redirect_to user_path(@person.user), notice: t('text.thanks.to_complete_account')
     end
     render json: @person
   end
