@@ -10,7 +10,7 @@
     = f.text_field :nickname, placeholder: 'Nome preferido'
   .field.required{ class: error_class(@person, :birthday) }
     = f.label :birthday
-    = f.date_field :birthday, placeholder: 'Data de nascimento',
+    = f.text_field :birthday, placeholder: 'Data de nascimento',
       class: 'datemask'
   - @person.phones.each do |phone|
     .field.required{ class: ('error' if @person.phones.first.errors.any?) }
