@@ -33,7 +33,7 @@ pt_BR:
         name: Nome do contato de emergência
         kinship: Parentesco do contato de emergência
         person: Pessoa
-        phone: Telefone
+        phone: Telefone do contato de emergência
       emergency_contact:
         name: Nome
         kinship: Parentesco

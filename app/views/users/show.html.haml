@@ -1,6 +1,7 @@
 #user-profile-header
   .ui.secondary.inverted.segment.no-border-radius
     / AVATAR
+    = render partial: 'messages/all'
     .ui.two.column.grid
       .two.wide.column
         .ui.small.dimmable.rounded.image
@@ -60,12 +61,13 @@
           .content
             .ui.two.column.grid
               .twelve.wide.column
-                .ui.header(style="margin-bottom: 5px")
-                  = link_to "Acampamento do MAS 2016", event_path(1)
+                .ui.header{ style: 'margin-bottom: 5px' }
+                  = link_to 'Acampamento do MAS 2016', event_path(1)
                   .sub.header Maio de 2016
                 .ui.description
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                  tempor incididunt ut labore et dolore magna aliqua.
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+                  sed do eiusmod tempor incididunt ut labore et dolore magna
+                  aliqua.
               .four.wide.column
                 .extra
                   .ui.right.floated.primary.small.button
