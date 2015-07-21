@@ -9,6 +9,7 @@ describe Person do
     it { should respond_to :birthday }
     it { should respond_to :age }
     it { should respond_to :gender }
+    it { should respond_to :gender_name }
     it { should respond_to :address }
     it { should respond_to :member }
     it { should respond_to :ward }
