@@ -13,7 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require plugins/jquery.mask
-//= require semantic.min
+//= require semantic-ui
 //= require_tree .
 
 $(document).ready(function() {
