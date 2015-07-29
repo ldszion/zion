@@ -7,6 +7,7 @@ pt_BR:
       person: Pessoa
       picture: Imagem
       emergency_contact: Contato de Emergência
+      ward: Ala
 
     # Model attributes
     attributes:

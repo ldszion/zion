@@ -26,6 +26,11 @@
                 placeholder: 'Confirmação de senha'
               %i.key.icon
 
+          .field.required
+            = f.label :ward
+            = f.collection_select :ward_id, @wards, :id, :name, {},
+              class: 'ui search dropdown'
+
           %button.ui.fluid.green.button{ type: 'submit' }
             Cadastrar
             %i.sign.in.icon

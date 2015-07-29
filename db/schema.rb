@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150716014327) do
+ActiveRecord::Schema.define(version: 20150727163553) do
 
   create_table "emergency_contacts", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -101,11 +101,13 @@ ActiveRecord::Schema.define(version: 20150716014327) do
     t.datetime "updated_at",                  null: false
     t.integer  "profile_id",      limit: 4
     t.integer  "person_id",       limit: 4
+    t.integer  "ward_id",         limit: 4
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["person_id"], name: "index_users_on_person_id", using: :btree
   add_index "users", ["profile_id"], name: "index_users_on_profile_id", using: :btree
+  add_index "users", ["ward_id"], name: "index_users_on_ward_id", using: :btree
 
   create_table "wards", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -121,5 +123,6 @@ ActiveRecord::Schema.define(version: 20150716014327) do
   add_foreign_key "stakes", "regions"
   add_foreign_key "users", "people"
   add_foreign_key "users", "profiles"
+  add_foreign_key "users", "wards"
   add_foreign_key "wards", "stakes"
 end

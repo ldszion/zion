@@ -2,13 +2,14 @@ class User < ActiveRecord::Base
   has_secure_password
   belongs_to :profile
   belongs_to :person
+  belongs_to :ward
 
   validates :email,
     presence: { presence: true },
     uniqueness: { case_sensitive: false },
     format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i }
 
-  validates_presence_of :profile
+  validates_presence_of :profile, :ward
   validates_length_of :password, in: 6..16, on: :create
 
   def register_to event

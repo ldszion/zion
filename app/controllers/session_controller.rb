@@ -25,8 +25,9 @@ class SessionController < ApplicationController
 
   # Add user to database and signin
   def signup
-    @user = User.new user_params
+    @user = User.new(user_params)
     @user.profile = Profile.user
+    @wards = Ward.all.order(:name)
 
     render(:register) && return unless @user.save
 
@@ -38,18 +39,6 @@ class SessionController < ApplicationController
 
   # Permit some user's fields from params
   def user_params
-    params.require(:user).permit(:email, :password, :password_confirmation)
-  end
-
-  # Permit some person's fields from params
-  def person_params
-    params.require(:person).permit(
-      :name,
-      :last_name,
-      :nickname,
-      :birthday,
-      :ward_id,
-      :gender
-    )
+    params.require(:user).permit(:email, :password, :password_confirmation, :ward_id)
   end
 end
