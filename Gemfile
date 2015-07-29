@@ -30,6 +30,7 @@ gem 'puma'
 
 gem 'haml-rails'
 gem 'paperclip', '~> 4.2'
+gem 'aws-sdk', '< 2.0'
 gem 'semantic-ui-sass', github: 'doabit/semantic-ui-sass'
 
 # Use Unicorn as the app server
