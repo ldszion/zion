@@ -97,13 +97,14 @@ if(user.nil?)
   user = User.create(email: 'admin@gmail.com',
                    password: '123456',
                    password_confirmation: '123456',
-                   profile: adminProfile)
+                   profile: adminProfile,
+                   ward: Ward.first)
   puts "... OK!"
 else
   puts "Admin já existente."
 end
 
 user.person = person
-user.save
+user.save!
 
 puts "...OK"

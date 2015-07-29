@@ -1,12 +1,13 @@
 require 'rails_helper'
 
 feature 'authentication process' do
-  given(:admin) { User.new email: 'admin@gmail.com', password: '123456' }
+  given(:password) { '123456' }
+  given(:email) { 'admin@gmail.com' }
   scenario 'signing in with correct credentials' do
     visit login_url
     within '.form.segment' do
-      fill_in 'email', with: admin.email
-      fill_in 'password', with: admin.password
+      fill_in 'email', with: email
+      fill_in 'password', with: password
     end
     click_button 'Entrar'
     expect(page).to have_text('ZION')

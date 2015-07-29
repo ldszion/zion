@@ -7,7 +7,7 @@ feature 'registration process' do
 
   # This is a complete Emergency Contact
   emergency_contact = EmergencyContact.new name: 'Beltrano',
-                                           phone: '(61) 8787-8884',
+                                           phone: '(61) 1234-1234',
                                            kinship: Person::FATHER
 
   # This is a avatar
@@ -25,26 +25,6 @@ feature 'registration process' do
                       phones: [Phone.new(number: '(61) 8555-7878')],
                       emergency_contact: emergency_contact,
                       avatar: avatar
-
-
-  # Fills a person's form with a person's object values
-  def fill_persons_form person
-    fill_in 'person_name', with: person.name
-    fill_in 'person_last_name', with: person.last_name
-    fill_in 'person_nickname', with: person.nickname
-    fill_in 'person_birthday', with: person.birthday
-    fill_in 'person_phones_attributes_0_number', with: person.phones.first.number
-    fill_in 'person_address', with: person.address
-    select person.ward.name, from: 'person_ward_id'
-    select person.gender_name, from: 'person_gender'
-    attach_file 'person_avatar_attributes_image', "#{Rails.root}/app/assets/images/perfil.jpg" unless person.avatar.nil?
-    check 'person_member' if person.member?
-
-    # Emergency Contact
-    select person.emergency_contact.kinship_name, from: 'person_emergency_contact_attributes_kinship'
-    fill_in 'person_emergency_contact_attributes_name', with: person.emergency_contact.name
-    fill_in 'person_emergency_contact_attributes_phone', with: person.emergency_contact.phone
-  end
 
   # Click register Button
   def click_register_button
@@ -102,25 +82,6 @@ feature 'registration process' do
     scenario 'should see "Por favor, complete seu cadastro." message when registration is not completed' do
       visit root_url
       expect(page).to have_text('Por favor, complete seu cadastro.')
-    end
-
-    scenario 'should see validation messages on blank values' do
-      click_button 'Salvar'
-      expect(page).to have_content('8 erros ocorreram')
-      expect(page).to have_content('Nome não pode ficar em branco')
-      expect(page).to have_content('Sobrenome não pode ficar em branco')
-      expect(page).to have_content('Aniversário não pode ficar em branco')
-      expect(page).to have_content('Número de telefone não pode ficar em branco')
-      expect(page).to have_content('Endereço não pode ficar em branco')
-      expect(page).to have_content('Avatar não pode ficar em branco')
-      expect(page).to have_content('Nome do contato de emergência não pode ficar em branco')
-      expect(page).to have_content('Telefone do contato de emergência não pode ficar em branco')
-    end
-
-    scenario 'should complete registration' do
-      fill_persons_form person
-      click_button 'Salvar'
-      expect(page).to have_content(I18n.t('text.thanks.to_complete_account'))
     end
   end
 end
