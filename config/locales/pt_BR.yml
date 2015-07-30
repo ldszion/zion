@@ -14,6 +14,8 @@ pt_BR:
       user:
         password: Senha
         password_confirmation: Confirmação de senha
+        ward: Ala
+        profile: Perfil
       person:
         phones: Telefone
         name: Nome
@@ -23,7 +25,6 @@ pt_BR:
         birthday: Aniversário
         address: Endereço
         nickname: Apelido
-        ward: Ala
         stake: Estaca
         gender: Sexo
       person/phones:

@@ -15,8 +15,8 @@ class ApplicationController < ActionController::Base
 
   # Redirects logged-in user to add his personal informations in case its nil
   def must_have_person_if_logged_in
-    if logged_in? and current_user.person.nil?
-      redirect_to new_person_url, notice: "Por favor, complete seu cadastro."
+    if logged_in? and current_user.account.nil?
+      redirect_to new_account_url, notice: "Por favor, complete seu cadastro."
     end
   end
 end

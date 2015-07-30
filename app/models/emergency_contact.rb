@@ -1,11 +1,8 @@
 class EmergencyContact < ActiveRecord::Base
-  belongs_to :person
+  belongs_to :account
+
+  enum kinship: [:father, :mother, :sibling, :spouse, :other]
 
   validates_presence_of :name, :phone, :kinship
-  validates_presence_of :person, on: :save
-
-  # Returns the Emergency Contact's kinship
-  def kinship_name
-    Person::KINSHIP[kinship - 1][0]
-  end
+  validates_presence_of :account, on: :save
 end

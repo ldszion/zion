@@ -1,5 +1,7 @@
-class Person < ActiveRecord::Base
-  belongs_to :ward
+class Account < ActiveRecord::Base
+
+  enum gender: [:male, :female]
+
   has_one :user
   has_many :phones, as: :phoneable
   has_one :avatar, as: :imageable, class_name: 'Picture'
@@ -15,35 +17,13 @@ class Person < ActiveRecord::Base
                         :birthday,
                         :gender,
                         :address,
-                        :ward,
                         :phones,
-                        :avatar,
                         :emergency_contact
 
-  MALE   = 1
-  FEMALE = 2
-  GENDER = [%w(Homem 1), %w(Mulher 2)]
-
-  FATHER  = 1
-  MOTHER  = 2
-  SIBLING = 3
-  SPOUSE  = 4
-  OTHER   = 5
-  KINSHIP = [%w(Pai 1), %w(Mãe 2), %w(Irmão(ã) 3), %w(Cônjuge 4), %w(Outro 5)]
 
   # Returns the person's full name
   def full_name
     name + ' ' + last_name
-  end
-
-  # Returns the person's gender name
-  def gender_name
-    GENDER[gender - 1][0]
-  end
-
-  # Returns the person's stake through his ward
-  def stake
-    ward.stake
   end
 
   # Returns the current person's age

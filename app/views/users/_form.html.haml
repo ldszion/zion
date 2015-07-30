@@ -1,19 +1,56 @@
-= form_for(@user) do |f|
-  - if @user.errors.any?
-    #error_explanation
-      %h2
-        = pluralize(@user.errors.count, "error")
-        prohibited this user from being saved:
-      %ul
-        - @user.errors.full_messages.each do |message|
-          %li= message
-  .field
-    = f.label :email
-    %br/
-    = f.text_field :email
-  .field
-    = f.label :password
-    %br/
-    = f.text_field :password
-  .actions
-    = f.submit
+.ui.page.centered.grid
+  .five.wide.column
+    %h2.ui.basic.center.aligned.segment
+      Cadastro
+      %i.ui.write.icon
+    = render partial: 'messages/notice'
+    = render partial: 'messages/error_list',
+      locals: { errors: @user.errors.full_messages }
+
+    .ui.form
+      = form_for @user, method: :post, multipart: true do |f|
+        .ui.segment
+          .field{ class: error_class(@user, :email) }
+            .ui.left.icon.input
+              = f.email_field :email, placeholder: 'Email'
+              %i.mail.icon
+
+          .field{ class: error_class(@user, :password) }
+            .ui.left.icon.input
+              = f.password_field :password, placeholder: 'Senha'
+              %i.key.icon
+
+          .field{ class: error_class(@user, :password_confirmation) }
+            .ui.left.icon.input
+              = f.password_field :password_confirmation,
+                placeholder: 'Confirmação de senha'
+              %i.key.icon
+
+          .field.required
+            = f.label :ward
+            = f.collection_select :ward_id, @wards, :id, :name, {},
+              class: 'ui search dropdown'
+
+          %button.ui.fluid.green.button{ type: 'submit' }
+            Cadastrar
+            %i.sign.in.icon
+          %br
+/ = form_for(@user) do |f|
+/   - if @user.errors.any?
+/     #error_explanation
+/       %h2
+/         = pluralize(@user.errors.count, "error")
+/         prohibited this user from being saved:
+/       %ul
+/         - @user.errors.full_messages.each do |message|
+/           %li= message
+/   .field
+/     = f.label :email
+/     %br/
+/     = f.text_field :email
+/   .field
+/     = f.label :password
+/     %br/
+/     = f.text_field :password
+/   .actions
+/     = f.submit

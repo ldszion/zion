@@ -1,32 +1,26 @@
-= form_for @person, multipart: true do |f|
-  .field.required{ class: error_class(@person, :name) }
+= form_for @account, multipart: true do |f|
+  .field.required{ class: error_class(@account, :name) }
     = f.label :name
     = f.text_field :name, placeholder: 'Nome'
-  .field.required{ class: error_class(@person, :last_name) }
+  .field.required{ class: error_class(@account, :last_name) }
     = f.label :last_name
     = f.text_field :last_name, placeholder: 'Sobrenome'
   .field
     = f.label :nickname
     = f.text_field :nickname, placeholder: 'Nome preferido'
-  .field.required{ class: error_class(@person, :birthday) }
+  .field.required{ class: error_class(@account, :birthday) }
     = f.label :birthday
     = f.text_field :birthday, placeholder: 'Data de nascimento',
       class: 'datemask'
-  - @person.phones.each do |phone|
-    .field.required{ class: ('error' if @person.phones.first.errors.any?) }
+  - @account.phones.each do |phone|
+    .field.required{ class: ('error' if @account.phones.first.errors.any?) }
       = f.label :phones
       = f.fields_for :phones, phone do |ph|
         = ph.text_field :number, placeholder: 'Telefone', class: 'phone'
-  .field.required{ class: error_class(@person, :address) }
+  .field.required{ class: error_class(@account, :address) }
     = f.label :address
     = f.text_field :address, placeholder: 'Endereço'
-  .field.required
-    = f.label :ward
-    = f.collection_select :ward_id, @wards, :id, :name, {},
-      class: 'ui search dropdown'
-  .field.required
-    = f.label :gender
-    = f.select :gender, Person::GENDER, {}, class: 'ui dropdown'
+
 
   .ui.column.grid
     .two.wide.column
@@ -34,10 +28,10 @@
         = image_tag 'example/avatars/default.jpg',
           style: 'width: 100px; height: 100px'
     .fourteen.wide.column
-      .field.required{ class: ('error' if @person.avatar.errors.any?) }
+      .field.required{ class: ('error' if @account.avatar.errors.any?) }
         = f.label :avatar
         .ui.fluid.input
-          = f.fields_for :avatar, @person.avatar do |pic|
+          = f.fields_for :avatar, @account.avatar do |pic|
             = pic.file_field :image, class: 'target_file'
   %br
   .field
@@ -46,14 +40,12 @@
       = f.label :member, t('label.is_member')
 
   .ui.header Informações do Contato de Emergência
-  = f.fields_for :emergency_contact, @person.emergency_contact do |c|
-    .field.required{ class: error_class(@person.emergency_contact, :kinship) }
-      = c.label :kinship
-      = c.select :kinship, Person::KINSHIP, {}, class: 'ui dropdown'
-    .field.required{ class: error_class(@person.emergency_contact, :name) }
+  = f.fields_for :emergency_contact, @account.emergency_contact do |c|
+
+    .field.required{ class: error_class(@account.emergency_contact, :name) }
       = c.label :name
       = c.text_field :name, placeholder: 'Nome completo'
-    .field.required{ class: error_class(@person.emergency_contact, :phone) }
+    .field.required{ class: error_class(@account.emergency_contact, :phone) }
       = c.label :phone
       = c.text_field :phone, placeholder: 'Telefone', class: 'phone'
 

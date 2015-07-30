@@ -3,29 +3,6 @@ require 'test_helper'
 
 feature 'registration process' do
 
-  # ENTITIES FOR TESTS
-
-  # This is a complete Emergency Contact
-  emergency_contact = EmergencyContact.new name: 'Beltrano',
-                                           phone: '(61) 1234-1234',
-                                           kinship: Person::FATHER
-
-  # This is a avatar
-  avatar = Picture.new image: File.new("#{Rails.root}/app/assets/images/perfil.jpg")
-
-  # This is a complete and correct person
-  person = Person.new name: 'Fulano Maluco',
-                      last_name: 'Silva',
-                      nickname: 'Fulaninho',
-                      birthday: '12/02/1987'.to_date,
-                      address: 'Endereço qualquer',
-                      gender: Person::MALE,
-                      ward: Ward.first,
-                      member: true,
-                      phones: [Phone.new(number: '(61) 8555-7878')],
-                      emergency_contact: emergency_contact,
-                      avatar: avatar
-
   # Click register Button
   def click_register_button
     click_button 'Cadastrar'
@@ -55,7 +32,7 @@ feature 'registration process' do
   end
 
   before(:each) do
-    visit register_url
+    visit new_user_url
     expect(page).to have_text 'Cadastro'
   end
 

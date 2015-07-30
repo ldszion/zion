@@ -1,21 +1,3 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
-
-# profile
-adminProfile        = Profile.create name: 'Administrador', key: Profile::ADMIN
-userProfile         = Profile.create name: 'Usuário', key: Profile::USER
-wardLeaderProfile   = Profile.create name: 'Líder da Ala', key: Profile::WARD_LEADER
-stakeLeaderProfile  = Profile.create name: 'Líder da Estaca', key: Profile::STAKE_LEADER
-regionLeaderProfile = Profile.create name: 'Líder da Região', key: Profile::REGION_LEADER
-
-
-
-
 event = Event.find_by(name: 'Acampamento do MAS 2016')
 if(event.nil?)
   print "Criando Evento modelo ..."
@@ -39,6 +21,7 @@ else
   puts "Região modelo já existente."
 end
 
+
 brasiliaStake = Stake.find_by(name: "Estaca 1")
 if(brasiliaStake.nil?)
   print "Criando estaca modelo ..."
@@ -47,6 +30,7 @@ if(brasiliaStake.nil?)
 else
   puts "Estaca modelo já existente."
 end
+
 
 # Alas
 puts "Criando alas modelo ..."
@@ -61,33 +45,31 @@ end
 puts "... OK!"
 
 
-puts "Criando modelo de usuário/pessoa..."
+puts "Criando modelo de usuário:"
 # Emergency Contact
 contact = EmergencyContact.find_by(name: 'Meu Contato de Emergência')
 if(contact.nil?)
-  contact = EmergencyContact.create name: 'Meu Contato de Emergência', phone: '(XX) XXXX-XXXX',
-                               kinship: Person::SPOUSE
+  contact = EmergencyContact.create(name: 'Meu Contato de Emergência', phone: '(XX) XXXX-XXXX',
+                               kinship: :other)
 end
 
-# Person Example
+# Account Example
 phone = Phone.create number: '(12) 1234-5678'
-picture = Picture.create image: File.new("#{Rails.root}/app/assets/images/perfil.jpg")
 
-person = Person.find_by(name: 'Meu nome')
-if(person.nil?)
-  person = Person.create(name: 'Meu nome',
+account = Account.find_by(name: 'Meu nome')
+if(account.nil?)
+  account = Account.create(name: 'Meu nome',
                        last_name: 'Meu sobrenome',
                        nickname: 'Meu Apelido',
                        birthday: '01/01/1901'.to_date,
                        address: 'Meu endereço',
-                       gender: Person::MALE,
-                       ward: Ward.first,
-                       avatar: picture,
+                       gender: :male,
                        emergency_contact: contact,
                        phones: [phone],
                        member: true)
+  puts "Conta criada"
 else
-  puts "Pessoa já existente"
+  puts "Conta já existente"
 end
 
 
@@ -97,14 +79,14 @@ if(user.nil?)
   user = User.create(email: 'admin@gmail.com',
                    password: '123456',
                    password_confirmation: '123456',
-                   profile: adminProfile,
-                   ward: Ward.first)
+                   ward: Ward.first,
+                   profile: :admin)
   puts "... OK!"
 else
   puts "Admin já existente."
 end
 
-user.person = person
+user.account = account
 user.save!
 
 puts "...OK"

@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 feature 'authentication process' do
-  given(:password) { '123456' }
   given(:email) { 'admin@gmail.com' }
+  given(:password) { '123456' }
   scenario 'signing in with correct credentials' do
     visit login_url
     within '.form.segment' do

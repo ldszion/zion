@@ -1,7 +1,9 @@
 class User < ActiveRecord::Base
   has_secure_password
-  belongs_to :profile
-  belongs_to :person
+  
+  enum profile: [:user, :ward_leader, :stake_leader, :region_leader, :admin]
+
+  belongs_to :account
   belongs_to :ward
 
   validates :email,
@@ -9,7 +11,7 @@ class User < ActiveRecord::Base
     uniqueness: { case_sensitive: false },
     format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i }
 
-  validates_presence_of :profile, :ward
+  validates_presence_of :ward
   validates_length_of :password, in: 6..16, on: :create
 
   def register_to event
@@ -21,30 +23,5 @@ class User < ActiveRecord::Base
     array.each do |key, value|
       self.errors[key] = value
     end
-  end
-
-  # Returns true if user's profile is admin.
-  def admin?
-    self.profile.key == Profile::ADMIN
-  end
-
-  # Returns true if user's profile is common user.
-  def user?
-    self.profile.key == Profile::USER
-  end
-
-  # Returns true if user's profile is ward leader.
-  def ward_leader?
-    self.profile.key == Profile::WARD_LEADER
-  end
-
-  # Returns true if user's profile is stake leader.
-  def stake_leader?
-    self.profile.key == Profile::STAKE_LEADER
-  end
-
-  # Returns true if user's profile is region leader.
-  def region_leader?
-    self.profile.key == Profile::REGION_LEADER
   end
 end

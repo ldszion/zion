@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Person do
+describe Account do
   context '#responsive_methods' do
     it { should respond_to :name }
     it { should respond_to :full_name }
@@ -9,12 +9,8 @@ describe Person do
     it { should respond_to :birthday }
     it { should respond_to :age }
     it { should respond_to :gender }
-    it { should respond_to :gender_name }
     it { should respond_to :address }
     it { should respond_to :member }
-    it { should respond_to :ward }
-    it { should respond_to :ward }
-    it { should respond_to :stake }
     it { should respond_to :avatar }
     it { should respond_to :phones }
     it { should respond_to :emergency_contact }
@@ -24,7 +20,6 @@ describe Person do
     it { should have_many :phones }
     it { should have_one :avatar }
     it { should have_one :emergency_contact }
-    it { should belong_to :ward }
     it { should accept_nested_attributes_for :phones }
     it { should accept_nested_attributes_for :avatar }
     it { should accept_nested_attributes_for :emergency_contact }
@@ -38,9 +33,7 @@ describe Person do
       it { should validate_presence_of(:birthday).with_message('não pode ficar em branco') }
       it { should validate_presence_of(:gender).with_message('não pode ficar em branco') }
       it { should validate_presence_of(:address).with_message('não pode ficar em branco') }
-      it { should validate_presence_of(:ward).with_message('não pode ficar em branco') }
       it { should validate_presence_of(:phones).with_message('não pode ficar em branco') }
-      it { should validate_presence_of(:avatar).with_message('não pode ficar em branco') }
       it { should validate_presence_of(:emergency_contact).with_message('não pode ficar em branco') }
     end
 
@@ -51,7 +44,7 @@ describe Person do
   end
 
   context '#valid' do
-    subject { Person.first }
+    subject { Account.first }
     it { should be_valid }
   end
 end

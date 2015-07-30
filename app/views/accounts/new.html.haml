@@ -2,6 +2,6 @@
   .column
     = render partial: 'messages/notice'
     = render partial: 'messages/error_list',
-      locals: { errors: @person.errors.full_messages }
+      locals: { errors: @account.errors.full_messages }
     .ui.form.segment
       = render partial: 'form'

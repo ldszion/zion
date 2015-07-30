@@ -16,29 +16,4 @@ class SessionController < ApplicationController
     logout if logged_in?
     redirect_to login_url
   end
-
-  # Show register form to guest
-  def register
-    @user = User.new
-    @wards = Ward.all.order(:name)
-  end
-
-  # Add user to database and signin
-  def signup
-    @user = User.new(user_params)
-    @user.profile = Profile.user
-    @wards = Ward.all.order(:name)
-
-    render(:register) && return unless @user.save
-
-    log_in @user
-    redirect_to users_url
-  end
-
-  private
-
-  # Permit some user's fields from params
-  def user_params
-    params.require(:user).permit(:email, :password, :password_confirmation, :ward_id)
-  end
 end

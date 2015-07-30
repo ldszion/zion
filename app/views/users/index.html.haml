@@ -16,21 +16,17 @@
           %tr
             %td
               .ui.avatar.image
-                - if user.person.nil?
-                  = image_tag 'avatar.jpg'
-                - else
-                  = image_tag user.person.avatar.image.url
-
+                = image_tag 'avatar.jpg'
             %td
               = mail_to user.email
             %td
-              - if user.person.nil?
+              - if user.account.nil?
                 \-
               - else
-                = link_to user.person.full_name, user
+                = link_to user.account.full_name, user
             %td
               .ui.mini.icon.buttons
-                - unless user.person.nil?
+                - unless user.account.nil?
                   = link_to user, class: 'ui button' do
                     %i.eye.icon
                 = link_to edit_user_path(user), class: 'ui button' do
