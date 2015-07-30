@@ -13,3 +13,7 @@
 /tmp
 .idea/
 public/system/*
+
+db/schema.rb
+*.sublime*
+config/database.yml
