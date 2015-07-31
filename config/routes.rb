@@ -14,5 +14,5 @@ Rails.application.routes.draw do
   get 'confirmation' => 'confirmation#index', as: :confirmation
 
   # You can have the root of your site routed with "root"
-  root 'users#index'
+  root 'session#home'
 end

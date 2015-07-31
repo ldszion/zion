@@ -10,8 +10,23 @@ class AccountsController < ApplicationController
   def new
   end
 
+  def edit
+    @account = Account.find(params[:id])
+  end
+
+  def update
+    @account = Account.find(params[:id])
+    @account.assign_attributes account_params
+    if(@account.save)
+      redirect_to current_user, notice: 'Dados atualizados com sucesso'
+    else
+      render :edit
+    end
+  end
+
   def create
     @account.assign_attributes account_params
+    # @account.birthday = params[:account][:birthday].to_date
 
     if @account.save
       current_user.account = @account

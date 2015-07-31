@@ -8,9 +8,6 @@
       %a.item{ href: users_url, class: active_item('users') }
         %i.ui.users.icon
         Usuários
-      %a.item{ href: accounts_url, class: active_item('people') }
-        %i.ui.users.icon
-        Pessoas
       %a.item{ href: confirmation_url, class: active_item('confirmation') }
         %i.ui.check.icon
         Confirmação
@@ -36,9 +33,6 @@
             = current_user.email
             %i.dropdown.icon
           .menu
-            %a.item{ href: edit_user_path(current_user) }
-              %i.edit.icon
-              Editar
             %a.item{ href: logout_url }
               %i.sign.out.icon
               Sair

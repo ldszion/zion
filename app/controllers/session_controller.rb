@@ -16,4 +16,12 @@ class SessionController < ApplicationController
     logout if logged_in?
     redirect_to login_url
   end
+
+  def home
+    if current_user?
+      redirect_to current_user
+    else
+      redirect_to login_url
+    end
+  end
 end

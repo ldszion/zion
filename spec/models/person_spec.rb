@@ -11,15 +11,12 @@ describe Account do
     it { should respond_to :gender }
     it { should respond_to :address }
     it { should respond_to :member }
-    it { should respond_to :avatar }
     it { should respond_to :phone }
     it { should respond_to :emergency_contact }
   end
 
   context '#relationships' do
-    it { should have_one :avatar }
     it { should have_one :emergency_contact }
-    it { should accept_nested_attributes_for :avatar }
     it { should accept_nested_attributes_for :emergency_contact }
   end
 

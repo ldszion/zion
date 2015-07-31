@@ -14,14 +14,13 @@
           = image_tag('avatar.jpg')
         .ui.icon.button#user-edit-button
           %i.edit.icon
-          Editar
+          %a{href: edit_account_path(current_user.account), id: 'edit'} Editar
       .fourteen.wide.column
         .ui.grid
-          / NOME DO USUÁRIO
           .sixteen.wide.column
             %h1.ui.header#user-name
               = @account.full_name
-          / INFORMAÇÕES
+          
           .four.wide.column
             %p
               %i.ui.mail.icon
