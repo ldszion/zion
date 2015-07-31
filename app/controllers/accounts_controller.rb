@@ -11,17 +11,15 @@ class AccountsController < ApplicationController
   end
 
   def create
-    @account.phones.clear
     @account.assign_attributes account_params
-
-    unless @account.valid?
-      render :new and return
-    end
+    # @account.birthday = params[:account][:birthday].to_date
 
     if @account.save
       current_user.account = @account
       current_user.save
       return redirect_to user_path(@account.user), notice: t('text.thanks.to_complete_account')
+    else
+      render :new and return
     end
     render json: @account
   end
@@ -31,7 +29,6 @@ class AccountsController < ApplicationController
   def prepare_account
     # The account to be inserted into current user
     @account = Account.new
-    @account.phones.build
     @account.avatar = Picture.new
     @account.emergency_contact = EmergencyContact.new
   end
@@ -45,6 +42,7 @@ class AccountsController < ApplicationController
       :address,
       :gender,
       :member,
+      :phone,
       avatar_attributes: [
         :image
       ],
@@ -52,10 +50,6 @@ class AccountsController < ApplicationController
         :name,
         :phone,
         :kinship
-      ],
-      phones_attributes: [
-        :number,
-        :provider
       ],
     )
   end

@@ -53,9 +53,6 @@ if(contact.nil?)
                                kinship: :other)
 end
 
-# Account Example
-phone = Phone.create number: '(12) 1234-5678'
-
 account = Account.find_by(name: 'Meu nome')
 if(account.nil?)
   account = Account.create(name: 'Meu nome',
@@ -65,7 +62,7 @@ if(account.nil?)
                        address: 'Meu endereço',
                        gender: :male,
                        emergency_contact: contact,
-                       phones: [phone],
+                       phone: '(12) 1234-5678',
                        member: true)
   puts "Conta criada"
 else

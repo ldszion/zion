@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150730203601) do
+ActiveRecord::Schema.define(version: 20150731195926) do
 
   create_table "accounts", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 20150730203601) do
     t.boolean  "member",     limit: 1
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
+    t.string   "phone",      limit: 255
   end
 
   create_table "emergency_contacts", force: :cascade do |t|
@@ -44,17 +45,6 @@ ActiveRecord::Schema.define(version: 20150730203601) do
     t.datetime "created_at",                   null: false
     t.datetime "updated_at",                   null: false
   end
-
-  create_table "phones", force: :cascade do |t|
-    t.string   "number",         limit: 255
-    t.integer  "provider",       limit: 4
-    t.integer  "phoneable_id",   limit: 4
-    t.string   "phoneable_type", limit: 255
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
-  end
-
-  add_index "phones", ["phoneable_type", "phoneable_id"], name: "index_phones_on_phoneable_type_and_phoneable_id", using: :btree
 
   create_table "pictures", force: :cascade do |t|
     t.integer  "imageable_id",       limit: 4

@@ -2,25 +2,30 @@
   .field.required{ class: error_class(@account, :name) }
     = f.label :name
     = f.text_field :name, placeholder: 'Nome'
+  
   .field.required{ class: error_class(@account, :last_name) }
     = f.label :last_name
     = f.text_field :last_name, placeholder: 'Sobrenome'
+  
   .field
     = f.label :nickname
     = f.text_field :nickname, placeholder: 'Nome preferido'
+  
   .field.required{ class: error_class(@account, :birthday) }
     = f.label :birthday
-    = f.text_field :birthday, placeholder: 'Data de nascimento',
-      class: 'datemask'
-  - @account.phones.each do |phone|
-    .field.required{ class: ('error' if @account.phones.first.errors.any?) }
-      = f.label :phones
-      = f.fields_for :phones, phone do |ph|
-        = ph.text_field :number, placeholder: 'Telefone', class: 'phone'
+    = f.text_field :birthday, placeholder: 'Data de nascimento', class: 'datemask'
+
+  .field.required{class: error_class(@account, :phone)}
+    = f.label :phone
+    = f.text_field :phone, placeholder: 'Telefone', class: 'phone'
+
   .field.required{ class: error_class(@account, :address) }
     = f.label :address
     = f.text_field :address, placeholder: 'Endereço'
 
+  .field.required
+    = f.label :gender
+    = f.collection_select :gender, Account.genders, :first, :first, {}, class: 'ui search dropdown'
 
   .ui.column.grid
     .two.wide.column
@@ -49,4 +54,7 @@
       = c.label :phone
       = c.text_field :phone, placeholder: 'Telefone', class: 'phone'
 
+    .field.required
+      = c.label :kinship
+      = c.collection_select :kinship, EmergencyContact.kinships, :first, :first, {}, class: 'ui search dropdown'
   = f.submit 'Salvar', class: 'ui green button'

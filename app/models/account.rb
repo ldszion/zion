@@ -3,11 +3,10 @@ class Account < ActiveRecord::Base
   enum gender: [:male, :female]
 
   has_one :user
-  has_many :phones, as: :phoneable
   has_one :avatar, as: :imageable, class_name: 'Picture'
   has_one :emergency_contact
 
-  accepts_nested_attributes_for :phones, :avatar, :emergency_contact
+  accepts_nested_attributes_for :avatar, :emergency_contact
 
   validates :name, presence: true,
     uniqueness: {
@@ -17,7 +16,7 @@ class Account < ActiveRecord::Base
                         :birthday,
                         :gender,
                         :address,
-                        :phones,
+                        :phone,
                         :emergency_contact
 
 
