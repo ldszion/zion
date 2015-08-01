@@ -17,3 +17,4 @@ public/system/*
 db/schema.rb
 *.sublime*
 config/database.yml
+config/local_env.yml
