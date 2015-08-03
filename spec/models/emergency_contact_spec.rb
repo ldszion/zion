@@ -6,6 +6,10 @@ describe EmergencyContact, type: :model do
     it { should respond_to :phone }
     it { should respond_to :kinship }
     it { should respond_to :account }
+    it { should respond_to :father? }
+    it { should respond_to :mother? }
+    it { should respond_to :sibling? }
+    it { should respond_to :other? }
   end
 
   context '#relationships' do

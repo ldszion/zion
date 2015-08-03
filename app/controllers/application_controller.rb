@@ -15,12 +15,14 @@ class ApplicationController < ActionController::Base
 
   # Redirects logged-in user to add his personal informations in case its nil
   def must_have_person_if_logged_in
-    if logged_in? 
-      if current_user.account.nil?
+    if logged_in? and current_user.account.nil?
         redirect_to new_account_url, notice: "Por favor, complete seu cadastro."
-      elsif !current_user.active?
-        redirect_to current_user, notice: "Você não pode realizar qualquer outra ação enquanto não tiver seu perfil ativado. Contate um administrador!"
-      end
+    end
+  end
+
+  def must_be_active
+    if logged_in? and !current_user.active?  
+      redirect_to current_user, notice: "Você não pode realizar qualquer outra ação enquanto não tiver seu perfil ativado. Contate um administrador!"
     end
   end
 end

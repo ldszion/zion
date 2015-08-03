@@ -3,7 +3,6 @@
     %h2.ui.basic.center.aligned.segment
       Cadastro
       %i.ui.write.icon
-    = render partial: 'messages/notice'
     = render partial: 'messages/error_list',
       locals: { errors: @user.errors.full_messages }
 
