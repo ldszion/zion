@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user, except: [:new, :create]
-  before_action :must_have_person_if_logged_in
+  before_action :must_have_person_if_logged_in, except: [:show]
 
   def index
     @users = User.all
@@ -19,6 +19,10 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     @wards = Ward.all.order(:name)
+
+    if(!@user.leader?)
+      @user.active = true
+    end
 
     render(:new) && return unless @user.save
 
