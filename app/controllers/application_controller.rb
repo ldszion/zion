@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
 
   # Redirects user to login page if user is not logged in
   def authenticate_user
-    if !logged_in?
+    unless logged_in?
       redirect_to login_url, notice: "Favor entrar com um email e senha"
     end
   end
