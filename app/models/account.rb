@@ -1,6 +1,7 @@
 class Account < ActiveRecord::Base
+  extend Enumerize
 
-  enum gender: [:male, :female]
+  enumerize :gender, in: [:male, :female], predicates: true
 
   has_one :user
   has_one :avatar, as: :imageable, class_name: 'Picture'

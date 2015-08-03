@@ -1,7 +1,9 @@
 class User < ActiveRecord::Base
   has_secure_password
+  extend Enumerize
   
-  enum profile: [:user, :ward_leader, :stake_leader, :region_leader, :admin]
+  enumerize :profile, in: [:user, :ward_leader, 
+    :bishopric, :stake_leader, :region_leader, :admin], default: :user, predicates: true
 
   belongs_to :account
   belongs_to :ward
@@ -11,7 +13,7 @@ class User < ActiveRecord::Base
     uniqueness: { case_sensitive: false },
     format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i }
 
-  validates_presence_of :ward
+  validates_presence_of :ward, :profile
   validates_length_of :password, in: 6..16, on: :create
 
   def register_to event

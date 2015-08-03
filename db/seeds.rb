@@ -62,11 +62,12 @@ if(account.nil?)
                        nickname: 'Meu Apelido',
                        birthday: '01/01/1901'.to_date,
                        address: 'Meu endereço',
-                       gender: :male,
                        emergency_contact: contact,
                        phone: '(12) 1234-5678',
                        member: true,
                        avatar: picture)
+  account.gender = 'male'
+  account.save!
   puts "Conta criada"
 else
   puts "Conta já existente"

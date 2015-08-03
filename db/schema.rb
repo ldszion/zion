@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150731195926) do
+ActiveRecord::Schema.define(version: 20150803161436) do
 
   create_table "accounts", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 20150731195926) do
     t.string   "nickname",   limit: 255
     t.string   "address",    limit: 255
     t.date     "birthday"
-    t.integer  "gender",     limit: 4
+    t.string   "gender",     limit: 255
     t.boolean  "member",     limit: 1
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
@@ -29,7 +29,7 @@ ActiveRecord::Schema.define(version: 20150731195926) do
   create_table "emergency_contacts", force: :cascade do |t|
     t.string   "name",       limit: 255
     t.string   "phone",      limit: 255
-    t.integer  "kinship",    limit: 4
+    t.string   "kinship",    limit: 255
     t.integer  "account_id", limit: 4
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
@@ -77,11 +77,11 @@ ActiveRecord::Schema.define(version: 20150731195926) do
   create_table "users", force: :cascade do |t|
     t.string   "email",           limit: 255
     t.string   "password_digest", limit: 255
-    t.datetime "created_at",                              null: false
-    t.datetime "updated_at",                              null: false
+    t.datetime "created_at",                                null: false
+    t.datetime "updated_at",                                null: false
     t.integer  "account_id",      limit: 4
     t.integer  "ward_id",         limit: 4
-    t.integer  "profile",         limit: 4,   default: 0
+    t.string   "profile",         limit: 255, default: "0"
   end
 
   add_index "users", ["account_id"], name: "index_users_on_account_id", using: :btree
