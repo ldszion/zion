@@ -11,7 +11,8 @@
                 .ui.inverted.basic.icon.button
                   Alterar
                   %i.photo.icon
-          = image_tag('avatar.jpg')
+          
+          = image_tag(@account.avatar.image.url(:medium))
         .ui.icon.button#user-edit-button
           %i.edit.icon
           %a{href: edit_account_path(current_user.account), id: 'edit'} Editar

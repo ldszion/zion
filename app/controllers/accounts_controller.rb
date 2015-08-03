@@ -26,7 +26,6 @@ class AccountsController < ApplicationController
 
   def create
     @account.assign_attributes account_params
-    # @account.birthday = params[:account][:birthday].to_date
 
     if @account.save
       current_user.account = @account
@@ -43,7 +42,7 @@ class AccountsController < ApplicationController
   def prepare_account
     # The account to be inserted into current user
     @account = Account.new
-    # @account.avatar = Picture.new
+    @account.avatar = Picture.new
     @account.emergency_contact = EmergencyContact.new
   end
 
@@ -57,9 +56,9 @@ class AccountsController < ApplicationController
       :gender,
       :member,
       :phone,
-      # avatar_attributes: [
-      #   :image
-      # ],
+      avatar_attributes: [
+        :image
+      ],
       emergency_contact_attributes: [
         :name,
         :phone,

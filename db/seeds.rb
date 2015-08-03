@@ -53,6 +53,8 @@ if(contact.nil?)
                                kinship: :other)
 end
 
+picture = Picture.create image: File.new("#{Rails.root}/app/assets/images/perfil.jpg")
+
 account = Account.find_by(name: 'Meu nome')
 if(account.nil?)
   account = Account.create(name: 'Meu nome',
@@ -63,7 +65,8 @@ if(account.nil?)
                        gender: :male,
                        emergency_contact: contact,
                        phone: '(12) 1234-5678',
-                       member: true)
+                       member: true,
+                       avatar: picture)
   puts "Conta criada"
 else
   puts "Conta já existente"

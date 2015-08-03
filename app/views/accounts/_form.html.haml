@@ -28,16 +28,16 @@
     = f.collection_select :gender, Account.genders, :first, :first, {}, class: 'ui search dropdown'
 
   .ui.column.grid
-    / .two.wide.column
-    /   %a.ui.fluid.circular.image#preview_image{ href: '#' }
-    /     = image_tag 'example/avatars/default.jpg',
-    /       style: 'width: 100px; height: 100px'
-    / .fourteen.wide.column
-    /   .field.required{ class: ('error' if @account.avatar.errors.any?) }
-    /     = f.label :avatar
-    /     .ui.fluid.input
-    /       = f.fields_for :avatar, @account.avatar do |pic|
-    /         = pic.file_field :image, class: 'target_file'
+    .two.wide.column
+      %a.ui.fluid.circular.image#preview_image{ href: '#' }
+        = image_tag 'example/avatars/default.jpg',
+          style: 'width: 100px; height: 100px'
+    .fourteen.wide.column
+      .field.required{ class: ('error' if @account.avatar.errors.any?) }
+        = f.label :avatar
+        .ui.fluid.input
+          = f.fields_for :avatar, @account.avatar do |pic|
+            = pic.file_field :image, class: 'target_file'
   %br
   .field
     .ui.checkbox

@@ -12,12 +12,15 @@ describe Account do
     it { should respond_to :address }
     it { should respond_to :member }
     it { should respond_to :phone }
+    it { should respond_to :avatar }
     it { should respond_to :emergency_contact }
   end
 
   context '#relationships' do
     it { should have_one :emergency_contact }
+    it { should have_one :avatar }
     it { should accept_nested_attributes_for :emergency_contact }
+    it { should accept_nested_attributes_for :avatar }
   end
 
   context '#validations' do
@@ -29,6 +32,7 @@ describe Account do
       it { should validate_presence_of(:gender).with_message('não pode ficar em branco') }
       it { should validate_presence_of(:address).with_message('não pode ficar em branco') }
       it { should validate_presence_of(:phone).with_message('não pode ficar em branco') }
+      it { should validate_presence_of(:avatar).with_message('não pode ficar em branco') }
       it { should validate_presence_of(:emergency_contact).with_message('não pode ficar em branco') }
     end
 
