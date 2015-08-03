@@ -12,7 +12,10 @@
           %tr
             %td
               .ui.avatar.image
-                = image_tag 'avatar.jpg'
+                - if(!user.account.nil? and !user.account.avatar.nil?)
+                  = image_tag(user.account.avatar.image.url(:thumb))
+                - else
+                  = image_tag 'avatar.jpg'
             %td
               = mail_to user.email
             %td
