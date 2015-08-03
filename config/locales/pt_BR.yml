@@ -37,6 +37,7 @@ pt_BR:
         password_confirmation: Confirmação de senha
         ward: Ala
         profile: Perfil
+        leader: Líder
       account:
         phones: Telefone
         name: Nome
@@ -48,8 +49,7 @@ pt_BR:
         nickname: Apelido
         stake: Estaca
         gender: Sexo
-      account/phones:
-        number: Número de telefone
+        phone: Número de telefone
       account/avatar:
         image: 'Avatar'
       account/emergency_contact:

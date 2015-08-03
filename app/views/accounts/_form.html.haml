@@ -25,7 +25,7 @@
 
   .field.required
     = f.label :gender
-    = f.select :gender, Account.gender.options, class: 'ui search dropdown'
+    = f.collection_select :gender, Account.gender.options, :last, :first, {}, class: 'ui search dropdown'
 
   .ui.column.grid
     .two.wide.column
@@ -56,5 +56,6 @@
 
     .field.required
       = c.label :kinship
-      = c.select :kinship, EmergencyContact.kinship.options, class: 'ui search dropdown'
+      = c.collection_select :kinship, EmergencyContact.kinship.options, :last, :first, {},
+              class: 'ui select dropdown'
   = f.submit 'Salvar', class: 'ui green button'

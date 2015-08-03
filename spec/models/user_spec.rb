@@ -10,6 +10,7 @@ describe User do
   it { should respond_to :admin? }
   it { should respond_to :user? }
   it { should respond_to :ward_leader? }
+  it { should respond_to :bishopric? }
   it { should respond_to :stake_leader? }
   it { should respond_to :region_leader? }
 

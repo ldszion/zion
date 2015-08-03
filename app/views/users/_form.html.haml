@@ -29,28 +29,20 @@
           .field.required
             = f.label :ward
             = f.collection_select :ward_id, @wards, :id, :name, {},
-              class: 'ui search dropdown'
+              class: 'ui select dropdown'
+        
+          %br
+          .field
+            .ui.checkbox
+              = f.check_box :leader
+              = f.label :leader
+
+          .field.required.hidden#profile
+            = f.label :profile
+            = f.collection_select :profile, User.profile.options, :last, :first, {},
+              class: 'ui select dropdown'
 
           %button.ui.fluid.green.button{ type: 'submit' }
             Cadastrar
             %i.sign.in.icon
           %br
-/ = form_for(@user) do |f|
-/   - if @user.errors.any?
-/     #error_explanation
-/       %h2
-/         = pluralize(@user.errors.count, "error")
-/         prohibited this user from being saved:
-/       %ul
-/         - @user.errors.full_messages.each do |message|
-/           %li= message
-/   .field
-/     = f.label :email
-/     %br/
-/     = f.text_field :email
-/   .field
-/     = f.label :password
-/     %br/
-/     = f.text_field :password
-/   .actions
-/     = f.submit

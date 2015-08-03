@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   has_secure_password
   extend Enumerize
-  
+
   enumerize :profile, in: [:user, :ward_leader, 
     :bishopric, :stake_leader, :region_leader, :admin], default: :user, predicates: true
 
@@ -25,5 +25,9 @@ class User < ActiveRecord::Base
     array.each do |key, value|
       self.errors[key] = value
     end
+  end
+
+  def leader?
+    self.profile != :user
   end
 end

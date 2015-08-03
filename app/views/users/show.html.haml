@@ -1,21 +1,21 @@
 #user-profile-header
   .ui.secondary.inverted.segment.no-border-radius
-    / AVATAR
-    = render partial: 'messages/all'
     .ui.two.column.grid
       .two.wide.column
         .ui.small.dimmable.rounded.image
           .ui.dimmer.transition.hidden
             .content
               .center
-                .ui.inverted.basic.icon.button
-                  Alterar
-                  %i.photo.icon
+                - if current_user == @user
+                  .ui.inverted.basic.icon.button
+                    Alterar
+                    %i.photo.icon
           
           = image_tag(@account.avatar.image.url(:medium))
-        .ui.icon.button#user-edit-button
-          %i.edit.icon
-          %a{href: edit_account_path(current_user.account), id: 'edit'} Editar
+        - if current_user == @user
+          .ui.icon.button#user-edit-button
+            %i.edit.icon
+            %a{href: edit_account_path(current_user.account), id: 'edit'} Editar
       .fourteen.wide.column
         .ui.grid
           .sixteen.wide.column
@@ -52,24 +52,3 @@
             %p
               %i.ui.call.icon
               = @account.emergency_contact.phone
-
-#user-profile-body
-  .ui.page.grid
-    .column
-      .ui.divided.divided.items
-        .item
-          .content
-            .ui.two.column.grid
-              .twelve.wide.column
-                .ui.header{ style: 'margin-bottom: 5px' }
-                  = link_to 'Acampamento do MAS 2016', event_path(1)
-                  .sub.header Maio de 2016
-                .ui.description
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                  sed do eiusmod tempor incididunt ut labore et dolore magna
-                  aliqua.
-              .four.wide.column
-                .extra
-                  .ui.right.floated.primary.small.button
-                    Inscrever-me
-                    %i.right.chevron.icon

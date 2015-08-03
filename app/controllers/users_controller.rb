@@ -50,6 +50,36 @@ class UsersController < ApplicationController
     end
   end
 
+  def activate
+    if(current_user.admin?)
+      set_user
+      @user.active = true
+      if(@user.save)
+        notice = 'Usuário ativado com sucesso!' 
+      else
+        notice = 'Usuário não pode ser ativado! Contate o administrador do sistema'
+      end
+        redirect_to users_url, notice: notice
+    else
+      redirect_to current_user, notice: 'Você não pode ativar um usuário!' 
+    end
+  end
+
+  def deactivate
+    if(current_user.admin?)
+      set_user
+      @user.active = false
+      if(@user.save)
+        notice = 'Usuário desativado com sucesso!' 
+      else
+        notice = 'Usuário não pode ser desativado! Contate o administrador do sistema'
+      end
+      redirect_to users_url, notice: notice
+    else
+      redirect_to current_user, notice: 'Você não pode desativar um usuário!' 
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
@@ -58,6 +88,6 @@ class UsersController < ApplicationController
 
     # Permit some user's fields from params
     def user_params
-      params.require(:user).permit(:email, :password, :password_confirmation, :ward_id)
+      params.require(:user).permit(:email, :password, :password_confirmation, :ward_id, :profile, :leader)
     end
 end

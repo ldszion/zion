@@ -12,6 +12,8 @@ Rails.application.routes.draw do
 
   # Confirmation routes
   get 'confirmation' => 'confirmation#index', as: :confirmation
+  post 'activate/:id' => 'users#activate', as: :activate_user
+  post 'deactivate/:id' => 'users#deactivate', as: :deactivate_user
 
   # You can have the root of your site routed with "root"
   root 'session#home'
