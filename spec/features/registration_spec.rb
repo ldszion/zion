@@ -3,7 +3,54 @@ require 'test_helper'
 
 feature 'registration process' do
 
-  # Click register Button
+  before(:each) do
+    visit new_user_url
+    expect(page).to have_text 'Cadastro'
+  end
+
+  scenario 'registering without password should not pass' do
+    fill_in_user_fields(EMAIL, '', '')
+    click_register_button
+    expect(page).to_not have_text EMAIL
+    expect(page).to have_text 'Senha não pode ficar em branco'
+  end
+
+  scenario 'registering without password confirmation should not pass' do
+    fill_in_user_fields(EMAIL, PASSWORD, '')
+    click_register_button
+    expect(page).to_not have_text EMAIL
+    expect(page).to have_text 'Confirmação de senha não é igual a Senha'
+  end
+
+  context 'user registration process' do
+    scenario 'register beeing regular user' do
+      register_with_success
+      visit root_url
+      expect(page).to have_text('Por favor, complete seu cadastro.')
+    end
+
+    scenario 'registering choosing option leader' do
+      register_with_success(true)
+      visit root_url
+      expect(page).to have_text('Por favor, complete seu cadastro.')
+    end
+  end
+
+  context 'account registration process' do
+    scenario 'register without filling any fields' do
+      register_with_success
+      click_button 'Salvar'
+      expect(page).to have_text('8 erros ocorreram')
+    end
+
+    scenario 'register without filling any fields' do
+      register_with_success
+      fill_in_account_fields
+      click_button 'Salvar'
+      expect(page).to have_text('1 erro ocorreu')
+    end
+  end
+
   def click_register_button
     click_button 'Cadastrar'
   end
@@ -39,38 +86,18 @@ feature 'registration process' do
         select 'Bispado', from: 'user_profile'
       end
     end
-  end
 
-  before(:each) do
-    visit new_user_url
-    expect(page).to have_text 'Cadastro'
-  end
-
-  scenario 'registering without password should not pass' do
-    fill_in_user_fields(EMAIL, '', '')
-    click_register_button
-    expect(page).to_not have_text EMAIL
-    expect(page).to have_text 'Senha não pode ficar em branco'
-  end
-
-  scenario 'registering without password confirmation should not pass' do
-    fill_in_user_fields(EMAIL, PASSWORD, '')
-    click_register_button
-    expect(page).to_not have_text EMAIL
-    expect(page).to have_text 'Confirmação de senha não é igual a Senha'
-  end
-
-  context 'complete registration process' do
-    scenario 'should see "Por favor, complete seu cadastro." message when registration is completed' do
-      register_with_success
-      visit root_url
-      expect(page).to have_text('Por favor, complete seu cadastro.')
-    end
-
-    scenario 'registering choosing option leader' do
-      register_with_success(true)
-      visit root_url
-      expect(page).to have_text('Por favor, complete seu cadastro.')
+    def fill_in_account_fields
+      fill_in 'account_name', with: 'Nome'
+      fill_in 'account_last_name', with: 'Ultimo Nome'
+      fill_in 'account_nickname', with: 'Apelido'
+      fill_in 'account_birthday', with: '10/10/1010'
+      fill_in 'account_phone', with: '(61) 1111-2222'
+      fill_in 'account_address', with: 'Meu endereço'
+      select 'Masculino', from: 'account_gender'
+      fill_in 'account_emergency_contact_attributes_name', with: 'Nome de emergencia'
+      fill_in 'account_emergency_contact_attributes_phone', with: '(61) 1111-2222'
+      select 'Outro', from: 'account_emergency_contact_attributes_kinship'
     end
   end
 end
