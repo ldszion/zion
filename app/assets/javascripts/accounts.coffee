@@ -3,7 +3,7 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 $(document).ready ->
   $('.ui.checkbox').click ->
-    if($(@).hasClass('checked'))
+    if($(this).hasClass('checked'))
       $('div#profile').addClass('hidden')
     else
       $('div#profile').removeClass('hidden')
