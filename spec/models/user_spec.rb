@@ -10,6 +10,7 @@ describe User do
   it { should respond_to :admin? }
   it { should respond_to :user? }
   it { should respond_to :ward_leader? }
+  it { should respond_to :bishopric? }
   it { should respond_to :stake_leader? }
   it { should respond_to :region_leader? }
 
@@ -18,11 +19,13 @@ describe User do
     it { should validate_presence_of(:email) }
     it { should validate_uniqueness_of(:email).case_insensitive }
     it { should validate_presence_of(:password).on(:create) }
+    it { should validate_presence_of(:ward).on(:create) }
+
     it 'should confirm password' do
       expect(subject.password_confirmation).to eq subject.password
     end
+    
     it { should validate_length_of(:password).is_at_least(6).is_at_most(16) }
-    it { should belong_to(:profile) }
     it { should_not be_valid }
   end
 

@@ -1,19 +1,44 @@
 pt_BR:
+  enumerize:
+    account:
+      gender:
+        male: Masculino
+        female: Feminino
+    user:
+      profile:
+        user: Usuário
+        ward_leader: Líder do MAS da Ala
+        bishopric: Bispado
+        stake_leader: Líder do MAS da Estaca
+        region_leader: Líder do MAS Regional
+        admin: Administrador
+    emergency_contact:
+      kinship:
+        father: Pai
+        mother: Mãe
+        sibling: Irmã(o)
+        spouse: Cônjuge
+        other: Outro
+
   activerecord:
     # Model names
     models:
       user: Usuário
       phone: Telefone
-      person: Pessoa
+      account: Pessoa
       picture: Imagem
       emergency_contact: Contato de Emergência
+      ward: Ala
 
     # Model attributes
     attributes:
       user:
         password: Senha
         password_confirmation: Confirmação de senha
-      person:
+        ward: Ala
+        profile: Perfil
+        leader: Líder
+      account:
         phones: Telefone
         name: Nome
         last_name: Sobrenome
@@ -22,18 +47,16 @@ pt_BR:
         birthday: Aniversário
         address: Endereço
         nickname: Apelido
-        ward: Ala
         stake: Estaca
         gender: Sexo
-      person/phones:
-        number: Número de telefone
-      person/avatar:
+        phone: Número de telefone
+      account/avatar:
         image: 'Avatar'
-      person/emergency_contact:
+      account/emergency_contact:
         name: Nome do contato de emergência
         kinship: Parentesco do contato de emergência
-        person: Pessoa
-        phone: Telefone
+        account: Pessoa
+        phone: Telefone do contato de emergência
       emergency_contact:
         name: Nome
         kinship: Parentesco

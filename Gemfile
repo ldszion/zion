@@ -1,3 +1,4 @@
+#rvm use 2.1.2@zion
 source 'https://rubygems.org'
 ruby '2.1.2'
 
@@ -26,12 +27,12 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
-gem 'puma'
 
 gem 'haml-rails'
 gem 'paperclip', '~> 4.2'
 gem 'aws-sdk', '< 2.0'
 gem 'semantic-ui-sass', github: 'doabit/semantic-ui-sass'
+gem 'enumerize'
 
 # Use Unicorn as the app server
 # gem 'unicorn'
@@ -41,6 +42,7 @@ gem 'semantic-ui-sass', github: 'doabit/semantic-ui-sass'
 group :production do
   gem 'rails_12factor'
   gem 'pg'
+  gem 'puma'
 end
 
 group :development, :test do

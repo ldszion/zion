@@ -1,0 +1,61 @@
+= form_for @account, multipart: true do |f|
+  .field.required{ class: error_class(@account, :name) }
+    = f.label :name
+    = f.text_field :name, placeholder: 'Nome'
+  
+  .field.required{ class: error_class(@account, :last_name) }
+    = f.label :last_name
+    = f.text_field :last_name, placeholder: 'Sobrenome'
+  
+  .field
+    = f.label :nickname
+    = f.text_field :nickname, placeholder: 'Nome preferido'
+  
+  .field.required{ class: error_class(@account, :birthday) }
+    = f.label :birthday
+    = f.text_field :birthday, placeholder: 'Data de nascimento', class: 'datemask'
+
+  .field.required{class: error_class(@account, :phone)}
+    = f.label :phone
+    = f.text_field :phone, placeholder: 'Telefone', class: 'phone'
+
+  .field.required{ class: error_class(@account, :address) }
+    = f.label :address
+    = f.text_field :address, placeholder: 'Endereço'
+
+  .field.required
+    = f.label :gender
+    = f.collection_select :gender, Account.gender.options, :last, :first, {}, class: 'ui search dropdown'
+
+  .ui.column.grid
+    .two.wide.column
+      %a.ui.fluid.circular.image#preview_image{ href: '#' }
+        = image_tag 'example/avatars/default.jpg',
+          style: 'width: 100px; height: 100px'
+    .fourteen.wide.column
+      .field.required{ class: ('error' if @account.avatar.errors.any?) }
+        = f.label :avatar
+        .ui.fluid.input
+          = f.fields_for :avatar, @account.avatar do |pic|
+            = pic.file_field :image, class: 'target_file'
+  %br
+  .field
+    .ui.checkbox
+      = f.check_box :member
+      = f.label :member, t('label.is_member')
+
+  .ui.header Informações do Contato de Emergência
+  = f.fields_for :emergency_contact, @account.emergency_contact do |c|
+
+    .field.required{ class: error_class(@account.emergency_contact, :name) }
+      = c.label :name
+      = c.text_field :name, placeholder: 'Nome completo'
+    .field.required{ class: error_class(@account.emergency_contact, :phone) }
+      = c.label :phone
+      = c.text_field :phone, placeholder: 'Telefone', class: 'phone'
+
+    .field.required
+      = c.label :kinship
+      = c.collection_select :kinship, EmergencyContact.kinship.options, :last, :first, {},
+              class: 'ui select dropdown'
+  = f.submit 'Salvar', class: 'ui green button'

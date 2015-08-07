@@ -17,39 +17,11 @@ class SessionController < ApplicationController
     redirect_to login_url
   end
 
-  # Show register form to guest
-  def register
-    @user = User.new
-    @wards = Ward.all.order(:name)
-  end
-
-  # Add user to database and signin
-  def signup
-    @user = User.new user_params
-    @user.profile = Profile.user
-
-    render(:register) && return unless @user.save
-
-    log_in @user
-    redirect_to users_url
-  end
-
-  private
-
-  # Permit some user's fields from params
-  def user_params
-    params.require(:user).permit(:email, :password, :password_confirmation)
-  end
-
-  # Permit some person's fields from params
-  def person_params
-    params.require(:person).permit(
-      :name,
-      :last_name,
-      :nickname,
-      :birthday,
-      :ward_id,
-      :gender
-    )
+  def home
+    if current_user?
+      redirect_to current_user
+    else
+      redirect_to login_url
+    end
   end
 end

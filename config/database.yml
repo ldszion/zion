@@ -25,8 +25,7 @@ development:
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test:
-  adapter: mysql2
-  encoding: utf8
+  <<: *default
   username: <%= ENV['TEST_DATABASE_USERNAME'] %>
   password: <%= ENV['TEST_DATABASE_PASSWORD'] %>
   database: zion_test

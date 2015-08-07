@@ -1,14 +1,19 @@
 class User < ActiveRecord::Base
   has_secure_password
-  belongs_to :profile
-  belongs_to :person
+  extend Enumerize
+
+  enumerize :profile, in: [:user, :ward_leader, 
+    :bishopric, :stake_leader, :region_leader, :admin], default: :user, predicates: true
+
+  belongs_to :account
+  belongs_to :ward
 
   validates :email,
     presence: { presence: true },
     uniqueness: { case_sensitive: false },
     format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i }
 
-  validates_presence_of :profile
+  validates_presence_of :ward, :profile
   validates_length_of :password, in: 6..16, on: :create
 
   def register_to event
@@ -22,28 +27,7 @@ class User < ActiveRecord::Base
     end
   end
 
-  # Returns true if user's profile is admin.
-  def admin?
-    self.profile.key == Profile::ADMIN
-  end
-
-  # Returns true if user's profile is common user.
-  def user?
-    self.profile.key == Profile::USER
-  end
-
-  # Returns true if user's profile is ward leader.
-  def ward_leader?
-    self.profile.key == Profile::WARD_LEADER
-  end
-
-  # Returns true if user's profile is stake leader.
-  def stake_leader?
-    self.profile.key == Profile::STAKE_LEADER
-  end
-
-  # Returns true if user's profile is region leader.
-  def region_leader?
-    self.profile.key == Profile::REGION_LEADER
+  def leader?
+    self.profile != :user
   end
 end
