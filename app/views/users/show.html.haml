@@ -13,9 +13,9 @@
           
           = image_tag(@account.avatar.image.url(:medium))
         - if current_user == @user
-          .ui.icon.button#user-edit-button
+          %a.ui.icon.button#user-edit-button{href: edit_account_path(current_user.account)}
             %i.edit.icon
-            %a{href: edit_account_path(current_user.account), id: 'edit'} Editar
+            Editar
       .fourteen.wide.column
         .ui.grid
           .sixteen.wide.column
@@ -25,7 +25,7 @@
           .four.wide.column
             %p
               %i.ui.mail.icon
-              = mail_to @user.email
+              = mail_to @user.email, nil, class: 'link'
             %p
               %i.ui.university.icon
               Estaca #{@account.user.ward.stake.name} - Ala #{@account.user.ward.name}
