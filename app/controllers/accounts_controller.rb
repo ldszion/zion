@@ -42,6 +42,18 @@ class AccountsController < ApplicationController
 
   private
 
+  # Define o avatar da conta se usuario enviou algum avatar valido
+  def set_avatar_if_exists
+    @avatar = Picture.new
+    @avatar.image = uploaded_image
+    @account.avatar = @avatar if @avatar.valid?
+  end
+
+  # Retorna a imagem enviada pelo usuario se tiver alguma
+  def uploaded_image
+    params[:avatar][:image] unless params[:avatar].nil?
+  end
+
   def prepare_account
     # The account to be inserted into current user
     @account = Account.new
