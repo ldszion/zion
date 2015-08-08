@@ -11,7 +11,7 @@
 
     - if !current_user.nil?
       .right.menu
-        .ui.dropdown.item
+        .ui.pointing.dropdown.item
           #profile-avatar
             .ui.avatar.image
               - if(!current_user.account.nil? and !current_user.account.avatar.nil?)
@@ -21,6 +21,13 @@
             = current_user.email
             %i.dropdown.icon
           .menu
+            %a.item{ href: user_path(current_user) }
+              %i.user.icon
+              Meu Perfil
+            %a.item{ href: edit_account_path(current_user.account) }
+              %i.setting.icon
+              Minha Conta
+            .divider
             %a.item{ href: logout_url }
               %i.sign.out.icon
               Sair
