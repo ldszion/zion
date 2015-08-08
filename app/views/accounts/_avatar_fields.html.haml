@@ -1,0 +1,5 @@
+.field.required{ class: ('error' if avatar.errors.any?) }
+  = label_tag :avatar
+  .ui.fluid.input
+    = fields_for :avatar, avatar do |pic|
+      = pic.file_field :image, class: 'target_file'
