@@ -16,9 +16,12 @@ class AccountsController < ApplicationController
 
   def update
     @account = Account.find(params[:id])
-    @account.assign_attributes account_params
-    if(@account.save)
-      redirect_to current_user, notice: 'Dados atualizados com sucesso'
+    @account.assign_attributes account_params unless params[:account].nil?
+
+    set_avatar_if_exists
+    if @account.save
+      redirect_to edit_account_path(@account),
+                  notice: 'Dados atualizados com sucesso'
     else
       render :edit
     end
