@@ -29,13 +29,14 @@ class AccountsController < ApplicationController
 
   def create
     @account.assign_attributes account_params
+    @account.avatar = set_avatar_if_exists || Picture.new
 
     if @account.save
-      current_user.account = @account
-      current_user.save
-      return redirect_to user_path(@account.user), notice: t('text.thanks.to_complete_account')
+      current_user.update account: @account
+      return redirect_to user_path(@account.user),
+                         notice: t('text.thanks.to_complete_account')
     else
-      render :new and return
+      render :new && return
     end
     render json: @account
   end
@@ -57,28 +58,15 @@ class AccountsController < ApplicationController
   def prepare_account
     # The account to be inserted into current user
     @account = Account.new
-    @account.avatar = Picture.new
+    @avatar = Picture.new
+    @account.avatar = @avatar
     @account.emergency_contact = EmergencyContact.new
   end
 
   def account_params
     params.require(:account).permit(
-      :name,
-      :last_name,
-      :nickname,
-      :birthday,
-      :address,
-      :gender,
-      :member,
-      :phone,
-      avatar_attributes: [
-        :image
-      ],
-      emergency_contact_attributes: [
-        :name,
-        :phone,
-        :kinship
-      ],
-    )
+      :name, :last_name, :nickname, :birthday, :address, :gender, :member,
+      :phone, emergency_contact_attributes: [:name, :phone, :kinship]
+    ) unless params[:account].nil?
   end
 end
