@@ -14,7 +14,7 @@ class User < ActiveRecord::Base
     format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i }
 
   validates_presence_of :ward, :profile
-  validates_length_of :password, in: 6..16, on: :create
+  validates_length_of :password, in: 6..16, on: [:create, :update]
 
   def register_to event
     "registrando em #{event.name}"

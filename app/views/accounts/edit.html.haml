@@ -7,6 +7,9 @@
     = render partial: 'messages/all'
     = render partial: 'messages/error_list',
       locals: { errors: @account.errors.full_messages }
+    - if flash[:errors]
+      = render partial: 'messages/error_list',
+        locals: { errors: flash[:errors] }
   .four.wide.column
     .ui.vertical.fluid.labeled.icon.pointing.menu#user-settings
       %a.icon.blue.item.active{ tab: 'info' }
@@ -42,14 +45,7 @@
               = f.submit 'Salvar', class: 'ui primary button'
 
     .absolute-container#change_password
-      .ui.form
-        = form_for @account do |f|
-          .ui.segments{ style: 'margin-top:0px' }
-            .ui.segment
-              = render partial: 'accounts/change_password_fields',
-                locals: { f: f }
-            .ui.secondary.segment
-              = f.submit 'Salvar', class: 'ui primary button'
+      = render partial: 'accounts/change_password_form'
 
     .absolute-container#change_avatar
       .ui.form

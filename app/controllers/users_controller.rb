@@ -3,6 +3,7 @@ class UsersController < ApplicationController
   before_action :authenticate_user, except: [:new, :create]
   before_action :must_have_person_if_logged_in
   before_action :must_be_active, except: :show
+  before_action :match_old_password, only: :change_password
 
   def index
     @users = User.all
@@ -43,6 +44,18 @@ class UsersController < ApplicationController
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  # Action para alterar a senha. Se jah chegou nesse metodo eh porque a senha
+  # digitada estah correta pois jah passou pelo filtro match_old_password
+  def change_password
+    @user = current_user
+    if @user.update(user_params)
+      flash[:notice] = 'Senha alterada com sucesso'
+    else
+      flash[:errors] = @user.errors.full_messages
+    end
+    redirect_to edit_account_path @user.account
   end
 
   # DELETE /users/1
@@ -94,5 +107,15 @@ class UsersController < ApplicationController
     # Permit some user's fields from params
     def user_params
       params.require(:user).permit(:email, :password, :password_confirmation, :ward_id, :profile, :leader)
+    end
+
+    # Redireciona para tela de conta se a senha digitada nao for igual a senha
+    # antiga
+    def match_old_password
+      @old_password = params[:user][:old_password]
+      unless current_user.authenticate(@old_password)
+        redirect_to edit_account_path(current_user.account),
+                    alert: 'A senha digitada está incorreta'
+      end
     end
 end

@@ -15,6 +15,9 @@ Rails.application.routes.draw do
   post 'activate/:id' => 'users#activate', as: :activate_user
   post 'deactivate/:id' => 'users#deactivate', as: :deactivate_user
 
+  match 'change_password' => 'users#change_password', as: :change_password,
+        via: [:post, :patch]
+
   # You can have the root of your site routed with "root"
   root 'session#home'
 end
