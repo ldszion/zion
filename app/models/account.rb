@@ -16,7 +16,6 @@ class Account < ActiveRecord::Base
   validates_presence_of :last_name,
                         :birthday,
                         :gender,
-                        :address,
                         :phone,
                         :avatar,
                         :emergency_contact

@@ -30,7 +30,6 @@ describe Account do
       it { should validate_presence_of(:last_name).with_message('não pode ficar em branco') }
       it { should validate_presence_of(:birthday).with_message('não pode ficar em branco') }
       it { should validate_presence_of(:gender).with_message('não pode ficar em branco') }
-      it { should validate_presence_of(:address).with_message('não pode ficar em branco') }
       it { should validate_presence_of(:phone).with_message('não pode ficar em branco') }
       it { should validate_presence_of(:avatar).with_message('não pode ficar em branco') }
       it { should validate_presence_of(:emergency_contact).with_message('não pode ficar em branco') }
@@ -39,6 +38,7 @@ describe Account do
     context '#not_required' do
       it { should_not validate_presence_of :member }
       it { should_not validate_presence_of :nickname }
+      it { should_not validate_presence_of :address }
     end
   end
 
