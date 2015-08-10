@@ -53,3 +53,7 @@
             %p
               %i.ui.call.icon
               = @account.emergency_contact.phone
+#user-profile-body
+  .ui.one.column.page.grid
+    .column
+      = render partial: 'messages/all'
