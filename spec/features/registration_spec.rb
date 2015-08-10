@@ -36,17 +36,18 @@ feature 'registration process' do
   end
 
   context 'account registration process' do
-    scenario 'register without filling any fields' do
+    scenario 'register without filling any fields should not pass' do
       register_with_success
       click_button 'Salvar'
       expect(page).to have_text('7 erros ocorreram')
     end
 
-    scenario 'register without filling any fields' do
+    scenario 'register only required fields should pass' do
       register_with_success
       fill_in_account_fields
       click_button 'Salvar'
-      expect(page).to have_text('1 erro ocorreu')
+      expect(page).to have_text(I18n.t('text.thanks.to_complete_account'))
+      expect(page).to have_selector('#user-profile-header')
     end
   end
 
@@ -92,6 +93,7 @@ feature 'registration process' do
     fill_in 'account_phone', with: '(61) 1111-2222'
     fill_in 'account_address', with: 'Meu endereço'
     select 'Masculino', from: 'account_gender'
+    attach_file 'avatar_image', "#{Rails.root}/app/assets/images/perfil.jpg"
     fill_in 'account_emergency_contact_attributes_name', with: 'Nome de emergencia'
     fill_in 'account_emergency_contact_attributes_phone', with: '(61) 1111-2222'
     select 'Outro', from: 'account_emergency_contact_attributes_kinship'
