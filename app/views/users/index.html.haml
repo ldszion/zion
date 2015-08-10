@@ -25,8 +25,6 @@
                 - unless user.account.nil?
                   = link_to user, class: 'ui button' do
                     %i.eye.icon
-                  = link_to edit_account_path(user.account), class: 'ui button' do
-                    %i.edit.icon
                 - if current_user != user
                   = link_to user, method: :delete,
                     data: { confirm: 'Tem certeza que deseja apagar este usuário?' }, class: 'ui button' do
