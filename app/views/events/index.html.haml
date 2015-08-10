@@ -15,7 +15,7 @@
           %tr
             %td
               = link_to event.name, event_path(event)
-            %td 10 inscritos
+            %td #{event.users.count} inscritos
             %td #{event.start_date} às #{event.start_time}
             %td #{event.end_date} às #{event.end_time}
             %td
