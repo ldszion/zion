@@ -6,6 +6,7 @@ class EventsController < ApplicationController
   end
 
   def show
+    @event = Event.find(params[:id])
   end
 
   def enroll
@@ -16,15 +17,15 @@ class EventsController < ApplicationController
       event.users << user
       event.save!
       user.save!
-      flash[:notice] = "Inscrição realizada com sucesso!"
+      notice = "Inscrição realizada com sucesso!"
     rescue ActiveRecord::RecordNotFound
-      flash[:error] = "Usuário ou Evento não encontrados"
+      notice = "Usuário ou Evento não encontrados"
     rescue ActiveRecord::RecordNotUnique
-      flash[:error] = "Usuário já inscrito no evento!"
+      notice = "Usuário já inscrito no evento!"
     rescue
-      flash[:error] = "Erro na inscrição. Contate um administrador!"
+      notice = "Erro na inscrição. Contate um administrador!"
     ensure
-      redirect_to current_user
+      redirect_to :back, notice: notice
     end
   end
 end
