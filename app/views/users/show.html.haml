@@ -1,50 +1,8 @@
-#user-profile-header
-  .ui.secondary.inverted.segment.no-border-radius
-    .ui.two.column.grid
-      .two.wide.column
-        .ui.small.rounded.image
-          = image_tag(@account.avatar.image.url(:medium))
-        - if current_user == @user
-          %a.ui.icon.button#user-edit-button{href: edit_account_path(current_user.account)}
-            %i.edit.icon
-            Editar
-      .fourteen.wide.column
-        .ui.grid
-          .sixteen.wide.column
-            %h1.ui.header#user-name
-              = @account.full_name
-          
-          .four.wide.column
-            %p
-              %i.ui.mail.icon
-              = mail_to @user.email, nil, class: 'link'
-            %p
-              %i.ui.university.icon
-              Estaca #{@account.user.ward.stake.name} - Ala #{@account.user.ward.name}
-            %p
-              %i.ui.birthday.icon
-              #{@account.age} anos em #{brazilian_date(@account.birthday)}
-          .four.wide.column
-            %p
-              %i.ui.call.icon
-              = @account.phone
-            %p
-              %i.ui.map.marker.icon
-              = @account.address
-            %p
-              %i.ui.privacy.icon
-              = @user.profile.text
-          .four.wide.black.column
-            %p
-              %i.ui.announcement.icon
-              %b Contato de Emergência
-            %p
-              %i.ui.user.icon
-              #{@account.emergency_contact.name} -
-              #{t(@account.emergency_contact.kinship.text)}
-            %p
-              %i.ui.call.icon
-              = @account.emergency_contact.phone
+= render partial: 'user_account_fields'
+
+%br
+= render partial: 'available_events'
+
 #user-profile-body
   .ui.one.column.page.grid
     .column
