@@ -46,7 +46,7 @@ puts 'Criando modelo de usuário:'
 contact = EmergencyContact.find_by(name: 'Meu Contato de Emergência')
 if contact.nil?
   contact = EmergencyContact.create(name: 'Meu Contato de Emergência',
-                                    phone: '(XX) XXXX-XXXX',
+                                    phone: '(61) 9876-5432',
                                     kinship: :other)
 end
 
@@ -58,7 +58,7 @@ if account.nil?
   account = Account.create(name: 'Meu nome',
                            last_name: 'Meu sobrenome',
                            nickname: 'Meu Apelido',
-                           birthday: '01/01/1901'.to_date,
+                           birthday: '12/02/1989'.to_date,
                            address: 'Meu endereço',
                            emergency_contact: contact,
                            phone: '(12) 1234-5678',
