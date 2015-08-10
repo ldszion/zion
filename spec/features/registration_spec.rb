@@ -2,7 +2,6 @@ require 'rails_helper'
 require 'test_helper'
 
 feature 'registration process' do
-
   before(:each) do
     visit new_user_url
     expect(page).to have_text 'Cadastro'
@@ -23,7 +22,7 @@ feature 'registration process' do
   end
 
   context 'user registration process' do
-    scenario 'register beeing regular user' do
+    scenario 'beeing regular user' do
       register_with_success
       visit root_url
       expect(page).to have_text('Por favor, complete seu cadastro.')
@@ -40,7 +39,7 @@ feature 'registration process' do
     scenario 'register without filling any fields' do
       register_with_success
       click_button 'Salvar'
-      expect(page).to have_text('8 erros ocorreram')
+      expect(page).to have_text('7 erros ocorreram')
     end
 
     scenario 'register without filling any fields' do
@@ -56,8 +55,8 @@ feature 'registration process' do
   end
 
   # Register with success
-  def register_with_success(leader=false)
-    if(leader)
+  def register_with_success(leader = false)
+    if leader
       fill_in_user_fields(EMAIL, PASSWORD, PASSWORD_CONFIRMATION, leader)
     else
       fill_in_user_fields
@@ -69,35 +68,32 @@ feature 'registration process' do
   EMAIL = 'register@test.com'
   PASSWORD = '123456'
   PASSWORD_CONFIRMATION = '123456'
+
   # Fill in all fields by default or by params
-  def fill_in_user_fields(
-      email = EMAIL,
-      password = PASSWORD,
-      password_confirmation = PASSWORD_CONFIRMATION,
-      leader = false
-  )
+  def fill_in_user_fields(email = EMAIL, password = PASSWORD,
+    password_confirmation = PASSWORD_CONFIRMATION, leader = false)
     within '.form' do
       fill_in 'user_email', with: email
       fill_in 'user_password', with: password
       fill_in 'user_password_confirmation', with: password_confirmation
-      select "Ala #2", from: 'user_ward_id', visible: false
-      if(leader)
+      select 'Ala #2', from: 'user_ward_id', visible: false
+      if leader
         check 'user_leader'
         select 'Bispado', from: 'user_profile'
       end
     end
+  end
 
-    def fill_in_account_fields
-      fill_in 'account_name', with: 'Nome'
-      fill_in 'account_last_name', with: 'Ultimo Nome'
-      fill_in 'account_nickname', with: 'Apelido'
-      fill_in 'account_birthday', with: '10/10/1010'
-      fill_in 'account_phone', with: '(61) 1111-2222'
-      fill_in 'account_address', with: 'Meu endereço'
-      select 'Masculino', from: 'account_gender'
-      fill_in 'account_emergency_contact_attributes_name', with: 'Nome de emergencia'
-      fill_in 'account_emergency_contact_attributes_phone', with: '(61) 1111-2222'
-      select 'Outro', from: 'account_emergency_contact_attributes_kinship'
-    end
+  def fill_in_account_fields
+    fill_in 'account_name', with: 'Nome'
+    fill_in 'account_last_name', with: 'Ultimo Nome'
+    fill_in 'account_nickname', with: 'Apelido'
+    fill_in 'account_birthday', with: '10/10/1010'
+    fill_in 'account_phone', with: '(61) 1111-2222'
+    fill_in 'account_address', with: 'Meu endereço'
+    select 'Masculino', from: 'account_gender'
+    fill_in 'account_emergency_contact_attributes_name', with: 'Nome de emergencia'
+    fill_in 'account_emergency_contact_attributes_phone', with: '(61) 1111-2222'
+    select 'Outro', from: 'account_emergency_contact_attributes_kinship'
   end
 end

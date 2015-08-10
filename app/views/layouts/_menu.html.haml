@@ -24,9 +24,10 @@
             %a.item{ href: user_path(current_user) }
               %i.user.icon
               Meu Perfil
-            %a.item{ href: edit_account_path(current_user.account) }
-              %i.setting.icon
-              Minha Conta
+            - unless current_user.account.nil?
+              %a.item{ href: edit_account_path(current_user.account) }
+                %i.setting.icon
+                Minha Conta
             .divider
             %a.item{ href: logout_url }
               %i.sign.out.icon

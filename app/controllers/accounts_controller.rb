@@ -36,9 +36,8 @@ class AccountsController < ApplicationController
       return redirect_to user_path(@account.user),
                          notice: t('text.thanks.to_complete_account')
     else
-      render :new && return
+      render :new
     end
-    render json: @account
   end
 
   private
