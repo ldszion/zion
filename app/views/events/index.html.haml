@@ -1,15 +1,18 @@
 .ui.one.column.page.grid
   .column
-    = link_to new_event_path do
-      .ui.icon.primary.button
-        %i.plus.icon
-        Novo Evento
+    - if(current_user.admin? or current_user.region_leader?)
+      = link_to new_event_path do
+        .ui.icon.primary.button
+          %i.plus.icon
+          Novo Evento
+
     %table.ui.celled.striped.table
       %thead
         %tr
           %th(colspan="4")
             Eventos
-          %th Operações
+          - if(current_user.admin? or current_user.region_leader?)
+            %th Operações
       %tbody
         - @events.each do |event|
           %tr
@@ -18,9 +21,10 @@
             %td #{event.users.count} inscritos
             %td #{event.start_date} às #{event.start_time}
             %td #{event.end_date} às #{event.end_time}
-            %td
-              .ui.mini.icon.buttons
-                .ui.icon.button(data-content="Editar Evento")
-                  %i.edit.icon
-                .ui.icon.button(data-content="Apagar Evento")
-                  %i.remove.icon
+            - if(current_user.admin? or current_user.region_leader?)
+              %td
+                .ui.mini.icon.buttons
+                  .ui.icon.button(data-content="Editar Evento")
+                    %i.edit.icon
+                  .ui.icon.button(data-content="Apagar Evento")
+                    %i.remove.icon
