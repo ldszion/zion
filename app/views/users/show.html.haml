@@ -2,15 +2,7 @@
   .ui.secondary.inverted.segment.no-border-radius
     .ui.two.column.grid
       .two.wide.column
-        .ui.small.dimmable.rounded.image
-          .ui.dimmer.transition.hidden
-            .content
-              .center
-                - if current_user == @user
-                  .ui.inverted.basic.icon.button
-                    Alterar
-                    %i.photo.icon
-          
+        .ui.small.rounded.image
           = image_tag(@account.avatar.image.url(:medium))
         - if current_user == @user
           %a.ui.icon.button#user-edit-button{href: edit_account_path(current_user.account)}
