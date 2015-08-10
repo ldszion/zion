@@ -1,0 +1,15 @@
+= form_for @account, html: { multipart: true } do |f|
+  = render partial: 'accounts/personal_fields', locals: { f: f }
+
+  .ui.column.grid
+    .two.wide.column
+      %a.ui.fluid.circular.image#preview_image{ href: '#' }
+        = image_tag @account.avatar.image.url(:medium)
+    .fourteen.wide.column
+      = render partial: 'accounts/avatar_fields',
+        locals: { avatar: @account.avatar, form: f }
+
+  .ui.header Informações do Contato de Emergência
+  = render partial: 'accounts/emergency_contact_fields', locals: { f: f }
+
+  = f.submit 'Salvar', class: 'ui green button'

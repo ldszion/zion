@@ -1,9 +1,5 @@
 .ui.one.column.page.grid
   .column
-    = link_to new_user_path do
-      .ui.icon.primary.button
-        %i.plus.icon
-        Novo Usuário
     %table.ui.striped.table
       %thead
         %tr
@@ -16,26 +12,32 @@
           %tr
             %td
               .ui.avatar.image
-                - if user.person.nil?
-                  = image_tag 'avatar.jpg'
-                - else
-                  = image_tag user.person.avatar.image.url
-
+                = image_tag account_thumbnail(user.account)
             %td
               = mail_to user.email
             %td
-              - if user.person.nil?
+              - if user.account.nil?
                 \-
               - else
-                = link_to user.person.full_name, user
+                = link_to user.account.full_name, user
             %td
               .ui.mini.icon.buttons
-                - unless user.person.nil?
+                - unless user.account.nil?
                   = link_to user, class: 'ui button' do
                     %i.eye.icon
-                = link_to edit_user_path(user), class: 'ui button' do
-                  %i.edit.icon
-                = link_to user, method: :delete,
-                  data: { confirm: 'Are you sure?' }, class: 'ui button' do
-                  %i.close.icon
+                  = link_to edit_account_path(user.account), class: 'ui button' do
+                    %i.edit.icon
+                - if current_user != user
+                  = link_to user, method: :delete,
+                    data: { confirm: 'Tem certeza que deseja apagar este usuário?' }, class: 'ui button' do
+                    %i.close.icon
+                  - if current_user.admin?
+                    - if !user.active?
+                      = link_to activate_user_path(user), method: :post,
+                        data: { confirm: 'Gostaria mesmo de ativar este usuário?' }, class: 'ui button' do
+                        %i.add.user.icon
+                    - else
+                      = link_to deactivate_user_path(user), method: :post,
+                        data: { confirm: 'Gostaria mesmo de desativar este usuário?' }, class: 'ui button' do
+                        %i.remove.user.icon
     %br/

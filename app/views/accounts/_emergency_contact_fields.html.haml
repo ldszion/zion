@@ -1,0 +1,14 @@
+= f.fields_for :emergency_contact, @account.emergency_contact do |c|
+
+  .field.required{ class: error_class(@account.emergency_contact, :name) }
+    = c.label :name
+    = c.text_field :name, placeholder: 'Nome completo'
+  .field.required{ class: error_class(@account.emergency_contact, :phone) }
+    = c.label :phone
+    = c.text_field :phone, placeholder: 'Telefone', class: 'phone'
+
+  .field.required
+    = c.label :kinship
+    = c.collection_select :kinship, EmergencyContact.kinship.options,
+      :last, :first, {},
+      class: 'ui select dropdown'

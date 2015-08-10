@@ -1,0 +1,12 @@
+.absolute-container{
+  position: absolute;
+  width: 100%;
+  display: none;
+  padding-bottom: 25px;
+  .segment{
+    margin-top: 0;
+  }
+  &.visible{
+    display: block;
+  }
+}

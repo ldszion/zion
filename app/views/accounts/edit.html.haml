@@ -1,0 +1,63 @@
+.ui.page.grid
+  .sixteen.wide.column
+    %h2
+      %i.setting.icon
+      Configurações da Conta
+    .ui.divider
+    = render partial: 'messages/all'
+    = render partial: 'messages/error_list',
+      locals: { errors: @account.errors.full_messages }
+    - if flash[:errors]
+      = render partial: 'messages/error_list',
+        locals: { errors: flash[:errors] }
+  .four.wide.column
+    .ui.vertical.fluid.labeled.icon.pointing.menu#user-settings
+      %a.icon.blue.item.active{ tab: 'info' }
+        %i.user.icon
+        Informações Pessoais
+      %a.icon.red.item{ tab: 'emergency_contact' }
+        %i.emergency.icon
+        Contato de Emergência
+      %a.icon.orange.item{ tab: 'change_password' }
+        %i.privacy.icon
+        Alterar Senha
+      %a.icon.teal.item{ tab: 'change_avatar' }
+        %i.photo.icon
+        Imagem de Perfil
+  .twelve.wide.stretched.column#tabs
+    .absolute-container.visible#info
+      .ui.form
+        = form_for @account do |f|
+          .ui.segments{ style: 'margin-top:0px' }
+            .ui.segment
+              = render partial: 'accounts/personal_fields', locals: { f: f }
+            .ui.secondary.segment
+              = f.submit 'Salvar', class: 'ui primary button'
+
+    .absolute-container#emergency_contact
+      .ui.form
+        = form_for @account do |f|
+          .ui.segments{ style: 'margin-top:0px' }
+            .ui.segment
+              = render partial: 'accounts/emergency_contact_fields',
+                locals: { f: f }
+            .ui.secondary.segment
+              = f.submit 'Salvar', class: 'ui primary button'
+
+    .absolute-container#change_password
+      = render partial: 'accounts/change_password_form'
+
+    .absolute-container#change_avatar
+      .ui.form
+        = form_for @account, html: { multipart: true } do |f|
+          .ui.segments{ style: 'margin-top:0px' }
+            .ui.segment
+              .ui.grid
+                .two.wide.column
+                  %a.ui.fluid.circular.image#preview_image{ href: '#' }
+                    = image_tag @account.avatar.image.url(:medium)
+                .fourteen.wide.column
+                  = render partial: 'accounts/avatar_fields',
+                    locals: { avatar: @account.avatar }
+            .ui.secondary.segment
+              = f.submit 'Salvar', class: 'ui primary button'

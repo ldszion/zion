@@ -1,0 +1,34 @@
+.field.required{ class: error_class(@account, :name) }
+  = f.label :name
+  = f.text_field :name, placeholder: 'Nome'
+
+.field.required{ class: error_class(@account, :last_name) }
+  = f.label :last_name
+  = f.text_field :last_name, placeholder: 'Sobrenome'
+
+.field
+  = f.label :nickname
+  = f.text_field :nickname, placeholder: 'Nome preferido'
+
+.field.required{ class: error_class(@account, :birthday) }
+  = f.label :birthday
+  = f.text_field :birthday, value: brazilian_date(@account.birthday),
+    placeholder: 'Data de nascimento',
+    class: 'datemask'
+
+.field.required{ class: error_class(@account, :phone) }
+  = f.label :phone
+  = f.text_field :phone, placeholder: 'Telefone', class: 'phone'
+
+.field{ class: error_class(@account, :address) }
+  = f.label :address
+  = f.text_field :address, placeholder: 'Endereço'
+
+.field.required
+  = f.label :gender
+  = f.collection_select :gender, Account.gender.options, :last, :first, {},
+    class: 'ui search dropdown'
+.field
+  .ui.checkbox
+    = f.check_box :member
+    = f.label :member, t('label.is_member')

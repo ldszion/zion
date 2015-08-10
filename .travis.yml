@@ -4,5 +4,5 @@ rvm:
 
 before_script:
   - mysql -e 'create database zion_test;'
-# uncomment this line if your project needs to run something other than `rake`:
+
 script: bundle exec rake db:reset && bundle exec rspec

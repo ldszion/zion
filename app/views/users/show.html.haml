@@ -1,73 +1,55 @@
 #user-profile-header
   .ui.secondary.inverted.segment.no-border-radius
-    / AVATAR
     .ui.two.column.grid
       .two.wide.column
         .ui.small.dimmable.rounded.image
           .ui.dimmer.transition.hidden
             .content
               .center
-                .ui.inverted.basic.icon.button
-                  Alterar
-                  %i.photo.icon
-          = image_tag(@person.avatar.image.url(:medium))
-        .ui.icon.button#user-edit-button
-          %i.edit.icon
-          Editar
+                - if current_user == @user
+                  .ui.inverted.basic.icon.button
+                    Alterar
+                    %i.photo.icon
+          
+          = image_tag(@account.avatar.image.url(:medium))
+        - if current_user == @user
+          %a.ui.icon.button#user-edit-button{href: edit_account_path(current_user.account)}
+            %i.edit.icon
+            Editar
       .fourteen.wide.column
         .ui.grid
-          / NOME DO USUÁRIO
           .sixteen.wide.column
             %h1.ui.header#user-name
-              = @person.full_name
-          / INFORMAÇÕES
+              = @account.full_name
+          
           .four.wide.column
             %p
               %i.ui.mail.icon
-              = mail_to @user.email
+              = mail_to @user.email, nil, class: 'link'
             %p
               %i.ui.university.icon
-              Estaca #{@person.stake.name} - Ala #{@person.ward.name}
+              Estaca #{@account.user.ward.stake.name} - Ala #{@account.user.ward.name}
             %p
               %i.ui.birthday.icon
-              #{@person.age} anos em #{brazilian_date(@person.birthday)}
+              #{@account.age} anos em #{brazilian_date(@account.birthday)}
           .four.wide.column
             %p
               %i.ui.call.icon
-              (61) 8125-7757 / (61) 3546-7757
+              = @account.phone
             %p
               %i.ui.map.marker.icon
-              QE 40 Rua 10 Lote 01 apt 201
+              = @account.address
             %p
               %i.ui.privacy.icon
-              = @user.profile.name
+              = @user.profile
           .four.wide.black.column
             %p
               %i.ui.announcement.icon
               %b Contato de Emergência
             %p
               %i.ui.user.icon
-              Polyana Ferreira Souza
+              #{@account.emergency_contact.name} -
+              #{t(@account.emergency_contact.kinship.text)}
             %p
               %i.ui.call.icon
-              (61) 8130-6496
-
-#user-profile-body
-  .ui.page.grid
-    .column
-      .ui.divided.divided.items
-        .item
-          .content
-            .ui.two.column.grid
-              .twelve.wide.column
-                .ui.header(style="margin-bottom: 5px")
-                  = link_to "Acampamento do MAS 2016", event_path(1)
-                  .sub.header Maio de 2016
-                .ui.description
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                  tempor incididunt ut labore et dolore magna aliqua.
-              .four.wide.column
-                .extra
-                  .ui.right.floated.primary.small.button
-                    Inscrever-me
-                    %i.right.chevron.icon
+              = @account.emergency_contact.phone
