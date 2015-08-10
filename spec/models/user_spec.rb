@@ -29,6 +29,12 @@ describe User do
     it { should_not be_valid }
   end
 
+  context '#relationships' do
+    it { should have_and_belong_to_many :events }
+    it { should belong_to :ward }
+    it { should belong_to :account }
+  end
+
   context '#valid_user' do
     subject { User.first }
     it { should be_valid }
