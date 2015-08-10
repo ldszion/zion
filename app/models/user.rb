@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
 
   has_one :account, dependent: :destroy
   belongs_to :ward
-  has_and_belongs_to_many :events
+  has_and_belongs_to_many :events, join_table: :enrollments
 
   validates :email,
     presence: { presence: true },
