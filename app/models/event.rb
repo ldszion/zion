@@ -1,5 +1,7 @@
 # Event class
 class Event < ActiveRecord::Base
+  has_and_belongs_to_many :users
+
   # Returns the event's start date in string
   def start_date
     start_datetime.strftime('%d/%m/%Y')
