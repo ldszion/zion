@@ -15,6 +15,9 @@
                     #{event.description}
                 .four.wide.column
                   .extra
-                    .ui.right.floated.primary.small.button
+                    = link_to enroll_path(user_id: user,
+                            event_id: event.id),
+                        method: :post,
+                        class: 'ui right floated small button basic blue' do
                       Inscrever-me
                       %i.right.chevron.icon
