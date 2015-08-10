@@ -11,6 +11,7 @@ class UsersController < ApplicationController
 
   def show
     @account = @user.account
+    @events = Event.all.order(:name)
   end
 
   def new
