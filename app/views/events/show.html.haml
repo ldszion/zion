@@ -2,69 +2,32 @@
   #page-bg
   #page-content
     .ui.page.grid
-      .ten.wide.column
+      .eleven.wide.column
         #event-name
-          %h1 Acampamento do MAS 2016
-          %p Dia 02/04/2016 às 09:00
-          %p.transparent Descrição Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+          %h1 #{@event.name}
+          %p Começa em #{@event.start_date} às #{@event.start_time}
+          %p.transparent #{@event.description}
 
-          %a.ui.left.icon.button(onclick="javascript:history.go(-1);")
-            %i.left.arrow.icon
-            Voltar
-          .ui.primary.button
-            Participar
+          .ui.buttons
+            = link_to :back,
+                  class: 'ui left button' do
+              %i.left.arrow.icon
+              Voltar
+            .or{data: {text: "ou"}}
+            = link_to enroll_path(user_id: current_user,
+                      event_id: @event.id),
+                  method: :post,
+                  class: 'ui positive button' do
+              Participar
+              %i.right.chevron.icon
 
-      .six.wide.column
+      .five.wide.column
         .ui.inverted.segment.no-background-color#participants
           %h3 Participantes:
           .ui.inverted.relaxed.list
+          - for user in @event.users do
             .item
-              = image_tag "example/avatars/man.jpg", class: "ui avatar image"
+              = image_tag account_thumbnail(user.account), class: "ui avatar image"
               .content
-                .header Lucas Skywalker
-                .description Ala Guará II
-            .item
-              = image_tag "example/avatars/man.jpg", class: "ui avatar image"
-              .content
-                .header Lucas Skywalker
-                .description Ala Guará II
-            .item
-              = image_tag "example/avatars/man.jpg", class: "ui avatar image"
-              .content
-                .header Lucas Skywalker
-                .description Ala Guará II
-            .item
-              = image_tag "example/avatars/man.jpg", class: "ui avatar image"
-              .content
-                .header Lucas Skywalker
-                .description Ala Guará II
-            .item
-              = image_tag "example/avatars/man.jpg", class: "ui avatar image"
-              .content
-                .header Lucas Skywalker
-                .description Ala Guará II
-            .item
-              = image_tag "example/avatars/man.jpg", class: "ui avatar image"
-              .content
-                .header Lucas Skywalker
-                .description Ala Guará II
-            .item
-              = image_tag "example/avatars/man.jpg", class: "ui avatar image"
-              .content
-                .header Lucas Skywalker
-                .description Ala Guará II
-            .item
-              = image_tag "example/avatars/man.jpg", class: "ui avatar image"
-              .content
-                .header Lucas Skywalker
-                .description Ala Guará II
-            .item
-              = image_tag "example/avatars/man.jpg", class: "ui avatar image"
-              .content
-                .header Lucas Skywalker
-                .description Ala Guará II
-            .item
-              = image_tag "example/avatars/man.jpg", class: "ui avatar image"
-              .content
-                .header Lucas Skywalker
-                .description Ala Guará II
+                .header #{user.account.full_name}
+                .description Ala #{user.ward.name}
