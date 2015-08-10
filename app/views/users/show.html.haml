@@ -48,7 +48,8 @@
               %b Contato de Emergência
             %p
               %i.ui.user.icon
-              #{@account.emergency_contact.name} - #{t(@account.emergency_contact.kinship)}
+              #{@account.emergency_contact.name} -
+              #{t(@account.emergency_contact.kinship.text)}
             %p
               %i.ui.call.icon
               = @account.emergency_contact.phone
