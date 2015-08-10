@@ -13,19 +13,22 @@ class EventsController < ApplicationController
     event = Event.find(params[:event_id])
     user = User.find(params[:user_id])
 
-    begin
-      event.users << user
-      event.save!
-      user.save!
-      notice = "Inscrição realizada com sucesso!"
-    rescue ActiveRecord::RecordNotFound
-      notice = "Usuário ou Evento não encontrados"
-    rescue ActiveRecord::RecordNotUnique
-      notice = "Usuário já inscrito no evento!"
-    rescue
-      notice = "Erro na inscrição. Contate um administrador!"
-    ensure
-      redirect_to :back, notice: notice
+    if(Time.now < event.end_datetime)
+      begin
+        event.users << user
+        event.save!
+        user.save!
+        notice = "Inscrição realizada com sucesso!"
+      rescue ActiveRecord::RecordNotFound
+        notice = "Usuário ou Evento não encontrados"
+      rescue ActiveRecord::RecordNotUnique
+        notice = "Usuário já inscrito no evento!"
+      rescue
+        notice = "Erro na inscrição. Contate um administrador!"
+      end
+    else
+      notice = "Inscrições não são mais permitidas neste evento!"
     end
+    redirect_to :back, notice: notice
   end
 end
