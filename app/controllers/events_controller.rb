@@ -9,10 +9,23 @@ class EventsController < ApplicationController
     @event = Event.find(params[:id])
   end
 
+  def destroy
+    @event = Event.find(params[:id])
+    notice = nil
+    alert = nil
+    if(@event.destroy!)
+      notice = "Evento excluído com sucesso!"
+    else
+      alert = "Evento não pôde ser excluído, contate o administrador!"
+    end
+    redirect_to :back, notice: notice, alert: alert
+  end
+
   def enroll
     event = Event.find(params[:event_id])
     user = User.find(params[:user_id])
-
+    notice = nil
+    alert = nil
     if(Time.now < event.end_datetime)
       begin
         event.users << user
@@ -20,15 +33,15 @@ class EventsController < ApplicationController
         user.save!
         notice = "Inscrição realizada com sucesso!"
       rescue ActiveRecord::RecordNotFound
-        notice = "Usuário ou Evento não encontrados"
+        alert = "Usuário ou Evento não encontrados"
       rescue ActiveRecord::RecordNotUnique
-        notice = "Usuário já inscrito no evento!"
+        alert = "Usuário já inscrito no evento!"
       rescue
-        notice = "Erro na inscrição. Contate um administrador!"
+        alert = "Erro na inscrição. Contate um administrador!"
       end
     else
-      notice = "Inscrições não são mais permitidas neste evento!"
+      alert = "Inscrições não são mais permitidas neste evento!"
     end
-    redirect_to :back, notice: notice
+    redirect_to :back, notice: notice, alert: alert
   end
 end
