@@ -2,9 +2,6 @@
 
 
 #user-profile-body
-  .ui.one.column.page.grid
-    .column
-      = render partial: 'messages/all'
   %br
   - if current_user == @user
     = render partial: 'available_events', locals: {events: @events, user: current_user}
