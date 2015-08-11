@@ -9,6 +9,20 @@ class EventsController < ApplicationController
     @event = Event.find(params[:id])
   end
 
+  def new
+    @event = Event.new
+  end
+
+  def create
+    @event = Event.new(event_params)
+    if(@event.save)
+      notice = "Evento criado com sucesso"
+      redirect_to current_user, notice: notice
+    else
+      render :new
+    end
+  end
+
   def destroy
     @event = Event.find(params[:id])
     notice = nil
@@ -43,5 +57,11 @@ class EventsController < ApplicationController
       alert = "Inscrições não são mais permitidas neste evento!"
     end
     redirect_to :back, notice: notice, alert: alert
+  end
+
+  private
+
+  def event_params
+    params.require(:event).permit(:name, :description, :start_datetime, :end_datetime)
   end
 end

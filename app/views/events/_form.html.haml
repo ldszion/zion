@@ -1,0 +1,50 @@
+.ui.page.centered.grid
+  .ten.wide.column
+    %h2.ui.basic.center.aligned.segment
+      Criar novo Evento
+      %i.ui.write.icon
+    = render partial: 'messages/error_list',
+      locals: { errors: @event.errors.full_messages }
+
+    .ui.form
+      = form_for @event, method: :post, multipart: true do |f|
+        .ui.segment
+          .field{ class: error_class(@event, :name) }
+            .ui.left.icon.input
+              = f.text_field :name, placeholder: 'Nome do Evento'
+              %i.write.icon
+
+          .field{ class: error_class(@event, :description) }
+            .ui.left.icon.input
+              %i.write.icon
+              = f.text_area :description, placeholder: 'Descrição'
+
+          .two.fields
+            .field{ class: error_class(@event, :start_datetime) }
+              .ui.left.icon.input
+                = f.text_field :start_datetime,
+                  placeholder: 'Data inicial'
+                %i.calendar.icon
+
+            .field{ class: error_class(@event, :start_datetime) }
+              .ui.left.icon.input
+                = f.text_field :start_datetime,
+                  placeholder: 'Hora'
+                %i.calendar.outline.icon
+
+          .two.fields
+            .field{ class: error_class(@event, :end_datetime) }
+              .ui.left.icon.input
+                = f.text_field :end_datetime,
+                  placeholder: 'Data de término'
+                %i.calendar.icon
+
+            .field{ class: error_class(@event, :end_datetime) }
+              .ui.left.icon.input
+                = f.text_field :end_datetime,
+                  placeholder: 'Hora'
+                %i.calendar.outline.icon
+
+          %button.ui.fluid.green.button{ type: 'submit' }
+            Criar
+          %br

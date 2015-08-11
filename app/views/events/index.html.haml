@@ -2,9 +2,10 @@
   .column
     - if(current_user.admin? or current_user.region_leader?)
       = link_to new_event_path do
-        .ui.icon.primary.button
+        .ui.icon.basic.button
           %i.plus.icon
-          Novo Evento
+          = link_to 'Novo Evento', new_event_path
+
 
     %table.ui.celled.striped.table
       %thead
