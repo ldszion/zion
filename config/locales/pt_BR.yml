@@ -29,6 +29,7 @@ pt_BR:
       picture: Imagem
       emergency_contact: Contato de Emergência
       ward: Ala
+      event: Evento
 
     # Model attributes
     attributes:
@@ -61,6 +62,11 @@ pt_BR:
         name: Nome
         kinship: Parentesco
         phone: Telefone
+      event:
+        name: Nome
+        description: Descrição
+        start_datetime: Date e hora de início
+        end_datetime: Date e hora de término
 
   # LABELS
   label:

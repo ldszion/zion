@@ -22,26 +22,26 @@
           .two.fields
             .field{ class: error_class(@event, :start_datetime) }
               .ui.left.icon.input
-                = f.text_field :start_datetime,
+                = f.text_field :start_date,
                   placeholder: 'Data inicial'
                 %i.calendar.icon
 
             .field{ class: error_class(@event, :start_datetime) }
               .ui.left.icon.input
-                = f.text_field :start_datetime,
+                = f.text_field :start_time,
                   placeholder: 'Hora'
                 %i.calendar.outline.icon
 
           .two.fields
             .field{ class: error_class(@event, :end_datetime) }
               .ui.left.icon.input
-                = f.text_field :end_datetime,
+                = f.text_field :end_date,
                   placeholder: 'Data de término'
                 %i.calendar.icon
 
             .field{ class: error_class(@event, :end_datetime) }
               .ui.left.icon.input
-                = f.text_field :end_datetime,
+                = f.text_field :end_time,
                   placeholder: 'Hora'
                 %i.calendar.outline.icon
 

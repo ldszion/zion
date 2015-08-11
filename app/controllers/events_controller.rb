@@ -10,11 +10,14 @@ class EventsController < ApplicationController
   end
 
   def new
-    @event = Event.new
+    time = Time.now
+    @event = Event.new(start_datetime: time,
+      end_datetime: time)
   end
 
   def create
     @event = Event.new(event_params)
+    convert_dates
     if(@event.save)
       notice = "Evento criado com sucesso"
       redirect_to current_user, notice: notice
@@ -59,9 +62,16 @@ class EventsController < ApplicationController
     redirect_to :back, notice: notice, alert: alert
   end
 
+  def convert_dates
+    start_datetime = params[:event][:start_date] + ' ' + params[:event][:start_time]
+    @event.start_datetime = start_datetime.to_datetime
+    end_datetime = params[:event][:end_date] + ' ' + params[:event][:end_time]
+    @event.end_datetime = end_datetime.to_datetime
+  end
+
   private
 
   def event_params
-    params.require(:event).permit(:name, :description, :start_datetime, :end_datetime)
+    params.require(:event).permit(:name, :description)
   end
 end
