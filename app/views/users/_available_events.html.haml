@@ -15,9 +15,17 @@
                     #{event.description}
                 .four.wide.column
                   .extra
-                    = link_to enroll_path(user_id: user,
-                            event_id: event.id),
-                        method: :post,
-                        class: 'ui right floated small button basic blue' do
-                      Inscrever-me
-                      %i.right.chevron.icon
+                    - if event.users.exists?(user)
+                      = link_to leave_path(user_id: user,
+                              event_id: event.id),
+                          method: :post,
+                          class: 'ui right floated small button basic red' do
+                        Cancelar inscrição
+                        %i.right.chevron.icon
+                    - else
+                      = link_to enroll_path(user_id: user,
+                              event_id: event.id),
+                          method: :post,
+                          class: 'ui right floated small button basic blue' do
+                        Inscrever-me
+                        %i.right.chevron.icon

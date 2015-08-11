@@ -38,6 +38,22 @@ class EventsController < ApplicationController
     redirect_to :back, notice: notice, alert: alert
   end
 
+  def edit
+    @event = Event.find(params[:id])
+  end
+
+  def update
+    @event = Event.find(params[:id])
+    @event.update(event_params)
+    convert_dates
+    if(@event.save)
+      notice = "Evento alterado com sucesso"
+      redirect_to current_user, notice: notice
+    else
+      render :edit
+    end
+  end
+
   def enroll
     event = Event.find(params[:event_id])
     user = User.find(params[:user_id])
@@ -58,6 +74,27 @@ class EventsController < ApplicationController
       end
     else
       alert = "Inscrições não são mais permitidas neste evento!"
+    end
+    redirect_to :back, notice: notice, alert: alert
+  end
+
+  def leave
+    event = Event.find(params[:event_id])
+    user = User.find(params[:user_id])
+    notice = nil
+    alert = nil
+    if(Time.now < event.end_datetime)
+      begin
+        event.users.destroy(user)
+        event.save!
+        notice = "Cancelamento realizado com sucesso!"
+      rescue ActiveRecord::RecordNotFound
+        alert = "Usuário ou Evento não encontrados"
+      rescue
+        alert = "Erro no cancelamento. Contate um administrador!"
+      end
+    else
+      alert = "Cancelar inscrição não é mais permitido neste evento!"
     end
     redirect_to :back, notice: notice, alert: alert
   end
