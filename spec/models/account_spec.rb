@@ -19,6 +19,7 @@ describe Account do
   context '#relationships' do
     it { should have_one :emergency_contact }
     it { should have_one :avatar }
+    it { should belong_to :user }
     it { should accept_nested_attributes_for :emergency_contact }
     it { should accept_nested_attributes_for :avatar }
   end

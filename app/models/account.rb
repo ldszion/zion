@@ -3,9 +3,9 @@ class Account < ActiveRecord::Base
 
   enumerize :gender, in: [:male, :female], predicates: true
 
-  has_one :user
-  has_one :avatar, as: :imageable, class_name: 'Picture'
-  has_one :emergency_contact
+  belongs_to :user
+  has_one :avatar, as: :imageable, class_name: 'Picture', dependent: :destroy
+  has_one :emergency_contact, dependent: :destroy
 
   accepts_nested_attributes_for :emergency_contact, :avatar
 

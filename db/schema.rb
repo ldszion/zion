@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150803184813) do
+ActiveRecord::Schema.define(version: 20150811155514) do
 
   create_table "accounts", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -24,7 +24,10 @@ ActiveRecord::Schema.define(version: 20150803184813) do
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
     t.string   "phone",      limit: 255
+    t.integer  "user_id",    limit: 4
   end
+
+  add_index "accounts", ["user_id"], name: "index_accounts_on_user_id", using: :btree
 
   create_table "emergency_contacts", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -79,14 +82,12 @@ ActiveRecord::Schema.define(version: 20150803184813) do
     t.string   "password_digest", limit: 255
     t.datetime "created_at",                                  null: false
     t.datetime "updated_at",                                  null: false
-    t.integer  "account_id",      limit: 4
     t.integer  "ward_id",         limit: 4
     t.string   "profile",         limit: 255, default: "0"
     t.boolean  "leader",          limit: 1,   default: false
     t.boolean  "active",          limit: 1,   default: false
   end
 
-  add_index "users", ["account_id"], name: "index_users_on_account_id", using: :btree
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["ward_id"], name: "index_users_on_ward_id", using: :btree
 
@@ -99,9 +100,9 @@ ActiveRecord::Schema.define(version: 20150803184813) do
 
   add_index "wards", ["stake_id"], name: "index_wards_on_stake_id", using: :btree
 
+  add_foreign_key "accounts", "users"
   add_foreign_key "emergency_contacts", "accounts"
   add_foreign_key "stakes", "regions"
-  add_foreign_key "users", "accounts"
   add_foreign_key "users", "wards"
   add_foreign_key "wards", "stakes"
 end
