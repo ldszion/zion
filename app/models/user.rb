@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
   enumerize :profile, in: [:user, :ward_leader, 
     :bishopric, :stake_leader, :region_leader, :admin], default: :user, predicates: true
 
-  belongs_to :account
+  has_one :account, dependent: :destroy
   belongs_to :ward
 
   validates :email,
