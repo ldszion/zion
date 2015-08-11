@@ -26,5 +26,6 @@
                 .ui.mini.icon.buttons
                   .ui.icon.button(data-content="Editar Evento")
                     %i.edit.icon
-                  .ui.icon.button(data-content="Apagar Evento")
-                    %i.remove.icon
+                  = link_to event, method: :delete,
+                    data: { confirm: 'Tem certeza que deseja apagar este evento?' }, class: 'ui button' do
+                    %i.close.icon
