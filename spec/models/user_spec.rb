@@ -24,7 +24,7 @@ describe User do
     it 'should confirm password' do
       expect(subject.password_confirmation).to eq subject.password
     end
-    
+
     it { should validate_length_of(:password).is_at_least(6).is_at_most(16) }
     it { should_not be_valid }
   end
@@ -32,7 +32,7 @@ describe User do
   context '#relationships' do
     it { should have_and_belong_to_many :events }
     it { should belong_to :ward }
-    it { should belong_to :account }
+    it { should have_one :account }
   end
 
   context '#valid_user' do
