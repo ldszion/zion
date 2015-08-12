@@ -1,13 +1,14 @@
 class EventsController < ApplicationController
   before_action :authenticate_user, :must_have_person_if_logged_in,
                 :must_be_active
-  before_action :set_event, only: [:show, :destroy, :edit, :update]
+  before_action :set_event, only: [:destroy, :edit, :update]
 
   def index
     @events = Event.all.order(:name)
   end
 
   def show
+    @event = Event.includes(users: [:account, :ward]).find params[:id]
   end
 
   def new
