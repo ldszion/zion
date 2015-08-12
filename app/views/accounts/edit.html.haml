@@ -4,6 +4,7 @@
       %i.setting.icon
       Configurações da Conta
     .ui.divider
+    = render partial: 'messages/all'
     = render partial: 'messages/error_list',
       locals: { errors: @account.errors.full_messages }
     - if flash[:errors]

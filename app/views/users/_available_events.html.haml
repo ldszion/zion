@@ -1,6 +1,7 @@
 %div
   .ui.page.grid
     .column
+      = render partial: 'messages/all'
       .ui.divided.divided.items
         - for event in events
           .item
