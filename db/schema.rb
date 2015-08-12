@@ -40,6 +40,14 @@ ActiveRecord::Schema.define(version: 20150811155514) do
 
   add_index "emergency_contacts", ["account_id"], name: "index_emergency_contacts_on_account_id", using: :btree
 
+  create_table "enrollments", id: false, force: :cascade do |t|
+    t.integer "user_id",  limit: 4, null: false
+    t.integer "event_id", limit: 4, null: false
+  end
+
+  add_index "enrollments", ["event_id", "user_id"], name: "index_enrollments_on_event_id_and_user_id", unique: true, using: :btree
+  add_index "enrollments", ["user_id", "event_id"], name: "index_enrollments_on_user_id_and_event_id", unique: true, using: :btree
+
   create_table "events", force: :cascade do |t|
     t.string   "name",           limit: 255
     t.text     "description",    limit: 65535
