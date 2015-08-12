@@ -16,7 +16,7 @@
                     #{event.description}
                 .four.wide.column
                   .extra
-                    - if event.users.exists?(user)
+                    - if event.users.exists?(user.id)
                       = link_to leave_path(user_id: user,
                               event_id: event.id),
                           method: :post,
