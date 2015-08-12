@@ -1,5 +1,6 @@
 .ui.one.column.page.grid
   .column
+    = render partial: 'messages/all'
     = render partial: 'messages/error_list',
       locals: { errors: @account.errors.full_messages }
     .ui.form.segment
