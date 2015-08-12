@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-# Para todos os testes é necessário executar o comando:
+# Para todos os testes e necessario executar o comando:
 # rake db:seed RAILS_ENV=test --trace
 # para executar o mesmo arquivo seed no banco de testes
 describe User do
@@ -24,9 +24,15 @@ describe User do
     it 'should confirm password' do
       expect(subject.password_confirmation).to eq subject.password
     end
-    
+
     it { should validate_length_of(:password).is_at_least(6).is_at_most(16) }
     it { should_not be_valid }
+  end
+
+  context '#relationships' do
+    it { should have_and_belong_to_many :events }
+    it { should belong_to :ward }
+    it { should have_one :account }
   end
 
   context '#valid_user' do

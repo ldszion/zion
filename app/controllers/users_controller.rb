@@ -5,12 +5,15 @@ class UsersController < ApplicationController
   before_action :must_be_active, except: :show
   before_action :match_old_password, only: :change_password
 
+  layout 'session', only: [:new]
+
   def index
     @users = User.all
   end
 
   def show
     @account = @user.account
+    @events = Event.all.order(:name)
   end
 
   def new

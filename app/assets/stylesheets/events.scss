@@ -15,11 +15,12 @@
   #page-content{
     position: absolute;
     top: 100px;
+    width: 100%;
 
     $colorname: #fff;
     #event-name{
       color: $colorname;
-        
+
       p.transparent{
         color: transparentize($colorname, 0.3);
       }

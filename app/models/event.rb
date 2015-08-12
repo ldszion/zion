@@ -1,5 +1,9 @@
 # Event class
 class Event < ActiveRecord::Base
+  has_and_belongs_to_many :users, join_table: :enrollments
+  validates :name, :start_datetime,
+    :end_datetime, :description, presence: true
+
   # Returns the event's start date in string
   def start_date
     start_datetime.strftime('%d/%m/%Y')

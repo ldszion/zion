@@ -1,0 +1,35 @@
+%div
+  .ui.one.column.page.grid
+    .column
+      = render partial: 'messages/all'
+      %h2 Próximos Eventos
+      .divider
+    .column
+      .ui.divided.divided.items
+        - events.each do |event|
+          .item
+            .content
+              .ui.two.column.grid
+                .twelve.wide.column
+                  .ui.header{ style: 'margin-bottom: 5px' }
+                    = link_to event.name, event
+                    .sub.header
+                      #{event.start_date} - #{event.end_date}
+                  .ui.description
+                    #{event.description}
+                .four.wide.column
+                  .extra
+                    - if event.users.exists?(user.id)
+                      = link_to leave_path(user_id: user,
+                              event_id: event.id),
+                          method: :post,
+                          class: 'ui right floated small button basic red' do
+                        Cancelar inscrição
+                        %i.right.chevron.icon
+                    - else
+                      = link_to enroll_path(user_id: user,
+                              event_id: event.id),
+                          method: :post,
+                          class: 'ui right floated small button primary' do
+                        Inscrever-me
+                        %i.right.chevron.icon

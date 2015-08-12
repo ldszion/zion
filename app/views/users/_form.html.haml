@@ -1,5 +1,5 @@
-.ui.page.centered.grid
-  .five.wide.column
+.ui.middle.aligned.centered.container.grid
+  .sixteen.wide.mobile.eight.wide.tablet.five.wide.computer.column
     %h2.ui.basic.center.aligned.segment
       Cadastro
       %i.ui.write.icon
@@ -8,28 +8,28 @@
 
     .ui.form
       = form_for @user, method: :post, multipart: true do |f|
-        .ui.segment
+        .ui.segment.stacked.raised.segment
           .field{ class: error_class(@user, :email) }
             .ui.left.icon.input
               = f.email_field :email, placeholder: 'Email'
-              %i.mail.icon
+              %i.user.icon
 
           .field{ class: error_class(@user, :password) }
             .ui.left.icon.input
               = f.password_field :password, placeholder: 'Senha'
-              %i.key.icon
+              %i.lock.icon
 
           .field{ class: error_class(@user, :password_confirmation) }
             .ui.left.icon.input
               = f.password_field :password_confirmation,
                 placeholder: 'Confirmação de senha'
-              %i.key.icon
+              %i.lock.icon
 
           .field.required
             = f.label :ward
             = f.collection_select :ward_id, @wards, :id, :name, {},
               class: 'ui select dropdown'
-        
+
           %br
           .field
             .ui.checkbox
@@ -38,10 +38,14 @@
 
           .field.required.hidden#profile
             = f.label :profile
-            = f.collection_select :profile, User.profile.options, :last, :first, {},
+            = f.collection_select :profile, User.profile.options, :last,
+              :first, {},
               class: 'ui select dropdown'
 
           %button.ui.fluid.green.button{ type: 'submit' }
             Cadastrar
             %i.sign.in.icon
-          %br
+
+    .ui.segment.center.aligned
+      %a{ href: login_path }
+        Já tem uma conta? Entrar!
