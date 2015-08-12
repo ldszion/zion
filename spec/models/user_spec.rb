@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-# Para todos os testes é necessário executar o comando:
+# Para todos os testes e necessario executar o comando:
 # rake db:seed RAILS_ENV=test --trace
 # para executar o mesmo arquivo seed no banco de testes
 describe User do
