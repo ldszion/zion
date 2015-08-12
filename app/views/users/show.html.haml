@@ -4,4 +4,5 @@
 #user-profile-body
   %br
   - if current_user == @user
-    = render partial: 'available_events', locals: {events: @events, user: current_user}
+    = render partial: 'available_events',
+      locals: { events: @events, user: current_user }

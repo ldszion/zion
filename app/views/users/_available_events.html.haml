@@ -1,9 +1,12 @@
 %div
-  .ui.page.grid
+  .ui.one.column.page.grid
+    .column
+      %h2 Próximos Eventos
+      .divider
     .column
       = render partial: 'messages/all'
       .ui.divided.divided.items
-        - for event in events
+        - events.each do |event|
           .item
             .content
               .ui.two.column.grid
