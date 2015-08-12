@@ -18,7 +18,7 @@ class EventsController < ApplicationController
   def create
     @event = Event.new(event_params)
     convert_dates
-    if(@event.save)
+    if @event.save
       notice = "Evento criado com sucesso"
       redirect_to current_user, notice: notice
     else
@@ -30,7 +30,7 @@ class EventsController < ApplicationController
     @event = Event.find(params[:id])
     notice = nil
     alert = nil
-    if(@event.destroy!)
+    if @event.destroy!
       notice = "Evento excluído com sucesso!"
     else
       alert = "Evento não pôde ser excluído, contate o administrador!"
@@ -46,9 +46,9 @@ class EventsController < ApplicationController
     @event = Event.find(params[:id])
     @event.update(event_params)
     convert_dates
-    if(@event.save)
+    if @event.save
       notice = "Evento alterado com sucesso"
-      redirect_to current_user, notice: notice
+      redirect_to @event, notice: notice
     else
       render :edit
     end
@@ -63,7 +63,6 @@ class EventsController < ApplicationController
       begin
         event.users << user
         event.save!
-        user.save!
         notice = "Inscrição realizada com sucesso!"
       rescue ActiveRecord::RecordNotFound
         alert = "Usuário ou Evento não encontrados"
