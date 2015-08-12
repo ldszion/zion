@@ -2,18 +2,20 @@
   #page-bg
   #page-content
     .ui.page.grid
-      .eleven.wide.column
+      .sixteen.wide.column
+        = render partial: 'messages/all'
+      .ten.wide.column
         #event-name
-          %h1 #{@event.name}
+          %h1= @event.name
           %p Começa em #{@event.start_date} às #{@event.start_time}
-          %p.transparent #{@event.description}
+          %p.transparent= @event.description
 
           .ui.buttons
             = link_to :back,
                   class: 'ui left button' do
               %i.left.arrow.icon
               Voltar
-            .or{data: {text: "ou"}}
+            .or{ data: { text: 'ou' } }
             - if @event.users.exists?(current_user)
               = link_to leave_path(user_id: current_user,
                       event_id: @event.id),
@@ -29,13 +31,15 @@
                 Inscrever-me
                 %i.right.chevron.icon
 
-      .five.wide.column
-        .ui.inverted.segment.no-background-color#participants
-          %h3 Participantes:
-          .ui.inverted.relaxed.list
-          - for user in @event.users do
-            .item
-              = image_tag account_thumbnail(user.account), class: "ui avatar image"
-              .content
-                .header #{user.account.full_name}
-                .description Ala #{user.ward.name}
+      .six.wide.column
+        - if @event.users.any?
+          .ui.inverted.segment#participants
+            %h3 Participantes:
+            .ui.inverted.relaxed.list
+              - @event.users.each do |user|
+                .item
+                  = image_tag account_thumbnail(user.account),
+                    class: 'ui avatar image'
+                  .content
+                    .header= user.account.full_name
+                    .description Ala #{user.ward.name}
