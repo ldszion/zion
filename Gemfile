@@ -45,6 +45,7 @@ group :production do
   gem 'puma'
 end
 
+gem "codeclimate-test-reporter", group: :test
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger
   # console

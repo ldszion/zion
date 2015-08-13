@@ -6,3 +6,7 @@ before_script:
   - mysql -e 'create database zion_test;'
 
 script: bundle exec rake db:reset && bundle exec rspec
+
+addons:
+  code_climate:
+    repo_token: ENV['CODECLIMATE_REPO_TOKEN']
