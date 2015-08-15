@@ -33,6 +33,9 @@ $(document).ready(function() {
   $('input.phone').mask(maskBehavior, options);
   $('input.datemask').mask('00/00/0000');
   $('input.timemask').mask('00:00');
+  $('input.moneymask').on('keydown change', function(e){
+    $(this).mask('000.000.000,00', { reverse: true });
+  });
   // END INPUT MASK
 
   $('.ui.message .close.icon')
