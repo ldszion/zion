@@ -117,7 +117,7 @@ class EventsController < ApplicationController
   # Define os parametros aceitaveis para um evento. Este metodo eh
   # complementado com o metodo convert_dates
   def event_params
-    params.require(:event).permit(:name, :description, :price)
+    params.require(:event).permit(:name, :description, :price, :private)
   end
 
   # Converte um numero formatado em dinheiro para um float
