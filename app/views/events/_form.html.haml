@@ -1,42 +1,62 @@
 .ui.form
   = form_for @event, multipart: true do |f|
-    .ui.segment
-      .field{ class: error_class(@event, :name) }
-        .ui.left.icon.input
-          = f.text_field :name, placeholder: 'Nome do Evento'
-          %i.write.icon
-
-      .field{ class: error_class(@event, :description) }
-        .ui.left.icon.input
-          %i.write.icon
-          = f.text_area :description, placeholder: 'Descrição'
-
-      .two.fields
-        .field{ class: error_class(@event, :start_datetime) }
+    .ui.segments
+      .ui.segment
+        .field{ class: error_class(@event, :name) }
+          = f.label :name
           .ui.left.icon.input
-            = f.text_field :start_date,
-              placeholder: 'Data inicial'
-            %i.calendar.icon
+            = f.text_field :name, placeholder: 'Nome do Evento'
+            %i.write.icon
+
+        .field{ class: error_class(@event, :description) }
+          = f.label :description
+          = f.text_area :description, placeholder: 'Descrição', rows: 3
 
         .field{ class: error_class(@event, :start_datetime) }
-          .ui.left.icon.input
-            = f.text_field :start_time,
-              placeholder: 'Hora'
-            %i.calendar.outline.icon
+          = f.label :start_datetime
+          .two.fields
+            .field
+              .ui.left.icon.input
+                = f.text_field :start_date,
+                  placeholder: 'Data inicial',
+                  class: 'datemask'
+                %i.calendar.icon
+            .field{ class: error_class(@event, :start_datetime) }
+              -# = f.label :start_time
+              .ui.left.icon.input
+                = f.text_field :start_time,
+                  placeholder: 'Hora',
+                  class: 'timemask'
+                %i.calendar.outline.icon
 
-      .two.fields
         .field{ class: error_class(@event, :end_datetime) }
-          .ui.left.icon.input
-            = f.text_field :end_date,
-              placeholder: 'Data de término'
-            %i.calendar.icon
+          = f.label :end_datetime
+          .two.fields
+            .field
+              .ui.left.icon.input
+                = f.text_field :end_date,
+                  placeholder: 'Data de término',
+                  class: 'datemask'
+                %i.calendar.icon
+            .field{ class: error_class(@event, :end_datetime) }
+              .ui.left.icon.input
+                = f.text_field :end_time,
+                  placeholder: 'Hora',
+                  class: 'timemask'
+                %i.calendar.outline.icon
 
-        .field{ class: error_class(@event, :end_datetime) }
+        .field{ class: error_class(@event, :price) }
+          = f.label :price
           .ui.left.icon.input
-            = f.text_field :end_time,
-              placeholder: 'Hora'
-            %i.calendar.outline.icon
+            %i.dollar.icon
+            = f.text_field :price,
+              value: number_to_currency(@event.price, unit: ''),
+              placeholder: 'Preço do evento',
+              class: 'moneymask'
 
-      %button.ui.fluid.green.button{ type: 'submit' }
-        Criar
-      %br
+      .ui.secondary.segment
+        = link_to :back, class: 'ui left icon basic button' do
+          %i.left.arrow.icon
+          Voltar
+        %button.ui.right.floated.primary.button{ type: 'submit' }
+          Criar Evento

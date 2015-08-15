@@ -10,6 +10,8 @@ describe Event do
     it { should respond_to :start_time }
     it { should respond_to :end_date }
     it { should respond_to :end_time }
+    it { should respond_to :free? }
+    it { should respond_to :paid? }
   end
 
   context '#relationships' do

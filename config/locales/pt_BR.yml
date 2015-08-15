@@ -67,6 +67,10 @@ pt_BR:
         description: Descrição
         start_datetime: Date e hora de início
         end_datetime: Date e hora de término
+        start_date: Data de ínicio
+        start_time: Hora de ínicio
+        end_date: Data de término
+        end_time: Hora de término
 
   # LABELS
   label:
