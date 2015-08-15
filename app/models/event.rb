@@ -4,13 +4,20 @@ class Event < ActiveRecord::Base
   validates :name, :start_datetime,
     :end_datetime, :description, presence: true
 
+  # Diz se um evento eh gratuito
   def free?
     !paid?
   end
 
+  # Diz se um evento eh pago
   def paid?
     price = price || 0.0
     price > 0.0
+  end
+
+  # Diz se um evento eh publico
+  def public?
+    !private?
   end
 
   # Returns the event's start date in string

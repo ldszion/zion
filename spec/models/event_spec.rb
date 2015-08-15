@@ -12,6 +12,8 @@ describe Event do
     it { should respond_to :end_time }
     it { should respond_to :free? }
     it { should respond_to :paid? }
+    it { should respond_to :public? }
+    it { should respond_to :private? }
   end
 
   context '#relationships' do
