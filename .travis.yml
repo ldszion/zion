@@ -9,4 +9,4 @@ script: bundle exec rake db:reset && bundle exec rspec
 
 addons:
   code_climate:
-    repo_token: ENV['CODECLIMATE_REPO_TOKEN']
+    repo_token: 3ae80f5ae3ccea32b85d2e503d06ec9b0b0be113eb3d93eef11ad786dd992f91
