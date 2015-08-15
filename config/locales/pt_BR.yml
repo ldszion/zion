@@ -71,6 +71,8 @@ pt_BR:
         start_time: Hora de ínicio
         end_date: Data de término
         end_time: Hora de término
+        private: Privado
+        private?: Evento privado
 
   # LABELS
   label:

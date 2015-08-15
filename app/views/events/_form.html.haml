@@ -53,6 +53,10 @@
               value: number_to_currency(@event.price, unit: ''),
               placeholder: 'Preço do evento',
               class: 'moneymask'
+        .field
+          .ui.toggle.checkbox
+            = f.check_box :private
+            = f.label :private?
 
       .ui.secondary.segment
         = link_to :back, class: 'ui left icon basic button' do
