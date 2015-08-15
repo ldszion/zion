@@ -49,7 +49,10 @@
           = f.label :price
           .ui.left.icon.input
             %i.dollar.icon
-            = text_field_tag :price, nil, placeholder: 'Preço do evento'
+            = f.text_field :price,
+              value: number_to_currency(@event.price, unit: ''),
+              placeholder: 'Preço do evento',
+              class: 'moneymask'
 
       .ui.secondary.segment
         = link_to :back, class: 'ui left icon basic button' do

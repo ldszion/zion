@@ -2,6 +2,7 @@ class EventsController < ApplicationController
   before_action :authenticate_user, :must_have_person_if_logged_in,
                 :must_be_active
   before_action :set_event, only: [:destroy, :edit, :update]
+  before_action :convert_price, only: [:create, :update]
 
   def index
     @events = Event.all.order(:name)
@@ -116,6 +117,16 @@ class EventsController < ApplicationController
   # Define os parametros aceitaveis para um evento. Este metodo eh
   # complementado com o metodo convert_dates
   def event_params
-    params.require(:event).permit(:name, :description)
+    params.require(:event).permit(:name, :description, :price)
+  end
+
+  # Converte um numero formatado em dinheiro para um float
+  def currency_to_number currency
+    currency.tr('.','').tr(',','.').to_f
+  end
+
+  # Converte o preco do parametro no formato correto em float
+  def convert_price
+    params[:event][:price] = currency_to_number params[:event][:price]
   end
 end

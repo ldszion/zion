@@ -9,6 +9,9 @@
           %h1= @event.name
           %p Começa em #{@event.start_date} às #{@event.start_time}
           %p.transparent= @event.description
+          %p.transparent
+            %b Preço:
+            = number_to_currency(@event.price)
 
           .ui.buttons
             = link_to :back,

@@ -4,6 +4,15 @@ class Event < ActiveRecord::Base
   validates :name, :start_datetime,
     :end_datetime, :description, presence: true
 
+  def free?
+    !paid?
+  end
+
+  def paid?
+    price = price || 0.0
+    price > 0.0
+  end
+
   # Returns the event's start date in string
   def start_date
     start_datetime.strftime('%d/%m/%Y')
