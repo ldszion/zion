@@ -46,5 +46,6 @@ module SessionHelper
     # abort back_url
     redirect_to(back_url || default)
     session.delete(:forwarding_url)
+    session.delete(:last_event_location)
   end
 end
