@@ -1,6 +1,9 @@
 class RegionsController < ApplicationController
+  before_action :authenticate_user,
+                :must_have_person_if_logged_in,
+                :must_be_active,
+                :check_authorization
   before_action :set_region, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user, :must_have_person_if_logged_in, :must_be_active
 
   # GET /regions
   # GET /regions.json
@@ -63,13 +66,20 @@ class RegionsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_region
-      @region = Region.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def region_params
-      params.require(:region).permit(:name)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_region
+    @region = Region.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def region_params
+    params.require(:region).permit(:name)
+  end
+
+  # Verifica se usuario logado tem permissao para acessar a controller
+  def check_authorization
+    permitted = [:admin]
+    raise User::NotAuthorized unless permitted.include? current_user.profile.to_sym
+  end
 end

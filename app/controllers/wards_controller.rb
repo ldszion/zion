@@ -1,6 +1,9 @@
 class WardsController < ApplicationController
   before_action :set_ward, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user, :must_have_person_if_logged_in, :must_be_active
+  before_action :authenticate_user,
+                :must_have_person_if_logged_in,
+                :must_be_active,
+                :check_authorization
 
   # GET /wards
   # GET /wards.json
@@ -63,13 +66,20 @@ class WardsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_ward
-      @ward = Ward.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def ward_params
-      params.require(:ward).permit(:name, :stake_id)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_ward
+    @ward = Ward.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def ward_params
+    params.require(:ward).permit(:name, :stake_id)
+  end
+
+  # Verifica se usuario logado tem permissao para acessar a controller
+  def check_authorization
+    permitted = [:admin]
+    raise User::NotAuthorized unless permitted.include? current_user.profile.to_sym
+  end
 end

@@ -1,6 +1,8 @@
 class EventsController < ApplicationController
-  before_action :authenticate_user, :must_have_person_if_logged_in,
+  before_action :authenticate_user, except: [:show]
+  before_action :must_have_person_if_logged_in,
                 :must_be_active
+  before_action :check_authorization, except: [:enroll, :leave, :show]
   before_action :set_event, only: [:destroy, :edit, :update]
   before_action :convert_price, only: [:create, :update]
 
@@ -128,5 +130,11 @@ class EventsController < ApplicationController
   # Converte o preco do parametro no formato correto em float
   def convert_price
     params[:event][:price] = currency_to_number params[:event][:price]
+  end
+
+  # Verifica se usuario logado tem permissao para acessar a controller
+  def check_authorization
+    permitted = [:admin]
+    fail User::NotAuthorized unless permitted.include? current_user.profile.to_sym
   end
 end

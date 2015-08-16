@@ -3,6 +3,7 @@ class UsersController < ApplicationController
   before_action :authenticate_user, except: [:new, :create]
   before_action :must_have_person_if_logged_in
   before_action :must_be_active, except: :show
+  before_action :check_authorization, only: [:index]
   before_action :match_old_password, only: :change_password
 
   layout 'session', only: [:new]
@@ -105,23 +106,30 @@ class UsersController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_user
-      @user = User.find(params[:id])
-    end
 
-    # Permit some user's fields from params
-    def user_params
-      params.require(:user).permit(:email, :password, :password_confirmation, :ward_id, :profile, :leader)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_user
+    @user = User.find(params[:id])
+  end
 
-    # Redireciona para tela de conta se a senha digitada nao for igual a senha
-    # antiga
-    def match_old_password
-      @old_password = params[:user][:old_password]
-      unless current_user.authenticate(@old_password)
-        redirect_to edit_account_path(current_user.account),
-                    alert: 'A senha digitada está incorreta'
-      end
+  # Permit some user's fields from params
+  def user_params
+    params.require(:user).permit(:email, :password, :password_confirmation, :ward_id, :profile, :leader)
+  end
+
+  # Redireciona para tela de conta se a senha digitada nao for igual a senha
+  # antiga
+  def match_old_password
+    @old_password = params[:user][:old_password]
+    unless current_user.authenticate(@old_password)
+      redirect_to edit_account_path(current_user.account),
+                  alert: 'A senha digitada está incorreta'
     end
+  end
+
+  # Verifica se usuario logado tem permissao para acessar a controller
+  def check_authorization
+    permitted = [:admin]
+    fail User::NotAuthorized unless permitted.include? current_user.profile.to_sym
+  end
 end

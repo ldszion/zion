@@ -1,6 +1,9 @@
 class StakesController < ApplicationController
   before_action :set_stake, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user, :must_have_person_if_logged_in, :must_be_active
+  before_action :authenticate_user,
+                :must_have_person_if_logged_in,
+                :must_be_active,
+                :check_authorization
 
   # GET /stakes
   # GET /stakes.json
@@ -63,13 +66,20 @@ class StakesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_stake
-      @stake = Stake.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def stake_params
-      params.require(:stake).permit(:name, :region_id)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_stake
+    @stake = Stake.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def stake_params
+    params.require(:stake).permit(:name, :region_id)
+  end
+
+  # Verifica se usuario logado tem permissao para acessar a controller
+  def check_authorization
+    permitted = [:admin]
+    fail User::NotAuthorized unless permitted.include? current_user.profile.to_sym
+  end
 end
