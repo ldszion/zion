@@ -1,0 +1,7 @@
+.field
+  = form.label :name
+  = form.text_field :name, placeholder: 'Nome da Estaca'
+.field
+  = form.label :region
+  = form.collection_select :region_id, Region.all, :id, :name, {},
+    class: 'ui dropdown'
