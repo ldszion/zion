@@ -1,7 +1,7 @@
 class EventsController < ApplicationController
   before_action :authenticate_user, except: [:show]
   before_action :must_have_person_if_logged_in,
-                :must_be_active
+                :must_be_active, except: [:show]
   before_action :check_authorization, except: [:enroll, :leave, :show]
   before_action :set_event, only: [:destroy, :edit, :update]
   before_action :convert_price, only: [:create, :update]
@@ -58,7 +58,7 @@ class EventsController < ApplicationController
 
   def enroll
     event = Event.find(params[:event_id])
-    user = User.find(params[:user_id])
+    user = current_user
     notice = nil
     alert = nil
     if Time.now < event.end_datetime
@@ -74,15 +74,16 @@ class EventsController < ApplicationController
       rescue
         alert = 'Erro na inscrição. Contate um administrador!'
       end
+      return redirect_to event, notice: notice, alert: alert
     else
       alert = 'Inscrições não são mais permitidas neste evento!'
     end
-    redirect_to :back, notice: notice, alert: alert
+    return redirect_to :back, notice: notice, alert: alert
   end
 
   def leave
     event = Event.find(params[:event_id])
-    user = User.find(params[:user_id])
+    user = current_user
     notice = nil
     alert = nil
     if Time.now < event.end_datetime

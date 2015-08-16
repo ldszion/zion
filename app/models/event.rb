@@ -4,6 +4,8 @@ class Event < ActiveRecord::Base
   validates :name, :start_datetime,
     :end_datetime, :description, presence: true
 
+  scope :publicly, -> { where(private: false) }
+
   # Diz se um evento eh gratuito
   def free?
     !paid?
