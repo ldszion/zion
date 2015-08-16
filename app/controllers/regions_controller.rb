@@ -8,7 +8,7 @@ class RegionsController < ApplicationController
   # GET /regions
   # GET /regions.json
   def index
-    @regions = Region.all
+    @regions = Region.includes(stakes: :wards).order(:name)
   end
 
   # GET /regions/1
@@ -32,7 +32,7 @@ class RegionsController < ApplicationController
 
     respond_to do |format|
       if @region.save
-        format.html { redirect_to @region, notice: 'Region was successfully created.' }
+        format.html { redirect_to @region, notice: 'Região criada com sucesso.' }
         format.json { render :show, status: :created, location: @region }
       else
         format.html { render :new }
@@ -46,7 +46,7 @@ class RegionsController < ApplicationController
   def update
     respond_to do |format|
       if @region.update(region_params)
-        format.html { redirect_to @region, notice: 'Region was successfully updated.' }
+        format.html { redirect_to @region, notice: 'Região atualizada com sucesso.' }
         format.json { render :show, status: :ok, location: @region }
       else
         format.html { render :edit }
@@ -60,7 +60,7 @@ class RegionsController < ApplicationController
   def destroy
     @region.destroy
     respond_to do |format|
-      format.html { redirect_to regions_url, notice: 'Region was successfully destroyed.' }
+      format.html { redirect_to regions_url, notice: 'Região removida com sucesso.' }
       format.json { head :no_content }
     end
   end

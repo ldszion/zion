@@ -26,9 +26,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     @wards = Ward.all.order(:name)
 
-    if(!@user.leader?)
-      @user.active = true
-    end
+    @user.active = true unless @user.leader?
 
     render(:new) && return unless @user.save
 
@@ -67,41 +65,41 @@ class UsersController < ApplicationController
   def destroy
     @user.destroy
     respond_to do |format|
-      format.html {
+      format.html do
         redirect_to users_url,
-        notice: 'User was successfully destroyed.'
-      }
+                    notice: 'User was successfully destroyed.'
+      end
       format.json { head :no_content }
     end
   end
 
   def activate
-    if(current_user.admin?)
+    if current_user.admin?
       set_user
       @user.active = true
-      if(@user.save)
-        notice = 'Usuário ativado com sucesso!' 
+      if @user.save
+        notice = 'Usuário ativado com sucesso!'
       else
         notice = 'Usuário não pode ser ativado! Contate o administrador do sistema'
       end
-        redirect_to users_url, notice: notice
+      redirect_to users_url, notice: notice
     else
-      redirect_to current_user, notice: 'Você não pode ativar um usuário!' 
+      redirect_to current_user, notice: 'Você não pode ativar um usuário!'
     end
   end
 
   def deactivate
-    if(current_user.admin?)
+    if current_user.admin?
       set_user
       @user.active = false
-      if(@user.save)
-        notice = 'Usuário desativado com sucesso!' 
+      if @user.save
+        notice = 'Usuário desativado com sucesso!'
       else
         notice = 'Usuário não pode ser desativado! Contate o administrador do sistema'
       end
       redirect_to users_url, notice: notice
     else
-      redirect_to current_user, notice: 'Você não pode desativar um usuário!' 
+      redirect_to current_user, notice: 'Você não pode desativar um usuário!'
     end
   end
 

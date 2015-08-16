@@ -8,7 +8,7 @@ class WardsController < ApplicationController
   # GET /wards
   # GET /wards.json
   def index
-    @wards = Ward.all
+    @wards = Ward.includes(:stake).order(:name)
   end
 
   # GET /wards/1
@@ -32,7 +32,7 @@ class WardsController < ApplicationController
 
     respond_to do |format|
       if @ward.save
-        format.html { redirect_to @ward, notice: 'Ward was successfully created.' }
+        format.html { redirect_to wards_url, notice: 'Ala criada com sucesso.' }
         format.json { render :show, status: :created, location: @ward }
       else
         format.html { render :new }
@@ -46,7 +46,8 @@ class WardsController < ApplicationController
   def update
     respond_to do |format|
       if @ward.update(ward_params)
-        format.html { redirect_to @ward, notice: 'Ward was successfully updated.' }
+        format.html { redirect_to wards_url,
+                      notice: 'Ala atualizada com sucesso.' }
         format.json { render :show, status: :ok, location: @ward }
       else
         format.html { render :edit }
@@ -60,7 +61,7 @@ class WardsController < ApplicationController
   def destroy
     @ward.destroy
     respond_to do |format|
-      format.html { redirect_to wards_url, notice: 'Ward was successfully destroyed.' }
+      format.html { redirect_to wards_url, notice: 'Ala removida com sucesso.' }
       format.json { head :no_content }
     end
   end

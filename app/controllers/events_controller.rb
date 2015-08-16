@@ -123,8 +123,8 @@ class EventsController < ApplicationController
   end
 
   # Converte um numero formatado em dinheiro para um float
-  def currency_to_number currency
-    currency.tr('.','').tr(',','.').to_f
+  def currency_to_number(currency)
+    currency.tr('.', '').tr(',', '.').to_f
   end
 
   # Converte o preco do parametro no formato correto em float

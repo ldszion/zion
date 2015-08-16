@@ -8,7 +8,7 @@ class StakesController < ApplicationController
   # GET /stakes
   # GET /stakes.json
   def index
-    @stakes = Stake.all
+    @stakes = Stake.includes(:wards).order(:name)
   end
 
   # GET /stakes/1
@@ -32,7 +32,7 @@ class StakesController < ApplicationController
 
     respond_to do |format|
       if @stake.save
-        format.html { redirect_to @stake, notice: 'Stake was successfully created.' }
+        format.html { redirect_to @stake, notice: 'Estaca criada com sucesso.' }
         format.json { render :show, status: :created, location: @stake }
       else
         format.html { render :new }
@@ -46,7 +46,7 @@ class StakesController < ApplicationController
   def update
     respond_to do |format|
       if @stake.update(stake_params)
-        format.html { redirect_to @stake, notice: 'Stake was successfully updated.' }
+        format.html { redirect_to @stake, notice: 'Estaca atualizada com sucesso.' }
         format.json { render :show, status: :ok, location: @stake }
       else
         format.html { render :edit }
@@ -60,7 +60,7 @@ class StakesController < ApplicationController
   def destroy
     @stake.destroy
     respond_to do |format|
-      format.html { redirect_to stakes_url, notice: 'Stake was successfully destroyed.' }
+      format.html { redirect_to stakes_url, notice: 'Estaca removida com sucesso.' }
       format.json { head :no_content }
     end
   end
