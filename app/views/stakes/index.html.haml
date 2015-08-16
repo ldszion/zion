@@ -1,23 +1,31 @@
-%h1 Listing stakes
+.ui.one.column.page.grid
+  .column
+    = render partial: 'messages/all'
+    = link_to new_stake_path, class: 'ui primary icon button' do
+      %i.plus.icon
+      Nova Estaca
+    %table.ui.striped.table
+      %thead
+        %tr
+          %th= t('text.stake')
+          %th Nº de Alas
+          %th= t('text.region')
+          %th
 
-%table
-  %thead
-    %tr
-      %th Name
-      %th Region
-      %th
-      %th
-      %th
-
-  %tbody
-    - @stakes.each do |stake|
-      %tr
-        %td= stake.name
-        %td= stake.region
-        %td= link_to 'Show', stake
-        %td= link_to 'Edit', edit_stake_path(stake)
-        %td= link_to 'Destroy', stake, :method => :delete, :data => { :confirm => 'Are you sure?' }
-
-%br
-
-= link_to 'New Stake', new_stake_path
+      %tbody
+        - @stakes.each do |stake|
+          %tr
+            %td= link_to stake.name, stake
+            %td
+              = stake.wards.count
+              alas
+            %td= link_to stake.region.name, stake.region
+            %td
+              .ui.mini.icon.buttons
+                = link_to stake, class: 'ui button' do
+                  %i.eye.icon
+                = link_to edit_stake_path(stake), class: 'ui button' do
+                  %i.edit.icon
+                = link_to stake, method: :delete,
+                  data: { confirm: 'Are you sure?' }, class: 'ui button' do
+                  %i.trash.icon
