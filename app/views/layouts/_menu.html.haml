@@ -1,34 +1,43 @@
 .ui.large.inverted.menu#topmenu
   %a.header.item{ href: '/' }
     ZION
-    - if !current_user.nil?
+    - if logged_in? && current_user.admin?
       %a.item{ href: events_url, class: active_item('events') }
         %i.ui.calendar.icon
         Eventos
       %a.item{ href: users_url, class: active_item('users') }
         %i.ui.users.icon
         Usuários
+      %a.item{ href: regions_url, class: active_item('regions') }
+        %i.ui.university.icon
+        Regiões
+      %a.item{ href: stakes_url, class: active_item('stakes') }
+        %i.ui.university.icon
+        Estacas
+      %a.item{ href: wards_url, class: active_item('wards') }
+        %i.ui.university.icon
+        Alas
 
-    - if !current_user.nil?
-      .right.menu
-        .ui.pointing.dropdown.item
-          #profile-avatar
-            .ui.avatar.image
-              - if(!current_user.account.nil? and !current_user.account.avatar.nil?)
-                = image_tag(current_user.account.avatar.image.url(:thumb))
-              - else
-                = image_tag 'avatar.jpg'
-            = current_user.email
-            %i.dropdown.icon
-          .menu
-            %a.item{ href: user_path(current_user) }
-              %i.user.icon
-              Meu Perfil
-            - unless current_user.account.nil?
-              %a.item{ href: edit_account_path(current_user.account) }
-                %i.setting.icon
-                Minha Conta
-            .divider
-            %a.item{ href: logout_url }
-              %i.sign.out.icon
-              Sair
+  - if logged_in?
+    .right.menu
+      .ui.pointing.dropdown.item
+        #profile-avatar
+          .ui.avatar.image
+            - if !current_user.account.nil? && !current_user.account.avatar.nil?
+              = image_tag(current_user.account.avatar.image.url(:thumb))
+            - else
+              = image_tag 'avatar.jpg'
+          = current_user.email
+          %i.dropdown.icon
+        .menu
+          %a.item{ href: user_path(current_user) }
+            %i.user.icon
+            Meu Perfil
+          - unless current_user.account.nil?
+            %a.item{ href: edit_account_path(current_user.account) }
+              %i.setting.icon
+              Minha Conta
+          .divider
+          %a.item{ href: logout_url }
+            %i.sign.out.icon
+            Sair

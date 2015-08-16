@@ -1,0 +1,21 @@
+-# Este componente precisa de duas variaveis locals: record e fields
+- fields = 'fields' if local_assigns[:fields].nil?
+.ui.form
+  = form_for record do |form|
+    .ui.segments
+      .ui.segment
+        - if record.errors.any?
+          #error_explanation
+            %h2
+              #{pluralize(record.errors.count, 'error')}
+              prohibited this region from being saved:
+            %ul
+              - record.errors.full_messages.each do |msg|
+                %li= msg
+
+        = render partial: fields, locals: { form: form }
+      .ui.secondary.segment
+        = link_to :back, class: 'ui basic icon button' do
+          %i.left.arrow.icon
+          Voltar
+        = form.submit class: 'ui primary right floated button'

@@ -11,6 +11,6 @@
     = f.text_field :name
   .field
     = f.label :stake
-    = f.text_field :stake
+    = f.collection_select :stake_id, Stake.all, :id, :name
   .actions
     = f.submit 'Save'

@@ -1,12 +1,26 @@
-%p#notice= notice
-
-%p
-  %b Name:
-  = @ward.name
-%p
-  %b Stake:
-  = @ward.stake
-
-= link_to 'Edit', edit_ward_path(@ward)
-\|
-= link_to 'Back', wards_path
+.ui.page.centered.grid
+  .ten.wide.column
+    %h2.ui.basic.center.aligned.segment
+      Ala
+      = @ward.name
+      = link_to [:edit, @ward], title: 'Editar' do
+        %i.ui.write.icon
+    = render partial: 'messages/error_list',
+      locals: { errors: @ward.errors.full_messages }
+    .ui.tall.stacked.segments
+      .ui.segment
+        %h3 Informações:
+      .ui.segment
+        %p
+          %b Pertence à estaca:
+          = @ward.stake.name
+          da região
+          = @ward.stake.region.name
+      .ui.segment
+        %b Quantidade de usuários:
+        = @ward.users.count
+        usuários
+      .ui.secondary.segment
+        = link_to :back, class: 'ui basic icon button' do
+          %i.left.arrow.icon
+          Voltar

@@ -1,9 +1,30 @@
-%p#notice= notice
-
-%p
-  %b Name:
-  = @region.name
-
-= link_to 'Edit', edit_region_path(@region)
-\|
-= link_to 'Back', regions_path
+.ui.page.centered.grid
+  .ten.wide.column
+    %h2.ui.basic.center.aligned.segment
+      Região
+      = @region.name
+      = link_to [:edit, @region], title: 'Editar' do
+        %i.ui.write.icon
+    = render partial: 'messages/error_list',
+      locals: { errors: @region.errors.full_messages }
+    = render partial: 'messages/all'
+    .ui.tall.stacked.segments
+      .ui.segment
+        %h3
+          = @region.stakes.count
+          Estacas da Região
+          = @region.name
+      - if @region.stakes.empty?
+        .ui.segment
+          Nenhum registro encontrado
+      - @region.stakes.order(:name).each do |stake|
+        .ui.clearing.segment
+          = link_to stake.name, stake
+          = link_to edit_stake_path(stake),
+            class: 'ui mini right floated icon button',
+            title: 'Editar' do
+            %i.edit.icon
+      .ui.secondary.segment
+        = link_to :back, class: 'ui basic icon button' do
+          %i.left.arrow.icon
+          Voltar

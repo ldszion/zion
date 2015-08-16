@@ -1,18 +1,17 @@
 .ui.one.column.page.grid
   .column
-    - if(current_user.admin? or current_user.region_leader?)
-      = link_to new_event_path do
-        .ui.icon.basic.button
-          %i.plus.icon
-          = link_to 'Novo Evento', new_event_path
+    - if current_user.admin? || current_user.region_leader?
+      = link_to new_event_path, class: 'ui primary icon button' do
+        %i.plus.icon
+        Novo Evento
 
 
     %table.ui.celled.striped.table
       %thead
         %tr
-          %th(colspan="4")
+          %th{ colspan: '4' }
             Eventos
-          - if(current_user.admin? or current_user.region_leader?)
+          - if current_user.admin? || current_user.region_leader?
             %th Operações
       %tbody
         - @events.each do |event|
@@ -22,7 +21,7 @@
             %td #{event.users.count} inscritos
             %td #{event.start_date} às #{event.start_time}
             %td #{event.end_date} às #{event.end_time}
-            - if(current_user.admin? or current_user.region_leader?)
+            - if current_user.admin? || current_user.region_leader?
               %td
                 .ui.mini.icon.buttons
                   = link_to edit_event_path(event), class: 'ui button' do

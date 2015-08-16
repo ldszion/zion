@@ -1,11 +1,14 @@
 class RegionsController < ApplicationController
+  before_action :authenticate_user,
+                :must_have_person_if_logged_in,
+                :must_be_active,
+                :check_authorization
   before_action :set_region, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user, :must_have_person_if_logged_in, :must_be_active
 
   # GET /regions
   # GET /regions.json
   def index
-    @regions = Region.all
+    @regions = Region.includes(stakes: :wards).order(:name)
   end
 
   # GET /regions/1
@@ -29,7 +32,7 @@ class RegionsController < ApplicationController
 
     respond_to do |format|
       if @region.save
-        format.html { redirect_to @region, notice: 'Region was successfully created.' }
+        format.html { redirect_to @region, notice: 'Região criada com sucesso.' }
         format.json { render :show, status: :created, location: @region }
       else
         format.html { render :new }
@@ -43,7 +46,7 @@ class RegionsController < ApplicationController
   def update
     respond_to do |format|
       if @region.update(region_params)
-        format.html { redirect_to @region, notice: 'Region was successfully updated.' }
+        format.html { redirect_to @region, notice: 'Região atualizada com sucesso.' }
         format.json { render :show, status: :ok, location: @region }
       else
         format.html { render :edit }
@@ -57,19 +60,26 @@ class RegionsController < ApplicationController
   def destroy
     @region.destroy
     respond_to do |format|
-      format.html { redirect_to regions_url, notice: 'Region was successfully destroyed.' }
+      format.html { redirect_to regions_url, notice: 'Região removida com sucesso.' }
       format.json { head :no_content }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_region
-      @region = Region.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def region_params
-      params.require(:region).permit(:name)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_region
+    @region = Region.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def region_params
+    params.require(:region).permit(:name)
+  end
+
+  # Verifica se usuario logado tem permissao para acessar a controller
+  def check_authorization
+    permitted = [:admin]
+    raise User::NotAuthorized unless permitted.include? current_user.profile.to_sym
+  end
 end

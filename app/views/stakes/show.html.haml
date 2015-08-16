@@ -1,12 +1,30 @@
-%p#notice= notice
-
-%p
-  %b Name:
-  = @stake.name
-%p
-  %b Region:
-  = @stake.region
-
-= link_to 'Edit', edit_stake_path(@stake)
-\|
-= link_to 'Back', stakes_path
+.ui.page.centered.grid
+  .ten.wide.column
+    %h2.ui.basic.center.aligned.segment
+      Estaca
+      = @stake.name
+      = link_to [:edit, @stake], title: 'Editar' do
+        %i.ui.write.icon
+    = render partial: 'messages/error_list',
+      locals: { errors: @stake.errors.full_messages }
+    = render partial: 'messages/all'
+    .ui.tall.stacked.segments
+      .ui.segment
+        %h3
+          = @stake.wards.count
+          Alas da Estaca
+          = @stake.name
+      - if @stake.wards.empty?
+        .ui.segment
+          Nenhum registro encontrado
+      - @stake.wards.order(:name).each do |ward|
+        .ui.clearing.segment
+          = link_to ward.name, ward
+          = link_to edit_stake_path(ward),
+            class: 'ui mini right floated icon button',
+            title: 'Editar' do
+            %i.edit.icon
+      .ui.secondary.segment
+        = link_to :back, class: 'ui basic icon button' do
+          %i.left.arrow.icon
+          Voltar

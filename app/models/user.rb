@@ -1,6 +1,8 @@
 class User < ActiveRecord::Base
   has_secure_password
   extend Enumerize
+  class NotAuthorized < StandardError
+  end
 
   enumerize :profile, in: [:user, :ward_leader, :bishopric, :stake_leader,
                            :region_leader, :admin],

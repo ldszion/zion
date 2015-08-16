@@ -3,6 +3,7 @@ class UsersController < ApplicationController
   before_action :authenticate_user, except: [:new, :create]
   before_action :must_have_person_if_logged_in
   before_action :must_be_active, except: :show
+  before_action :check_authorization, only: [:index]
   before_action :match_old_password, only: :change_password
 
   layout 'session', only: [:new]
@@ -25,9 +26,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     @wards = Ward.all.order(:name)
 
-    if(!@user.leader?)
-      @user.active = true
-    end
+    @user.active = true unless @user.leader?
 
     render(:new) && return unless @user.save
 
@@ -66,62 +65,69 @@ class UsersController < ApplicationController
   def destroy
     @user.destroy
     respond_to do |format|
-      format.html {
+      format.html do
         redirect_to users_url,
-        notice: 'User was successfully destroyed.'
-      }
+                    notice: 'User was successfully destroyed.'
+      end
       format.json { head :no_content }
     end
   end
 
   def activate
-    if(current_user.admin?)
+    if current_user.admin?
       set_user
       @user.active = true
-      if(@user.save)
-        notice = 'Usuário ativado com sucesso!' 
+      if @user.save
+        notice = 'Usuário ativado com sucesso!'
       else
         notice = 'Usuário não pode ser ativado! Contate o administrador do sistema'
       end
-        redirect_to users_url, notice: notice
+      redirect_to users_url, notice: notice
     else
-      redirect_to current_user, notice: 'Você não pode ativar um usuário!' 
+      redirect_to current_user, notice: 'Você não pode ativar um usuário!'
     end
   end
 
   def deactivate
-    if(current_user.admin?)
+    if current_user.admin?
       set_user
       @user.active = false
-      if(@user.save)
-        notice = 'Usuário desativado com sucesso!' 
+      if @user.save
+        notice = 'Usuário desativado com sucesso!'
       else
         notice = 'Usuário não pode ser desativado! Contate o administrador do sistema'
       end
       redirect_to users_url, notice: notice
     else
-      redirect_to current_user, notice: 'Você não pode desativar um usuário!' 
+      redirect_to current_user, notice: 'Você não pode desativar um usuário!'
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_user
-      @user = User.find(params[:id])
-    end
 
-    # Permit some user's fields from params
-    def user_params
-      params.require(:user).permit(:email, :password, :password_confirmation, :ward_id, :profile, :leader)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_user
+    @user = User.find(params[:id])
+  end
 
-    # Redireciona para tela de conta se a senha digitada nao for igual a senha
-    # antiga
-    def match_old_password
-      @old_password = params[:user][:old_password]
-      unless current_user.authenticate(@old_password)
-        redirect_to edit_account_path(current_user.account),
-                    alert: 'A senha digitada está incorreta'
-      end
+  # Permit some user's fields from params
+  def user_params
+    params.require(:user).permit(:email, :password, :password_confirmation, :ward_id, :profile, :leader)
+  end
+
+  # Redireciona para tela de conta se a senha digitada nao for igual a senha
+  # antiga
+  def match_old_password
+    @old_password = params[:user][:old_password]
+    unless current_user.authenticate(@old_password)
+      redirect_to edit_account_path(current_user.account),
+                  alert: 'A senha digitada está incorreta'
     end
+  end
+
+  # Verifica se usuario logado tem permissao para acessar a controller
+  def check_authorization
+    permitted = [:admin]
+    fail User::NotAuthorized unless permitted.include? current_user.profile.to_sym
+  end
 end
