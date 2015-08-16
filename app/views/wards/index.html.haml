@@ -1,23 +1,27 @@
-%h1 Listing wards
+.ui.one.column.page.grid
+  .column
+    = render partial: 'messages/all'
+    = link_to new_ward_path, class: 'ui primary icon button' do
+      %i.plus.icon
+      Nova Ala
+    %table.ui.striped.table
+      %thead
+        %tr
+          %th= t('text.wards')
+          %th= t('text.stakes')
+          %th
 
-%table
-  %thead
-    %tr
-      %th Name
-      %th Stake
-      %th
-      %th
-      %th
-
-  %tbody
-    - @wards.each do |ward|
-      %tr
-        %td= ward.name
-        %td= ward.stake
-        %td= link_to 'Show', ward
-        %td= link_to 'Edit', edit_ward_path(ward)
-        %td= link_to 'Destroy', ward, :method => :delete, :data => { :confirm => 'Are you sure?' }
-
-%br
-
-= link_to 'New Ward', new_ward_path
+      %tbody
+        - @wards.each do |ward|
+          %tr
+            %td= link_to ward.name, ward
+            %td= link_to ward.stake.name, ward.stake
+            %td
+              .ui.mini.icon.buttons
+                = link_to ward, class: 'ui button' do
+                  %i.eye.icon
+                = link_to edit_ward_path(ward), class: 'ui button' do
+                  %i.edit.icon
+                = link_to ward, method: :delete,
+                  data: { confirm: 'Are you sure?' }, class: 'ui button' do
+                  %i.trash.icon

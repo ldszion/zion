@@ -1,7 +1,10 @@
-%h1 Editing ward
+.ui.page.centered.grid
+  .ten.wide.column
+    %h2.ui.basic.center.aligned.segment
+      Editando Ala
+      %i.ui.write.icon
+    = render partial: 'messages/error_list',
+      locals: { errors: @ward.errors.full_messages }
 
-= render 'form'
-
-= link_to 'Show', @ward
-\|
-= link_to 'Back', wards_path
+    = render partial: 'components/form',
+      locals: { record: @ward }
