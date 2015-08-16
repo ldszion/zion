@@ -23,19 +23,26 @@
             %td
               .ui.mini.icon.buttons
                 - unless user.account.nil?
-                  = link_to user, class: 'ui button' do
+                  = link_to user, class: 'ui button',
+                    title: 'Perfil de Usuário' do
                     %i.eye.icon
                 - if current_user.admin?
                   - if current_user != user
                     = link_to user, method: :delete,
-                      data: { confirm: 'Tem certeza que deseja apagar este usuário?' }, class: 'ui button' do
+                      data: { confirm: t('text.confirm.user.remove') },
+                      title: 'Remover',
+                      class: 'ui button' do
                       %i.close.icon
                     - if !user.active?
                       = link_to activate_user_path(user), method: :post,
-                        data: { confirm: 'Gostaria mesmo de ativar este usuário?' }, class: 'ui button' do
+                        data: { confirm: t('text.confirm.user.activate') },
+                        class: 'ui button',
+                        title: 'Ativar' do
                         %i.add.user.icon
                     - else
                       = link_to deactivate_user_path(user), method: :post,
-                        data: { confirm: 'Gostaria mesmo de desativar este usuário?' }, class: 'ui button' do
+                        data: { confirm: t('text.confirm.user.deactivate') },
+                        title: 'Desativar',
+                        class: 'ui button' do
                         %i.remove.user.icon
     %br/
