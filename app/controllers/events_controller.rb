@@ -1,7 +1,7 @@
 class EventsController < ApplicationController
   before_action :authenticate_user, except: [:show]
   before_action :must_have_person_if_logged_in,
-                :must_be_active
+                :must_be_active, except: [:show]
   before_action :check_authorization, except: [:enroll, :leave, :show]
   before_action :set_event, only: [:destroy, :edit, :update]
   before_action :convert_price, only: [:create, :update]
