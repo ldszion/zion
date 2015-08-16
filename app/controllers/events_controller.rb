@@ -74,10 +74,11 @@ class EventsController < ApplicationController
       rescue
         alert = 'Erro na inscrição. Contate um administrador!'
       end
+      return redirect_to event, notice: notice, alert: alert
     else
       alert = 'Inscrições não são mais permitidas neste evento!'
     end
-    redirect_to :back, notice: notice, alert: alert
+    return redirect_to :back, notice: notice, alert: alert
   end
 
   def leave

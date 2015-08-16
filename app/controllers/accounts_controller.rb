@@ -33,8 +33,8 @@ class AccountsController < ApplicationController
 
     if @account.save
       current_user.update account: @account
-      return redirect_to user_path(@account.user),
-                         notice: t('text.thanks.to_complete_account')
+      flash[:notice] = t('text.thanks.to_complete_account')
+      redirect_back_or user_path(@account.user)
     else
       render :new
     end

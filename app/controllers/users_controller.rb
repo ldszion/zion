@@ -31,7 +31,7 @@ class UsersController < ApplicationController
     render(:new) && return unless @user.save
 
     log_in @user
-    redirect_to users_url
+    redirect_to new_account_url, notice: t('text.complete_account')
   end
 
   # PATCH/PUT /users/1

@@ -20,16 +20,12 @@
               Voltar
             .or{ data: { text: 'ou' } }
             - if @event.users.exists?(current_user)
-              = link_to leave_path(user_id: current_user,
-                      event_id: @event.id),
-                  method: :post,
+              = link_to leave_path(@event),
                   class: 'ui negative button' do
                 Cancelar inscrição
                 %i.right.chevron.icon
             - else
-              = link_to enroll_path(user_id: current_user,
-                      event_id: @event.id),
-                  method: :post,
+              = link_to enroll_path(@event),
                   class: 'ui positive button' do
                 Inscrever-me
                 %i.right.chevron.icon
