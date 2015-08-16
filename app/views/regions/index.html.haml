@@ -1,21 +1,29 @@
-%h1 Listing regions
+.ui.one.column.page.grid
+  .column
+    = render partial: 'messages/all'
+    = link_to new_region_path, class: 'ui primary icon button' do
+      %i.plus.icon
+      Nova Região
+    %table.ui.striped.table
+      %thead
+        %tr
+          %th= t('text.regions')
+          %th Nº de Estacas
+          %th Nº de Alas
+          %th
 
-%table
-  %thead
-    %tr
-      %th Name
-      %th
-      %th
-      %th
-
-  %tbody
-    - @regions.each do |region|
-      %tr
-        %td= region.name
-        %td= link_to 'Show', region
-        %td= link_to 'Edit', edit_region_path(region)
-        %td= link_to 'Destroy', region, :method => :delete, :data => { :confirm => 'Are you sure?' }
-
-%br
-
-= link_to 'New Region', new_region_path
+      %tbody
+        - @regions.each do |region|
+          %tr
+            %td= link_to region.name, region
+            %td= region.stakes.count
+            %td= region.wards.count
+            %td
+              .ui.mini.icon.buttons
+                = link_to region, class: 'ui button' do
+                  %i.eye.icon
+                = link_to edit_region_path(region), class: 'ui button' do
+                  %i.edit.icon
+                = link_to region, method: :delete,
+                  data: { confirm: 'Are you sure?' }, class: 'ui button' do
+                  %i.trash.icon
