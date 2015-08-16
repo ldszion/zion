@@ -58,7 +58,7 @@ class EventsController < ApplicationController
 
   def enroll
     event = Event.find(params[:event_id])
-    user = User.find(params[:user_id])
+    user = current_user
     notice = nil
     alert = nil
     if Time.now < event.end_datetime
@@ -83,7 +83,7 @@ class EventsController < ApplicationController
 
   def leave
     event = Event.find(params[:event_id])
-    user = User.find(params[:user_id])
+    user = current_user
     notice = nil
     alert = nil
     if Time.now < event.end_datetime
