@@ -73,6 +73,12 @@ pt_BR:
         end_time: Hora de término
         private: Privado
         private?: Evento privado
+      ward:
+        name: Nome
+      stake:
+        name: Nome
+      region:
+        name: Nome
 
   # LABELS
   label:
@@ -82,6 +88,25 @@ pt_BR:
   text:
     thanks:
       to_complete_account: Obrigado por completar seu cadastro
+    confirm:
+      user:
+        remove: Tem certeza que deseja remover este usuário?
+        activate: Tem certeza que deseja ativar este usuário?
+        deactivate: Tem certeza que deseja desativar este usuário?
+      event:
+        remove: Tem certeza que deseja remover este evento?
+      ward:
+        remove: Tem certeza que deseja remover esta ala?
+      stake:
+        remove: Tem certeza que deseja remover esta estaca?
+      region:
+        remove: Tem certeza que deseja remover esta região?
+    ward: Ala
+    wards: Alas
+    stake: Estaca
+    stakes: Estacas
+    region: Região
+    regions: Regiões
 
   # tradução em:
   # https://github.com/svenfuchs/rails-i18n/blob/master/rails/locale/pt-BR.yml
@@ -222,6 +247,15 @@ pt_BR:
       create: Criar %{model}
       submit: Salvar %{model}
       update: Atualizar %{model}
+      region:
+        create: Criar Região
+        update: Atualizar Região
+      stake:
+        create: Criar Estaca
+        update: Atualizar Estaca
+      ward:
+        create: Criar Ala
+        update: Atualizar Ala
   number:
     currency:
       format:
