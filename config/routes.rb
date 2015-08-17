@@ -15,8 +15,8 @@ Rails.application.routes.draw do
   post 'activate/:id' => 'users#activate', as: :activate_user
   post 'deactivate/:id' => 'users#deactivate', as: :deactivate_user
 
-  get 'event/:event_id/enroll' => 'events#enroll', as: :enroll
-  get 'event/:event_id/leave' => 'events#leave', as: :leave
+  match 'event/:event_id/enroll' => 'events#enroll', as: :enroll, via: [:get, :post]
+  match 'event/:event_id/leave' => 'events#leave', as: :leave, via: [:get, :post]
 
   match 'change_password' => 'users#change_password', as: :change_password,
         via: [:post, :patch]
