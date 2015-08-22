@@ -102,6 +102,11 @@ pt_BR:
         remove: Tem certeza que deseja remover esta estaca?
       region:
         remove: Tem certeza que deseja remover esta região?
+    enroll:
+      successfuly: Inscrição realizada com sucesso!
+      enroll: Inscrever-me
+      cancel: Cancelar inscrição
+      cancel_success: Cancelamento realizado com sucesso!
     ward: Ala
     wards: Alas
     stake: Estaca

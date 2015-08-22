@@ -90,7 +90,7 @@ class EventsController < ApplicationController
       begin
         event.users.destroy(user)
         event.save!
-        notice = 'Cancelamento realizado com sucesso!'
+        notice = I18n.t('text.enroll.cancel_success')
       rescue ActiveRecord::RecordNotFound
         alert = 'Usuário ou Evento não encontrados'
       rescue
