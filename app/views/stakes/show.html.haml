@@ -20,7 +20,7 @@
       - @stake.wards.order(:name).each do |ward|
         .ui.clearing.segment
           = link_to ward.name, ward
-          = link_to edit_stake_path(ward),
+          = link_to edit_ward_path(ward),
             class: 'ui mini right floated icon button',
             title: 'Editar' do
             %i.edit.icon
