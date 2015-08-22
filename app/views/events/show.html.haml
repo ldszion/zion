@@ -13,23 +13,23 @@
             %p.transparent
               %b Preço:
               = number_to_currency(@event.price)
-
-          .ui.buttons
-            = link_to :back,
-                  class: 'ui left button' do
-              %i.left.arrow.icon
-              Voltar
-            .or{ data: { text: 'ou' } }
-            - if @event.users.exists?(current_user)
-              = link_to leave_path(@event),
-                  class: 'ui negative button' do
-                Cancelar inscrição
-                %i.right.chevron.icon
-            - else
-              = link_to enroll_path(@event),
-                  class: 'ui positive button' do
-                Inscrever-me
-                %i.right.chevron.icon
+        %br
+        .ui.buttons
+          = link_to :back,
+                class: 'ui left button' do
+            %i.left.arrow.icon
+            Voltar
+          .or{ data: { text: 'ou' } }
+          - if @event.users.include?(current_user)
+            = link_to leave_path(@event),
+                class: 'ui negative button' do
+              = t 'text.enroll.cancel'
+              %i.right.chevron.icon
+          - else
+            = link_to enroll_path(@event),
+                class: 'ui positive button' do
+              = t 'text.enroll.enroll'
+              %i.right.chevron.icon
 
       .six.wide.column
         - if @event.users.any?
