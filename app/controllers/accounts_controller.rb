@@ -1,4 +1,5 @@
 class AccountsController < ApplicationController
+  before_action :authenticate_user
   before_action :must_have_person_if_logged_in, except: [:new, :create]
   before_action :prepare_account, only: [:new, :create]
   # Show a list of people
