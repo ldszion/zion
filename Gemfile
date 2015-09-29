@@ -31,7 +31,9 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'haml-rails'
 gem 'paperclip', '~> 4.2'
 gem 'aws-sdk', '< 2.0'
-gem 'semantic-ui-sass', github: 'doabit/semantic-ui-sass'
+
+gem 'less-rails-semantic_ui'
+gem 'autoprefixer-rails'
 gem 'enumerize'
 
 # Use Unicorn as the app server
