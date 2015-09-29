@@ -17,9 +17,8 @@
 //= require_tree .
 
 $(document).ready(function() {
-  $('div.dropdown').dropdown();
+  $('.app.dropdown').dropdown();
   $('.ui.checkbox').checkbox();
-  $('select.dropdown').dropdown();
 
   // INPUT MASK FOR PHONE NUMBERS
   var maskBehavior = function (val) {
