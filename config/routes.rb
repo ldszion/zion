@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   get 'confirmation' => 'confirmation#index', as: :confirmation
   post 'activate/:id' => 'users#activate', as: :activate_user
   post 'deactivate/:id' => 'users#deactivate', as: :deactivate_user
+  post 'users/:id/change-profile' => 'users#change_profile'
 
   match 'event/:event_id/enroll' => 'events#enroll', as: :enroll, via: [:get, :post]
   match 'event/:event_id/leave' => 'events#leave', as: :leave, via: [:get, :post]

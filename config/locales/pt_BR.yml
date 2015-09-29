@@ -86,6 +86,8 @@ pt_BR:
 
   # PURE TEXTS
   text:
+    active: Ativo
+    inactive: Inativo
     complete_account: Por favor, complete seu cadastro.
     thanks:
       to_complete_account: Obrigado por completar seu cadastro
