@@ -60,6 +60,20 @@ class UsersController < ApplicationController
     redirect_to edit_account_path @user.account
   end
 
+  # Altera o perfil de um usuario via AJAX
+  def change_profile
+    # Altera o perfil somente se usuario logado for administrador e se o id de usuario nao for o do superadmin
+    if current_user.admin? && params[:id] != 1
+      user = User.find params[:id]
+      user.profile = params[:profile]
+      if user.save
+        render json: :ok
+      else
+        render json: { message: 'Não foi possível alterar o perfil de usuário' }
+      end
+    end
+  end
+
   # DELETE /users/1
   # DELETE /users/1.json
   def destroy

@@ -28,7 +28,7 @@
           .field.required
             = f.label :ward
             = f.collection_select :ward_id, @wards, :id, :name, {},
-              class: 'ui select dropdown'
+              class: 'ui select app dropdown'
 
           .field
             .ui.checkbox
@@ -39,7 +39,7 @@
             = f.label :profile
             = f.collection_select :profile, User.profile.options, :last,
               :first, {},
-              class: 'ui select dropdown'
+              class: 'ui select app dropdown'
 
           %button.ui.fluid.green.button{ type: 'submit' }
             Cadastrar

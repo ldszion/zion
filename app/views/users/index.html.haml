@@ -6,6 +6,8 @@
           %th{ style: 'width: 30px' }
           %th Email
           %th Nome
+          %th Perfil
+          %th Status
           %th Operações
       %tbody
         - @users.each do |user|
@@ -20,6 +22,19 @@
                 \-
               - else
                 = link_to user.account.full_name, user
+            %td
+              - if current_user.admin? && user.id != 1
+                = select_tag :profile, options_for_select(User.profile.options, user.profile),
+                {'data-user-id' => (user.id)}
+              - else
+                = user.profile.text
+            %td
+              - if user.active?
+                %a.ui.green.label#user_status
+                  = t 'text.active'
+              - else
+                %a.ui.red.label#user_status
+                  = t 'text.inactive'
             %td
               .ui.mini.icon.buttons
                 - unless user.account.nil?
